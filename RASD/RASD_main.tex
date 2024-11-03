@@ -1,13 +1,51 @@
 \documentclass{article}
-\usepackage{graphicx} % Required for inserting images
+\usepackage{graphicx} % required for inserting images
+\usepackage{import}
 
-\title{RASD}
-\author{Cerberi Gatti Ginolfi}
-\date{November 2024}
+% add links to Contents and manage style
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+}
+
+\title{\textbf{RASD}}
+\author{Riccardo Cerberi\\
+        -%personal code
+        \and
+        Matteo Gatti\\
+        -%personal code
+        \and
+        Alessio Ginolfi\\
+        -%personal code
+}
+\date{A.Y. 2024/2025 - Software engineering 2}
 
 \begin{document}
 
 \maketitle
+\tableofcontents
+
+\newpage
 
 \section{Introduction}
+\import{./}{Introduction/main.tex}
+
+\section{Overall description}
+\import{./}{Overall_description/main.tex}
+
+\section{Specific Requirements}
+\import{./}{Specific_requirements/main.tex}
+
+\section{Formal analysis using Alloy}
+\import{./}{Formal_analysis_using_alloy/main.tex}
+
+\section{Effort spent}
+\import{./}{Effort_spent/main.tex}
+
+\section{References}
+\import{./}{References/main.tex}
 \end{document}

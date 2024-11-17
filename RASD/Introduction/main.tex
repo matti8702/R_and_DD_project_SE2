@@ -1,71 +1,63 @@
-\subsection{Purpose}
-\subsubsection{Goals} %maybe put them after phenomena?
+\subsection{Purpose} %TODO: fix enumerations
+\subsubsection{Goals}
 \begin{itemize}
     \item \text{[G1]} The company aims to spread the project proposals to all interested students.
-    \item \text{[G2]} The company aims to select the most suitable and compatible students for each project.
-    \item \text{[G3]} The student would like to find proposals that are most suited to him.
+    \item \text{[G2]} The company aims to select the most suitable and compatible students for each project. %specify
+    \item \text{[G3]} The student would like to find proposals that are most suited to him. %specify
     \item \text{[G4]} The student and the company would like to receive suggestions on how to improve CVs and project descriptions.
-    \item \text{[G5]} The university would like to monitor the status of internships involving all its students and suspend them if necessary.
+    \item \text{[G5]} The university would like to monitor the status of internships involving all its students and suspend them if necessary.%delete
     \item \text{[G6]} The company wants to keep track of the status of each open selection process.
-    \item \text{[G7]} The company wishes to automate all phases that do not require an human interaction (such as the creation of virtual rooms for interviews).
+    %\item \text{[G7]} The company wishes to automate all phases that do not require an human interaction (such as the creation of virtual rooms for interviews).%add our assumption
 \end{itemize}
 
 \subsection{Scope}
 \subsubsection{World phenomena}
-\begin{itemize}
-    \item \text{[WP1]} The student writes his CV.
-    \item \text{[WP2]} The company is considering a new project to propose to students and therefore it defines a thorough and clear description.
-    \item \text{[WP3]} The student perform the assigned project and tries to carry out it within the company's deadlines. 
-    \item \text{[WP4]} The company makes an interview to the student.
-    \item \text{[WP5]} The company chooses the day and time to carry out the interview to the student.
-    \item \text{[WP6]} The company thinks about a structured questionnaire to submit to the student.
-    \item \text{[WP7]} The company trains the student on the tasks to be carried out within the assigned project.
-    \item \text{[WP8]} The university reviews the complaints of enrolled students (in order to terminate internships if necessary).%maybe it is shared...
-    \item \text{[WP9]} The student (or the company) identifies a problem and considers filing a complaint.
-    \item \text{[WP10]} ...
-\end{itemize}
+\begin{enumerate}[label={[WP\arabic*]}, align=left, leftmargin=0pt, labelindent=\parindent, listparindent=\parindent, labelwidth=0pt, itemindent=*]
+    \item The student writes his CV.
+    \item The company considers a new project to propose to students and therefore it defines an accurate and clear description including also terms and requirements for the internship.
+    \item The student works on the tasks assigned by the company.
+    \item The company makes an interview to the student.%add specification "Interviews may be online/presence. If online, there are supported by an external tool."
+    \item The external statistical analysis tool calculates statistics which will be used for recommendation process.
+    \item The company prepares a structured questionnaire that will be filled out by the interviewers.
+    \item The university handles the complaints of enrolled students (in order to terminate internships if necessary).%specify
+    %\item \text{[WP8]} The student or the company identifie a problem.
+\end{enumerate}
 \subsubsection{Shared phenomena}
 \textbf{Machine controlled}
 \begin{itemize}
-    \item \text{[SP1]} The student is notified about the availability of an internship that might interest him.
-    \item \text{[SP2]} The company is notified about the availability of a new CV that aligns with their interests. % or maybe "new CV that corresponds to their interests"?
-    \item \text{[SP3]} The system provides to student (company) all available internships (CVs) related to the keyword specified by the user. %maybe specify who is "user"
-    \item \text{[SP4]} After a new student/internship match is instantiated, the statistics are updated. %maybe specify "match" and "statistics"
-    \item \text{[SP5]} The system notifies the student about the outcome of the selection process. %maybe specify possible outcomes"
-    \item \text{[SP6]} The system displays all feedback associated with the requested user (student or company). %not directly mentioned in the specs...
-    \item \text{[SP7]} The system provides a suggestion (to the student) to the company regarding the description of the internship (CV) submitted, in order to improve it. %maybe specify what does "improve" mean
-    \item \text{[SP8]} The system shows to the student the status of each selection process he is a part of.
-    %specify "status" meaning
-    \item \text{[SP9]} The system shows to the company the status of all the selection processes belonging to it.
-    \item \text{[SP10]} The system informs the company and the student that the internship has concluded cause of the decision of the student's university (due to student complaints).
+    %todo important to specify that we interpreted the notification system as an additional function, that regards notifications sent in an external environment regarding the system. 
+    %the reccomendation system explained in the specific doesn't openly require that the reccomendation must be send as a notify
+    
+    \item \text{[SP1]} The student receives a notify about the availability of an internship that might interest him.%specify: "Students are notified by emails"
+    \item \text{[SP2]} The company receives a notify about the availability of a new CV that aligns with their interests. 
+    \item \text{[SP3]} 
+    %\item \text{[SP4]} After a new student/internship match is instantiated, the statistics are updated. %maybe specify "match" and "statistics"
+    \item \text{[SP5]} 
+    \item \text{[SP6]} 
+    
+    
+    \item \text{[SP11]} The system generates the link of the virtual room using an external video conference tool. %specify "in case of online interview..."
 \end{itemize}
 
 \textbf{World controlled}
 \begin{itemize}
+    \item \text{[SP11]} The student publishes his CV.
     \item \text{[SP11]} The student look at available internship offers.
-    \item \text{[SP12]} The company introduces a new internship proposal.
-    \item \text{[SP13]} The student (or the company proposing the internship) accepts the recommendation provided by the system. %maybe define an actor named "user"
-    %specify "recommendation" meaning
-    \item \text{[SP14]} The company communicates to the student the date and time of the interview, along with other necessary information (how it has to be done, rules, duration, links to virtual rooms, etc...). %improve this
-    \item \text{[SP15]} The company reviews and analyzes the data collected from the open selection processes (such as structured questionnaires).
-    \item \text{[SP16]} The company selects the student who is the best fit for the proposed internship.
-    \item \text{[SP17]} The student (company) provides feedback about the company (student) regarding the concluded selection process.
-    \item \text{[SP18]} The student (company) accepts a suggestion from the system and makes a modification to the CV (description of the internship).
-    \item \text{[SP19]} The student (company) submits a complaint or reports an issue encountered regarding the ongoing internship (or even the selection phase).
-    \item \text{[SP20]} The university views the status of an enrolled student. %specify "status" meaning
-    \item \text{[SP21]} The university reviews the complaints of its students.
-    \item \text{[SP22]} After reviewing complaints in the system, the university decides to terminate a student's internship.
+    \item \text{[SP12]} The company publishes a new internship proposal.
+    
+    \item \text{[SP14]} The company communicates to the student the date and time of the interview, along with other necessary information (how it has to be done, rules, duration). %specify contact --> chat
+    \item \text{[SP15]} The company reviews the data collected with structured questionnaires from the open selection processes.%move to WP
+    \item \text{[SP16]} The company selects the student who is the best fit for the proposed internship by updating the system.
+    \item \text{[SP17]} After concluding internship, the student or the company publishes feedback regarding the counterpart. %specify
+    
+    \item \text{[SP19]} The student or the company submits a complaint or reports an issue regarding the ongoing internship. %specify complaint system (university -> student; company -> other companies). complaints on selection process also
+    \item \text{[SP20]} The university monitors the status of an ongoing student's internship. %specify that university views only its students.
+    \item \text{[SP21]} The university views the complaints of a student.
+    \item \text{[SP22]} The university interrupts a student's internship.
+    \item \text{[SP23]} The user creates an account on the platform.
 \end{itemize}
 
-\subsubsection{Machine phenomena}
-\begin{itemize}
-    \item \text{[MP1]} The system finds a possible match between the company and the student based on needs/skills, etc... %improve this
-    \item \text{[MP2]} The system provides the company and the student with a direct channel for communication.
-    \item \text{[MP3]} The system closes the communication channel between the student and the company once the selection process is completed.
-    \item \text{[MP4]} With the current available data, the system generates a possible suggestion for the company or student (related to CVs or interships' description)
-    \item \text{[MP5]} After each modification of a selection process, the system updates its status. %improve this or remove it
-    \item \text{[MP6]} ...
-\end{itemize}
+\subsubsection{Machine phenomena} %maybe delete this section
 
 \subsection{Definitions, Acronyms, Abbreviations}
 

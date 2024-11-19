@@ -2,59 +2,82 @@
 \subsubsection{Goals}
 \begin{itemize}
     \item \text{[G1]} The company aims to spread the project proposals to all interested students.
-    \item \text{[G2]} The company aims to select the most suitable and compatible students for each project. %specify
-    \item \text{[G3]} The student would like to find proposals that are most suited to him. %specify
+    \item \text{[G2]} The student would like to find proposals that are most suited to him. %specify ("This will be carried out by recommendation system")
+    \item \text{[G3]} The company would like to find student's CVs that satisfy their needs.
     \item \text{[G4]} The student and the company would like to receive suggestions on how to improve CVs and project descriptions.
-    \item \text{[G5]} The university would like to monitor the status of internships involving all its students and suspend them if necessary.%delete
+    \item \text{[G5]} The university would like to monitor the status of internships involving all its students. %specify ("Universities may interrupt internships if it's needed")
     \item \text{[G6]} The company wants to keep track of the status of each open selection process.
-    %\item \text{[G7]} The company wishes to automate all phases that do not require an human interaction (such as the creation of virtual rooms for interviews).%add our assumption
 \end{itemize}
 
 \subsection{Scope}
 \subsubsection{World phenomena}
 \begin{enumerate}[label={[WP\arabic*]}, align=left, leftmargin=0pt, labelindent=\parindent, listparindent=\parindent, labelwidth=0pt, itemindent=*]
     \item The student writes his CV.
-    \item The company considers a new project to propose to students and therefore it defines an accurate and clear description including also terms and requirements for the internship.
+    \item The company considers a new project to prropose to students and therefore it defines an accurate and clear description including also terms and requirements for the internship.
     \item The student works on the tasks assigned by the company.
-    \item The company makes an interview to the student.%add specification "Interviews may be online/presence. If online, there are supported by an external tool."
-    \item The external statistical analysis tool calculates statistics which will be used for recommendation process.
-    \item The company prepares a structured questionnaire that will be filled out by the interviewers.
-    \item The university handles the complaints of enrolled students (in order to terminate internships if necessary).%specify
-    %\item \text{[WP8]} The student or the company identifie a problem.
+    \item The company makes an interview to the student.%specify ("Interviews may be either remotely (by external tools e.g. Webex) or in person.)
+    \item The external statistical analysis tool calculates statistics which will be used for recommendation process.%specify in specific section
+    \item The company prepares a structured questionnaire that will be filled out by the interviewers.%specify in specific section
+    \item The university handles the complaints of enrolled students.
+    \item The company reviews the data collected with structured questionnaires from the open selection processes.
 \end{enumerate}
 \subsubsection{Shared phenomena}
 \textbf{Machine controlled}
 \begin{itemize}
     %todo important to specify that we interpreted the notification system as an additional function, that regards notifications sent in an external environment regarding the system. 
-    %the reccomendation system explained in the specific doesn't openly require that the reccomendation must be send as a notify
+    %the recommendation system explained in the specific doesn't openly require that the recommendation must be send as a notify
     
-    \item \text{[SP1]} The student receives a notify about the availability of an internship that might interest him.%specify: "Students are notified by emails"
-    \item \text{[SP2]} The company receives a notify about the availability of a new CV that aligns with their interests. 
-    %\item \text{[SP4]} After a new student/internship match is instantiated, the statistics are updated. %maybe specify "match" and "statistics"
-    \item \text{[SP3]} The system generates the link of the virtual room using an external video conference tool. %specify "in case of online interview..."
+    \item \text{[SP1]} The student receives a notify about the availability of an internship that might interest him. %specify ("Students are notified by emails")
+    \item \text{[SP2]} The company receives a notify about a new application for an internship. %delete this specify: %specify ("A candidate is a student who has sent an application for an internship") 
+    \item \text{[SP3]} The company receives a notify about the availability of a new CV that aligns with their interests. %specify ("Companies are notified by emails")
+    \item \text{[SP4]} The system generates the link of the virtual room using an external video conference tool.
 \end{itemize}
 
 \textbf{World controlled}
 \begin{itemize}
-    \item \text{[SP4]} The student publishes his CV.
-    \item \text{[SP5]} The student look at available internship offers.
-    \item \text{[SP6]} The company publishes a new internship proposal.
-    
-    \item \text{[SP7]} The company communicates to the student the date and time of the interview, along with other necessary information (how it has to be done, rules, duration). %specify contact --> chat
-    \item \text{[SP8]} The company reviews the data collected with structured questionnaires from the open selection processes.%move to WP
-    \item \text{[SP9]} The company selects the student who is the best fit for the proposed internship by updating the system.
-    \item \text{[SP10]} After concluding internship, the student or the company publishes feedback regarding the counterpart. %specify
-    
-    \item \text{[SP11]} The student or the company submits a complaint or reports an issue regarding the ongoing internship. %specify complaint system (university -> student; company -> other companies). complaints on selection process also
-    \item \text{[SP12]} The university monitors the status of an ongoing student's internship. %specify that university views only its students.
-    \item \text{[SP13]} The university views the complaints of a student.
-    \item \text{[SP14]} The university interrupts a student's internship.
-    \item \text{[SP15]} The user creates an account on the platform.
+    \item \text{[SP5]} The user registers into the system by providing all required information. %specify what information means in separated section
+    \item \text{[SP6]} The student publishes his CV.
+    \item \text{[SP7]} The student look at available internship offers.
+    \item \text{[SP8]} The company publishes a new internship proposal.
+    \item \text{[SP9]} The company communicates to the candidate the date and time of the interview, along with other necessary information (how it has to be done, rules, duration). %specify ("Conterparts will communicate through an integrated chat")
+    \item \text{[SP10]} The company selects the student who is the best fit for the proposed internship.
+    \item \text{[SP11]} After concluding internship, the student or the company publishes feedback regarding the counterpart. %specify ("Users can submit feedback only after the internship they participated in has ended.")
+    \item \text{[SP12]} The user submits a complaint or reports an issue regarding the ongoing internship. %specify complaint system (university -> student; company -> other companies).
+    \item \text{[SP13]} The university monitors the status of an ongoing student's internship. %specify ("University views only its students").
+    \item \text{[SP14]} The university views the complaints of a student.
+    \item \text{[SP15]} The university interrupts a student's internship.
+    \item \text{[SP16]} The user creates an account on the platform.
 \end{itemize}
 
 \subsubsection{Machine phenomena} %maybe delete this section
 
 \subsection{Definitions, Acronyms, Abbreviations}
+
+\subsubsection{Recommendation Process}
+
+The recommendation process is composed by two main functionality: 
+    \begin{itemize}
+        \item \textbf{HomePage recommendation :} this function produces suggestions
+        , which appears to the user (company or student) in 
+        their main page after logging in, withouth performing any action. The suggestions can include internship proposals 
+        for students and CVs that meet the requirements of previously published projects for companies. There is also a notification 
+        process associated with this functionality, that sends an email to the user whenever a new recommendation becomes available.
+
+        \item \textbf{Search :} This function can only be performed by a student and provides the results of a search after entering
+        a keyword. The results consist of a list of available internship proposals, determined through keyword matching and statistical analysis produced by an external tool. For example, multiple projects with similar keywords might be returned, sorted based on the value derived from the analysis.
+        
+    \end{itemize}
+
+\subsubsection{Matching Process}
+
+
+
+\begin{itemize}
+    %TODO
+    \item User: 
+    \item Interviewer: 
+    \item ...
+\end{itemize}
 
 \subsection{Revision history}
 

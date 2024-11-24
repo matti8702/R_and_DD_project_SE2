@@ -87,12 +87,30 @@ Student "1" -- "0..*"  Chat : have
 Company "1" -- "0..*"  Chat : have
 
 
-class ApplicationRequest{
+abstract class Request{
     + approved: Boolean 
     + dateOfCreation: Date
 }
-ApplicationRequest "0..*" -- "1" Student : matches
-ApplicationRequest "0..*" -- "1" Internship : matches
+
+Request "0..*" -- "1" Internship : refer
+
+class StudentRequest extends Request{
+
+}
+
+StudentRequest "0..*" -- "1" Student : send
+
+note top of StudentRequest: Request from the student, to the company
+
+
+class CompanyRequest extends Request{
+    
+}
+
+CompanyRequest "0..*" -- "1" Student : receive
+
+note top of CompanyRequest: Request from the company, to the student, about a specific internship (specified in the abstract class Request)
+
 
 class StudentSelectionProcess{
     + selected: Boolean

@@ -1,10 +1,6 @@
 \subsection{External Interface Requirements}
 \subsection{Functional Requirements}
 
-
-
-    %matching, login
-
 \begin{itemize}
     %we thought that student look for an internship in two methods: 1 search by keyword 2 use recommendation (which appears in home page)
     %convert all in must, should 
@@ -15,27 +11,29 @@
     \item The system must allow users to log in by inserting their credentials.
     \item The system must allow student to publish his CV.
     \item The system must allow companies to publish internships.
-    \item The system shall inform students when suitable internships are available through recommendation. %recommendation process
-    \item The system shall inform companies about the availability of student CVs corresponding to their needs, through recommendation.
-    \item The system must use analysis produced by the statistical analysis tool to formulated recommendation for students and companies.
-    \item The system must notifies the student or the company when a new recommendation is available. %specify that this is an out assumption on how the system provides recommendations 
+    \item The system shall inform students when suitable internships are available through recommendation. %specify that this is an out assumption on how the system provides recommendations --> point to specific section
+    \item The system shall inform companies about the availability of student CVs corresponding to their needs, through recommendation. %specify that this is an out assumption on how the system provides recommendations --> point to specific section
+    \item The system must use analysis produced by the statistical analysis tool to formulate recommendation for students and companies.
     \item The system shall provide suggestions to companies for the project description.
     \item The system shall provide suggestions to students regarding their CVs.
-    \item The system must allow the student and the company to establish contact by instantiating a communication channel.
     \item The system shall allow the company to select the student, among all candidates, for the internship.
     \item The system must collect feedbacks from students and companies in order to keep statistics up-to-date.
     \item The system must send feedbacks to the statistical analysis tool in order to update its analysis.
     \item The system must allow the student and the company to monitor the execution and the outcome of the matchmaking process. %specify allow the student to see if his candidature is accepted and then he could proceed with an interview or he isn't selected
-    \item The system must allow the student, the company and the university to monitor the ongoing internship.
+    \item The system must allow the student, the company and the university to monitor the ongoing internship. %specify ("By looking on reports")
     \item The system must allow interrupting an internship when university requires it. %we thought that only the university could interrupt the internship and not the company
     \item The system must provide to student all available internships related to the keyword specified by him. %specify that it also involves recommendation (statistical analysis) maybe in case of common keywords 
-    \item The system must provide to the companies all the feedbacks associated to a student.
-    \item The system must provide to the students all the feedbacks associated to a company.
     \item The system shall inform the company and the student that the internship has concluded cause of the decision of the student's university. %specify due to student complains
-    \item The system must prevent students to apply for the internship once the company has selected the eligible candidate.
+    \item The system must prevent students to apply for the internship once the company has selected the eligible candidate for it.
     \item The system shall allow students to modify their CV.
     \item The system shall allow companies to modify internship description.
-    \item 
+    \item The system must allow students and companies (that are involved in the same internship) to send messages to each other.
+    \item The system must allow students and companies to posts reports regarding internship.
+    \item The system must notify the company about the new matching proposal made by the student.
+    \item The system shall allow the student to send a matching proposal to a company.
+    \item The system must inform the student about a new matching proposal made by the company.
+    \item The system must inform the student or the company of the outcome of the matching proposal he sent to the counterpart.
+    \item The system shall allow the company or the student to either accept or decline the matching proposal made by the counterpart.
 \end{itemize}
 
 \subsection{Performance Requirements}

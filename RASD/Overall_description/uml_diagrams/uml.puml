@@ -1,0 +1,88 @@
+@startuml uml
+
+abstract class User{
+    + email: String
+    + password: String
+}
+
+class Student extends User{
+    + name: String
+    + surname: String
+    + dateOfBirthday: Date
+}
+Student "1..*" -- "1" University : enrolled
+note top of Student: Email attribute for Student stands for institutional email
+
+class University extends User{
+    + universityName: String 
+}
+
+class Company extends User{
+    + companyName: String
+    + companyDescription: String
+}
+note top of Company: unique account for all the employees of the company
+
+class CurriculumVitae{
+
+}
+
+CurriculumVitae "1" --* "1" Student : owns
+
+class Internship{
+    + name: String
+    + dateOfPublication: Date
+    + applicationStartDate: Date
+    + applicationEndDate : Date
+}
+Company "1" -- "0..*" Internship : offer
+
+class InternshipDescription{
+    + description: String
+    + requirements: String
+    + applicationDomain: String
+    + terms: String
+}
+InternshipDescription "1" --* "1" Internship : owns
+
+class InternshipStatus{
+    + interruptionRequested: Boolean
+}
+InternshipStatus "0..*" -- "1" Student : partecipate
+InternshipStatus "0..*" -- "1" Internship : manage
+InternshipStatus "1*" *-- "0..*" InternshipComplaint : has
+
+
+note top of InternshipStatus: Universities access to the intership manager through the students
+
+
+class InternshipComplaint{
+    + Description: String
+    + DateOfCreation: Date
+}
+
+class Chat{
+
+}
+
+class Message{
+    + Content: String
+    + 
+}
+
+Message "0..*" --* "1" Chat : contain
+Student "1" -- "0..*"  Chat : contain
+Company "1" -- "0..*"  Chat : contain
+
+
+class Match{
+    
+}
+Match "0..*" -- "1" Student : matches
+Match "0..*" -- "1" Internship : matches
+
+@enduml
+
+//is curriculum a component?
+//chat is instantiated only after the match is completed
+//university monitors means that univesity sees the status and the number of opened internships

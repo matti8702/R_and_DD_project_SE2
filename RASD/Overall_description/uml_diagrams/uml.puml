@@ -1,4 +1,5 @@
-@startuml uml
+@startuml uml 
+left to right direction
 
 abstract class User{
     + email: String
@@ -57,32 +58,130 @@ note top of InternshipStatus: Universities access to the intership manager throu
 
 
 class InternshipComplaint{
-    + Description: String
-    + DateOfCreation: Date
+    + description: String
+    + dateOfCreation: Date
+    + title: String
 }
+
+class InternshipReport{
+    + dateOfCreation: Date
+    + title: String
+    + description: String
+}
+InternshipReport "0..*" -- "1" InternshipStatus : has
+InternshipReport "0..*" -- "1" User : owner
 
 class Chat{
 
 }
 
 class Message{
-    + Content: String
-    + 
+    + content: String
+    + timestamp: Timestamp
 }
+
+User "1" -- "0..*"  Message : sender
 
 Message "0..*" --* "1" Chat : contain
-Student "1" -- "0..*"  Chat : contain
-Company "1" -- "0..*"  Chat : contain
+Student "1" -- "0..*"  Chat : have
+Company "1" -- "0..*"  Chat : have
 
 
-class Match{
+class ApplicationRequest{
+    + approved: Boolean 
+    + dateOfCreation: Date
+}
+ApplicationRequest "0..*" -- "1" Student : matches
+ApplicationRequest "0..*" -- "1" Internship : matches
+
+class StudentSelectionProcess{
+    + selected: Boolean
+}
+note top of StudentSelectionProcess: selected means "student of this selection process has been selected for the internship"
+
+StudentSelectionProcess "0..*" -- "1" Student : partecipate
+StudentSelectionProcess "0..*" -- "1" Internship : refer
+StudentSelectionProcess "1" -- "1" Chat : have
+StudentSelectionProcess "1" -- "1" Interview : have
+
+abstract class Interview{
+    + date: Date
+    + details: String
+    + estimatedDuration: String
+}
+
+class OnlineInterview extends Interview{
+    + link: String
+}
+
+note top of OnlineInterview: Link is provided by an external video conference tool
+
+class InPersonInterview extends Interview{
+    + address: String
+    + room: String
+}
+
+class Feedback {
+    + globalScore: Float
+    + comment: String
+} 
+
+Feedback "0..*" -- "1" Internship : have
+
+class CompanyFeedback extends Feedback{
+}
+CompanyFeedback "0..*" -- "1" Student : create
+note top of CompanyFeedback: feedback about the company
+
+class StudentFeedback extends Feedback{
     
 }
-Match "0..*" -- "1" Student : matches
-Match "0..*" -- "1" Internship : matches
+StudentFeedback "0..*" -- "1" Company : create
+note top of StudentFeedback: feedback about the student
+
+class FieldEvaluation{
+    + fieldName: String
+    + description:String
+    + score: Float
+}
+FieldEvaluation "0..*" -- "1" Feedback : have
+
+abstract class Suggestion{
+
+}
+
+class CVSuggestion extends Suggestion{
+    + field: Field
+    + action: String
+}
+
+abstract class Recommendation{
+    compatibilityRate: Float
+}
+
+class StudentRecommendation extends Recommendation{
+    
+}
+StudentRecommendation "0..*" -- "1" Intership : refer
+StudentRecommendation "0..*" -- "1" Student : receive
+
+note top of StudentRecommendation: recommendation directed to the student about an intership
+
+class CompanyRecommendation extends Recommendation{
+    
+}
+CompanyRecommendation "0..*" -- "1" Student : refer
+CompanyRecommendation "0..*" -- "1" Company : receive
+
+note top of CompanyRecommendation: recommendation directed to the company about an intership
 
 @enduml
 
 //is curriculum a component?
 //chat is instantiated only after the match is completed
 //university monitors means that univesity sees the status and the number of opened internships
+//Date contains both date and time
+//review composition/relations
+
+//implement tag concept, in cv, company description and feedback
+//explain why we do not mention "suggestions"

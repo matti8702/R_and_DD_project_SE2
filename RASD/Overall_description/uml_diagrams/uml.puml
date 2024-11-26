@@ -1,33 +1,41 @@
 @startuml uml 
-left to right direction
 
-abstract class User{
-    + email: String
-    + password: String
-}
+together{
+    abstract class User{
+        + email: String
+        + password: String
+    }
 
-class Student extends User{
-    + name: String
-    + surname: String
-    + dateOfBirthday: Date
-}
-Student "1..*" -- "1" University : enrolled
-note top of Student: Email attribute for Student stands for institutional email
+    class Student extends User{
+        + name: String
+        + surname: String
+        + dateOfBirthday: Date
+    }
+    Student "0..*" --* "1" University : enrolled
+    note top of Student: Email attribute for Student stands for institutional email
 
-class University extends User{
-    + universityName: String 
-}
+    class CompanyMember extends User{
 
-class Company extends User{
-    + companyName: String
-    + companyDescription: String
+    }
+    CompanyMember "1..*" --* "1" Company : employ
+
+    class UniversityMember extends User{
+
+    }
+    UniversityMember "1..*" --* "1" University : employ
+
+    class University{
+        + universityName: String 
+    }
+
+    class Company{
+        + companyName: String
+    }
 }
-note top of Company: unique account for all the employees of the company
 
 class CurriculumVitae{
 
 }
-
 CurriculumVitae "1" --* "1" Student : owns
 
 class Internship{
@@ -53,9 +61,7 @@ InternshipStatus "0..*" -- "1" Student : partecipate
 InternshipStatus "0..*" -- "1" Internship : manage
 InternshipStatus "1*" *-- "0..*" InternshipComplaint : has
 
-
 note top of InternshipStatus: Universities access to the intership manager through the students
-
 
 class InternshipComplaint{
     + description: String
@@ -84,33 +90,16 @@ User "1" -- "0..*"  Message : sender
 
 Message "0..*" --* "1" Chat : contain
 Student "1" -- "0..*"  Chat : have
-Company "1" -- "0..*"  Chat : have
+CompanyMember "1" -- "0..*"  Chat : have
 
 
-abstract class Request{
+class Request{
     + approved: Boolean 
     + dateOfCreation: Date
 }
-
 Request "0..*" -- "1" Internship : refer
-
-class StudentRequest extends Request{
-
-}
-
-StudentRequest "0..*" -- "1" Student : send
-
-note top of StudentRequest: Request from the student, to the company
-
-
-class CompanyRequest extends Request{
-    
-}
-
-CompanyRequest "0..*" -- "1" Student : receive
-
-note top of CompanyRequest: Request from the company, to the student, about a specific internship (specified in the abstract class Request)
-
+Request "0..*" -- "1" User : requestedBy
+note top of Request: it represents a generic matching proposal made by either company or student
 
 class StudentSelectionProcess{
     + selected: Boolean
@@ -142,20 +131,10 @@ class InPersonInterview extends Interview{
 class Feedback {
     + globalScore: Float
     + comment: String
-} 
+}
 
 Feedback "0..*" -- "1" Internship : have
-
-class CompanyFeedback extends Feedback{
-}
-CompanyFeedback "0..*" -- "1" Student : create
-note top of CompanyFeedback: feedback about the company
-
-class StudentFeedback extends Feedback{
-    
-}
-StudentFeedback "0..*" -- "1" Company : create
-note top of StudentFeedback: feedback about the student
+Feedback "0..*" -- "1" User : creator
 
 class FieldEvaluation{
     + fieldName: String
@@ -164,34 +143,16 @@ class FieldEvaluation{
 }
 FieldEvaluation "0..*" -- "1" Feedback : have
 
-abstract class Suggestion{
+class Suggestion{
 
 }
+note top of Suggestion: it represents either CVs suggestions or internship's description suggestion
 
-class CVSuggestion extends Suggestion{
-    + field: Field
-    + action: String
-}
-
-abstract class Recommendation{
+class Recommendation{
     compatibilityRate: Float
 }
-
-class StudentRecommendation extends Recommendation{
-    
-}
-StudentRecommendation "0..*" -- "1" Intership : refer
-StudentRecommendation "0..*" -- "1" Student : receive
-
-note top of StudentRecommendation: recommendation directed to the student about an intership
-
-class CompanyRecommendation extends Recommendation{
-    
-}
-CompanyRecommendation "0..*" -- "1" Student : refer
-CompanyRecommendation "0..*" -- "1" Company : receive
-
-note top of CompanyRecommendation: recommendation directed to the company about an intership
+Recommendation "0..*" -- "1" Internship : recommendedInternship
+Recommendation "0..*" -- "1" Student : recommendedStudent
 
 @enduml
 
@@ -202,4 +163,3 @@ note top of CompanyRecommendation: recommendation directed to the company about 
 //review composition/relations
 
 //implement tag concept, in cv, company description and feedback
-//explain why we do not mention "suggestions"

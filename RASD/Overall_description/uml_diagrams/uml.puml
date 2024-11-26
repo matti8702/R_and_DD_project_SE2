@@ -56,6 +56,8 @@ InternshipDescription "1" --* "1" Internship : owns
 
 class InternshipStatus{
     + interruptionRequested: Boolean
+    + beginInternshipDate: Date
+    + endInternshipDate
 }
 InternshipStatus "0..*" -- "1" Student : partecipate
 InternshipStatus "0..*" -- "1" Internship : manage

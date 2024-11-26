@@ -78,7 +78,6 @@ This section outlines the goals of the system:
     \item Interviewer: 
     \item CV: 
     \item Project: same as internship
-    \item matchmaking process/match/matching proposal
     \item selection process
     \item reports
     \item suggestion system
@@ -88,19 +87,38 @@ This section outlines the goals of the system:
 \subsubsection{Recommendation Process}
 
 The recommendation process is composed by two main functionality: 
-    \begin{itemize}
-        \item \textbf{HomePage recommendation :} this function produces suggestions
-        , which appears to the user (company or student) in 
-        their main page after logging in, without performing any action. The suggestions can include internship proposals 
-        for students and CVs that meet the requirements of previously published projects for companies. There is also a notification 
-        process associated with this functionality, that sends an email to the user whenever a new recommendation becomes available.
 
-        \item \textbf{Search :} This function can only be performed by a student and provides the results of a search after entering
-        a keyword. The results consist of a list of available internship proposals, determined through keyword matching and statistical analysis produced by an external tool. For example, multiple projects with similar keywords might be returned, sorted based on the value derived from the analysis.
-        
-    \end{itemize}
+\begin{itemize}
+    \item \textbf{HomePage recommendation :} this function produces suggestions
+    , which appears to the user (company or student) in 
+    their main page after logging in, without performing any action. The suggestions can include internship proposals 
+    for students and CVs that meet the requirements of previously published projects for companies. There is also a notification 
+    process associated with this functionality, that sends an email to the user whenever a new recommendation becomes available.
+
+    \item \textbf{Search :} This function can only be performed by a student and provides the results of a search after entering
+    a keyword. The results consist of a list of available internship proposals, determined through keyword matching and statistical analysis produced by an external tool. For example, multiple projects with similar keywords might be returned, sorted based on the value derived from the analysis.
+    
+\end{itemize}
 
 \subsubsection{Matching Process}
+
+This is the process responsible for matching students with companies.
+
+\begin{itemize}
+    \item \textbf{Student point of view :} The student selects an internship, identified through the "Homepage Recommendation" or "Search," 
+    and submits an application to the respective company. The student may also receive a request from a company that considers their 
+    curriculum eligible for a specific internship it offers. In this case, the student has the option to either accept or decline the proposal.
+
+    \item \textbf{Company point of view :} The company receives an application from a student and can either accept or decline it. The company may also invite students
+    with an eligible curriculum, identified through the "Homepage Recommendation", to participate in an internship it offers.
+    %add reference to the subsection reccomendation process
+\end{itemize}
+
+Both the student and the company can send and receive multiple requests over the same period of time.
+When the two counterparts respond to an appended request, the matching process is complete. If both parties responded positively, the selection process begins.
+
+
+
 
 \subsection{Revision history}
 

@@ -43,8 +43,20 @@ class Internship{
     + dateOfPublication: Date
     + applicationStartDate: Date
     + applicationEndDate : Date
+    + positionAvailables: Int
+    + maxStudentsAllowed: Int
+    + openForApplication: Boolean
 }
 Company "1" -- "0..*" Internship : offer
+note right of Internship::positionAvailables
+    It states the current number of available positions 
+end note
+note right of Internship::maxStudentsAllowed
+    It states the maximum number of students which can be enrolled in the internship
+end note
+note right of Internship::openForApplication
+    It specifies if the internship still allow candidatures or not
+end note
 
 class InternshipDescription{
     + description: String
@@ -57,13 +69,13 @@ InternshipDescription "1" --* "1" Internship : owns
 class InternshipStatus{
     + interruptionRequested: Boolean
     + beginInternshipDate: Date
-    + endInternshipDate
+    + endInternshipDate: Date
 }
 InternshipStatus "0..*" -- "1" Student : partecipate
 InternshipStatus "0..*" -- "1" Internship : manage
 InternshipStatus "1*" *-- "0..*" InternshipComplaint : has
 
-note top of InternshipStatus: Universities access to the intership manager through the students
+note top of InternshipStatus: It contains all relevant data related to a specific student in the ongoing internship. It is instantiated only after the company has selected the candidate. 
 
 class InternshipComplaint{
     + description: String
@@ -87,6 +99,7 @@ class Message{
     + content: String
     + timestamp: Timestamp
 }
+note top of Chat: The chat will remain active for the entire internship
 
 User "1" -- "0..*"  Message : sender
 
@@ -135,8 +148,9 @@ class Feedback {
     + comment: String
 }
 
-Feedback "0..*" -- "1" Internship : have
+Feedback "0..*" -- "1" InternshipStatus : refer
 Feedback "0..*" -- "1" User : creator
+note top of Feedback: The feedback created by students is directed to the company, while the feedback created by a company member is directed to the student
 
 class FieldEvaluation{
     + fieldName: String

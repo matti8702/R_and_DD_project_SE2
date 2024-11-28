@@ -1,62 +1,46 @@
-@startuml uml 
+@startuml uml
+left to right direction
 
-together{
-    abstract class User{
-        + email: String
-        + password: String
-    }
-
-    class Student extends User{
-        + name: String
-        + surname: String
-        + dateOfBirthday: Date
-    }
-    Student "0..*" --* "1" University : enrolled
-    note top of Student: Email attribute for Student stands for institutional email
-
-    class CompanyMember extends User{
-
-    }
-    CompanyMember "1..*" --* "1" Company : employ
-
-    class UniversityMember extends User{
-
-    }
-    UniversityMember "1..*" --* "1" University : employ
-
-    class University{
-        + universityName: String 
-    }
-
-    class Company{
-        + companyName: String
-    }
+abstract class User{
+    + name: String
+    + surname: String
+    + email: String
+    + password: String
 }
 
-class CurriculumVitae{
+class Student extends User{
+    + dateOfBirthday: Date
+}
+Student "0..*" --* University : enrolled
+
+class CompanyMember extends User{
 
 }
-CurriculumVitae "1" --* "1" Student : owns
+CompanyMember "1..*" --* Company : employ
+
+class UniversityMember extends User{
+
+}
+UniversityMember "1..*" --* University : employ
+
+class University{
+    + universityName: String 
+}
+
+class Company{
+    + companyName: String
+    + companyDescription: String
+}
 
 class Internship{
     + name: String
     + dateOfPublication: Date
     + applicationStartDate: Date
     + applicationEndDate : Date
-    + positionAvailables: Int
     + maxStudentsAllowed: Int
     + openForApplication: Boolean
 }
-Company "1" -- "0..*" Internship : offer
-note right of Internship::positionAvailables
-    It states the current number of available positions 
-end note
-note right of Internship::maxStudentsAllowed
-    It states the maximum number of students which can be enrolled in the internship
-end note
-note right of Internship::openForApplication
-    It specifies if the internship still allow candidatures or not
-end note
+Company -- "0..*" Internship : offer
 
 class InternshipDescription{
     + description: String
@@ -64,67 +48,46 @@ class InternshipDescription{
     + applicationDomain: String
     + terms: String
 }
-InternshipDescription "1" --* "1" Internship : owns
+InternshipDescription --* Internship : owns
 
 class InternshipStatus{
     + interruptionRequested: Boolean
     + beginInternshipDate: Date
     + endInternshipDate: Date
 }
-InternshipStatus "0..*" -- "1" Student : partecipate
-InternshipStatus "0..*" -- "1" Internship : manage
-InternshipStatus "1*" *-- "0..*" InternshipComplaint : has
-
-note top of InternshipStatus: It contains all relevant data related to a specific student in the ongoing internship. It is instantiated only after the company has selected the candidate. 
+InternshipStatus "0..*" -- Student : partecipate
+InternshipStatus "0..*" -- Internship : manage
+InternshipStatus *-- "0..*" InternshipComplaint : has
 
 class InternshipComplaint{
-    + description: String
-    + dateOfCreation: Date
     + title: String
+    + content: String
+    + dateOfCreation: Date
 }
 
 class InternshipReport{
-    + dateOfCreation: Date
     + title: String
-    + description: String
-}
-InternshipReport "0..*" -- "1" InternshipStatus : has
-InternshipReport "0..*" -- "1" User : owner
-
-class Chat{
-
-}
-
-class Message{
     + content: String
-    + timestamp: Timestamp
+    + dateOfCreation: Date
 }
-note top of Chat: The chat will remain active for the entire internship
-
-User "1" -- "0..*"  Message : sender
-
-Message "0..*" --* "1" Chat : contain
-Student "1" -- "0..*"  Chat : have
-CompanyMember "1" -- "0..*"  Chat : have
-
+InternshipReport "0..*" -- InternshipStatus : has
+InternshipReport "0..*" -- User : owner
 
 class Request{
     + approved: Boolean 
     + dateOfCreation: Date
 }
-Request "0..*" -- "1" Internship : refer
-Request "0..*" -- "1" User : requestedBy
-note top of Request: it represents a generic matching proposal made by either company or student
+Request "0..*" -- Internship : refer
+Request "0..*" -- User : requestedBy
 
 class StudentSelectionProcess{
     + selected: Boolean
 }
-note top of StudentSelectionProcess: selected means "student of this selection process has been selected for the internship"
 
-StudentSelectionProcess "0..*" -- "1" Student : partecipate
-StudentSelectionProcess "0..*" -- "1" Internship : refer
-StudentSelectionProcess "1" -- "1" Chat : have
-StudentSelectionProcess "1" -- "1" Interview : have
+StudentSelectionProcess "0..*" -- Student : partecipate
+StudentSelectionProcess "0..*" -- Internship : refer
+StudentSelectionProcess -- Chat : have
+StudentSelectionProcess -- Interview : have
 
 abstract class Interview{
     + date: Date
@@ -136,8 +99,6 @@ class OnlineInterview extends Interview{
     + link: String
 }
 
-note top of OnlineInterview: Link is provided by an external video conference tool
-
 class InPersonInterview extends Interview{
     + address: String
     + room: String
@@ -148,34 +109,57 @@ class Feedback {
     + comment: String
 }
 
-Feedback "0..*" -- "1" InternshipStatus : refer
-Feedback "0..*" -- "1" User : creator
-note top of Feedback: The feedback created by students is directed to the company, while the feedback created by a company member is directed to the student
+Feedback "0..*" -- InternshipStatus : refer
+Feedback "0..*" -- User : creator
 
 class FieldEvaluation{
     + fieldName: String
     + description:String
     + score: Float
 }
-FieldEvaluation "0..*" -- "1" Feedback : have
+FieldEvaluation "0..*" -- Feedback : have
 
 class Suggestion{
 
 }
-note top of Suggestion: it represents either CVs suggestions or internship's description suggestion
+Suggestion "0..*" -- "0,1" CurriculumVitae : refer
+Suggestion "0..*" -- "0,1" InternshipDescription : refer
 
 class Recommendation{
     compatibilityRate: Float
 }
-Recommendation "0..*" -- "1" Internship : recommendedInternship
-Recommendation "0..*" -- "1" Student : recommendedStudent
+Recommendation "0..*" -- Internship : recommend
+Recommendation "0..*" -- Student : recommend
+
+class Chat{
+
+}
+
+class Message{
+    + content: String
+    + timestamp: Timestamp
+}
+
+User -- "0..*"  Message : sender
+
+Message "0..*" --* Chat : contain
+Student -- "0..*"  Chat : have
+CompanyMember -- "0..*"  Chat : have
+
+class CurriculumVitae{
+
+}
+CurriculumVitae --* Student : owns
+
+class CVSection{
+    + title: String
+    + content: String
+    + tags: String
+}
+CVSection "1..*" --* CurriculumVitae : have
 
 @enduml
 
 //is curriculum a component?
-//chat is instantiated only after the match is completed
-//university monitors means that univesity sees the status and the number of opened internships
-//Date contains both date and time
 //review composition/relations
-
-//implement tag concept, in cv, company description and feedback
+//implement tag concept

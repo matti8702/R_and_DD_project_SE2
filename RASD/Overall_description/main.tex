@@ -60,6 +60,41 @@
 \subsubsection{Further details on the shared phenomena}
 \subsubsection{Class diagrams}
 
+%TODO: put diagram
+
+The previous diagram aims to model all relevant aspects of the system mentioned so far (e.g., in the phenomena).
+Cardinalities of type "1" have been omitted to improve the readability of the diagram.
+
+The first key concept is the user.
+\textbf{User} class represents a generic and abstract physical actor interacting with the system.
+A user account (email and password) is associated with it, enabling authentication in the system.
+There are three types of users: \textbf{Student}, \textbf{CompanyMember}, and \textbf{UniversityMember}. Each "member" is then associated with a
+specific institution (\textbf{University} or \textbf{Company}, depending on the user type).
+
+The \textbf{Internship} class represents an internship proposal created by a company.
+A few clarifications about its attributes: "maxStudentsAllowed" is the number of students the company aims to recruit
+and "openForApplication" specifies whether applications are currently allowed. Each internship proposal can involve multiple students.
+For this reason, the \textbf{InternshipStatus} class is introduced. It represents an instance of an internship for a specific student.
+This class contains all the information regarding the internship's progress, ensuring that each participant (student, company, and university) stays informed about its status.
+
+There are three classes associated to the InternshipStatus class: InternshipComplaint, Feedback, and InternshipReport.
+
+\textbf{InternshipComplaint} models a complaint created by a student and directed to the company.
+\textbf{Feedback} represents the final evaluation written by the student and/or the company about the other party at the end of the internship.
+The "globalScore" field allows for an overall score, while the \textbf{FieldEvaluation} class enables detailed feedback on specific aspects. 
+These evaluations are used by the system to generate recommendations.
+\textbf{InternshipReport} represents a report written by a student or the company. A report is a brief description of what occurred during the internship on a specific day.
+
+The \textbf{Chat} class describes communication between the student and the company member. It is instantiated only after the match is confirmed by both the two parties.
+
+The \textbf{StudentSelectionProcess} class handles all stages of selecting an \textbf{individual} student, from matching to communicating the results (including interviews). The outcome referred
+to a specific student is represented by the attribute "selected".
+
+Additionally, the \textbf{Request} class models a "match request" made by either the student or the company and directed to the other party.
+If both parties accept, the attribute "approved" will be set to true and then the selection process begins.
+
+Finally, the \textbf{Suggestion} class represents tips that the system provides, either to students (e.g., for their CV) or to companies (e.g., for internship descriptions).
+
 \subsubsection{State diagrams}
 
 \subsection{User characteristics}

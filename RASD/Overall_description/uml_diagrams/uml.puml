@@ -25,11 +25,13 @@ UniversityMember "1..*" --* University : employ
 
 class University{
     + universityName: String 
+    + mailDomain: String
 }
 
 class Company{
     + companyName: String
     + companyDescription: String
+    + mailDomain: String
 }
 
 class Internship{
@@ -120,7 +122,7 @@ class FieldEvaluation{
 FieldEvaluation "0..*" -- Feedback : have
 
 class Suggestion{
-
+    + content: String
 }
 Suggestion "0..*" -- "0,1" CurriculumVitae : refer
 Suggestion "0..*" -- "0,1" InternshipDescription : refer
@@ -132,7 +134,6 @@ Recommendation "0..*" -- Internship : recommend
 Recommendation "0..*" -- Student : recommend
 
 class Chat{
-
 }
 
 class Message{
@@ -147,19 +148,22 @@ Student -- "0..*"  Chat : have
 CompanyMember -- "0..*"  Chat : have
 
 class CurriculumVitae{
-
+    + CVDocument: File
 }
 CurriculumVitae --* Student : owns
 
 class CVSection{
     + title: String
     + content: String
-    + tags: String
 }
 CVSection "1..*" --* CurriculumVitae : have
 
+class Tag{
+    + name: String
+}
+Tag "0..*" -- "0..*" CVSection : have
+Tag "0..*" -- "0..*" InternshipDescription : have
+
 @enduml
 
-//is curriculum a component?
 //review composition/relations
-//implement tag concept

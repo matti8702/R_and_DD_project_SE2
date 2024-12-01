@@ -100,6 +100,21 @@ A user account (email and password) is associated with it, enabling authenticati
 There are three types of users: \textbf{Student}, \textbf{CompanyMember}, and \textbf{UniversityMember}. Each "member" is then associated with a
 specific institution (\textbf{University} or \textbf{Company}, depending on the user type).
 
+The \textbf{Company} and \textbf{University} classes describe various institutions.
+The field "mailDomain" specifies the email domain associated with the company or university (e.g., "polimi.it").
+This field is used to validate the registration of new members associated with specific company or new students associated with university.
+The system will compare the domain of the email entered by the new user with the one specified by the organization. If the comparison is successful, the user will be accepted; otherwise, the registration will be canceled.
+
+The \textbf{CurriculumVitae} class represents a student's curriculum.
+The field "CVDocument" allows students to upload and store their curriculum in the system as a file (e.g., in pdf format).
+The type "File" represents the abstract concept of a digital document.
+This file can be accessed by company members during the selection process. Companies can also access a structured version of the same curriculum.
+A structured version refers to one compiled by the student directly within the system, allowing the definition of various sections.
+The \textbf{CVSection} class models this concept. It represents a specific experience undertaken by the student (either academic/university-related or work-related), such as language certificates, diplomas, and publications.
+This structured curriculum version has been introduced (in addition to the uploaded file) to perform the recommendation system.
+Using tags (specified by the \textbf{Tag} class) added by the student, the system will calculate affinity indicators between students and internships using an external tool.
+Internships also include Tags, which in this case are added by company members. To conclude, recommendation will consider curriculum and internships tags and feedbacks posted by students and company members.
+
 The \textbf{Internship} class represents an internship proposal created by a company.
 A few clarifications about its attributes: "maxStudentsAllowed" is the number of students the company aims to recruit
 and "openForApplication" specifies whether applications are currently allowed. Each internship proposal can involve multiple students.
@@ -126,6 +141,8 @@ Finally, the \textbf{Suggestion} class represents tips that the system provides,
 
 \subsubsection{State diagrams}
 
+%TODO
+
 \subsection{User characteristics}
 \subsection{Assumptions, dependencies and constraints}
 \begin{itemize}
@@ -140,4 +157,6 @@ Finally, the \textbf{Suggestion} class represents tips that the system provides,
     \item \text{[DA9]} An interviewer from the company attend to the scheduled interview.
     \item \text{[DA10]} The university consistently provides a precise and comprehensive list of all email addresses assigned to its enrolled students. %specify in separated section
     \item \text{[DA11]} During the registration process, the student must enter his correct university email contact.
+    \item \text{[DA12]} When a company member registers, the associated company must already exist in the system (previously created).
+    \item \text{[DA13]} When a student or a university member registers, the associated university must already exist in the system (previously created).
 \end{itemize}

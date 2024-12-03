@@ -68,6 +68,9 @@
 \subsubsection{Class diagrams}
 
 %TODO: put diagram
+%\begin{center}
+%      \includegraphics[scale = 0.25]{Overall_description/uml_diagrams/class_diagram.png}
+%\end{center}
 
 The previous diagram aims to model all relevant aspects of the system mentioned so far (e.g., in the phenomena).
 Cardinalities of type "1" have been omitted to improve the readability of the diagram.
@@ -119,31 +122,90 @@ Finally, the \textbf{Suggestion} class represents tips that the system provides,
 
 \subsubsection{State diagrams}
 
-%TODO
+In this section, the state diagrams associated with some classes from the previously presented class diagram are shown.
+We thought to model the diagrams associated with the Internship and InternshipStatus classes to better clarify their lifecycle within the system.
+Additionally, these classes represent the core concepts of the system.
+
+\begin{itemize}
+      \item \textbf{Internship}
+      %TODO: add diagram
+      %\begin{center}
+      %      \includegraphics[scale = 0.]{Overall_description/uml_diagrams/internship_state_diagram.png}
+      %\end{center}
+      \item \textbf{InternshipStatus}
+      %TODO: add diagram
+      %\begin{center}
+      %      \includegraphics[scale = 0.]{Overall_description/uml_diagrams/internshipStatus_state_diagram.png}
+      %\end{center}
+\end{itemize}
 
 \subsection{Product functions}
 
 \begin{itemize}
-      \item \textbf{Register to the system} 
-      
+      \item \textbf{Register to the system} \\
+      A user who wishes to use the platform must register by providing their first name, last name, an email address, and a password that will be used for authentication in subsequent logins. If the user is a student or a university member, they must provide their institutional email address. On the other hand, if the user is a company member, they must specify a company domain email address.
+      Additionally, students and university members will be required to specify their university, while company members must indicate the company they work for. Once all the inserted information is confirmed, the system will send an email to the specified address to verify ownership of the email account. The user must check their inbox and confirm the address.
+      In any case, the system will compare the domain of the provided email address with the official domain of the institution. If they do not match, the registration will be denied. This product function assumes that the institution (company or university) associated with the user already exists within the system.
 
       \item \textbf{Login to the system} \\
       User submits his credentials (email and password) and enter the system. Credentials must be correct in order to access the homepage of the system.
       
+      \item \textbf{Add a company into the system} \\
+      A company decides to use the system. A member accesses the platform and registers by providing their personal details (same as described in the "Register to the system" product function). Once the required information is entered, the system will prompt the user to create the associated company, as no email domain is linked to the provided email address. The user will then input the company's name followed by a brief description (the email domain associated with the company will be automatically set by the system). At this point, the company will appear in the system along with the company member, who will immediately be able to publish internships.
+
+      \item \textbf{Add a university into the system} \\
+      A university decides to use the system. A member accesses the platform and registers by providing their personal details (same as described in the "Register to the system" product function). Once the required information is entered, the system will prompt the user to create the associated university, as no email domain is linked to the provided email address. The user will then input the university's name (the email domain associated with the university will be automatically set by the system). Once the information entered is confirmed, the university will be added to the system, allowing its students to register on the platform and search for internships.
+\end{itemize}
+
+\noindent The following product functions require the users to be authenticated in the system before they are executed.
+
+\begin{itemize}
       \item \textbf{Create an internship} \\
-      \item \textbf{Edit the curriculum} \\
+      The company member publishes a new internship to be shared with students by providing: a name, the valid application period, the maximum number of students allowed, the description, the requirements, the domain of application, tags and the terms specified in the contract (e.g., type of contract and compensation).
+      Thus, after that, students will be able to view the new proposal submitted by the company (by searching through keywords or thanks the recommendation system).
+      
+      \item \textbf{Upload a new version of the curriculum} \\
+      The student accesses their personal area and uploads the updated version of their document (e.g., in PDF format) to the system, so that companies can view the updated CV.
+      
+      \item \textbf{Edit the digitalized version of the curriculum}
+      The student accesses their personal area to edit or add a section to their digital curriculum.
+      Once all changes have been made, the student posts the new version of the digital CV.
+
       \item \textbf{Edit internship information} \\
+      The company member logs into the system to edit information related to an internship previously created. They navigate to the page containing the list of internships published by the company and select the one to be edited. After making all the necessary changes, the user saves the updated version of the internship.
+
       \item \textbf{Searching for an internship} \\
+      The student logs into the platform to browse the available internships. To do this, they enter keywords to filter the results and view them. Alternatively, the student can rely on the recommendation system, which will provide a list of internships aligned with their interests, with no need to specify keywords anymore.
+      
       \item \textbf{Send matching requests to the counterpart} \\
+      The student (or company member) sends a match request to the counterpart after viewing the internship proposal (the student's curriculum). Once the request is made, the user waits for a response from the counterpart.
+      
       \item \textbf{Send a message to the counterpart} \\
+      The student (or company member) sends a message to the counterpart. To do this, they log into the platform, select the corresponding chat channel, write their message, and finally send it.
+      
       \item \textbf{Schedule interviews} \\
+      The student and the company member have agreed on the day, time, and type of the interview by using chat. The company member then logs into the platform and sets the date and time for the interview. If the interview is of type "online", the system will automatically generate a link to access the virtual room using an external tool. The link will be displayed to both parties in the proper section.
+      
       \item \textbf{Identify recommendations} \\
+      After a feedback is published (either by a student or by a company), the system updates the statistics related to the recommendation process through an external tool. Following this, the system will be able to propose new recommendations, which will take into account also the published feedback. The statistics are updated also when changes are made to tags (related to both curriculum and internship descriptions).
+
       \item \textbf{Show the status of a selection process} \\
+      The company member wants to consult the information related to the selection process for an internship. To do this, they access the platform and go to the page of the internship. At this point, the system will display a list of candidates and information regarding the interviews. The student will only be able to access information related to their own selection process. For example, they will be able to check the outcome of the selection and understand whether they have been accepted or not.
+
+      \item \textbf{Finalize the selection process}
+      The company member enters the platform and selects the most suitable students for the proposed internship by consulting the list of all the candidates and the related information. Once the students are selected, all candidates will be notified about the outcome of the selection.
+
       \item \textbf{Manage reports} \\
+      The student (or the company member) publishes a report through a proper section of the platform. In the report they describe the current status of the internship and the events that occurred throughout the day. This part of the system ensures that all parties involved are kept informed about the progress of the internship. When a report is uploaded to the platform by the student, it will be made available to the company's members and the student's university members.
+
       \item \textbf{Manage feedbacks} \\
+      The student (or the company member) submits feedback through the dedicated section of the platform. The feedback will include an overall evaluation of the experience and a series of ratings related to specific areas. This feedback will not be shared with the counterpart or the university members but is intended to enhance the recommendation process. Providing feedback is optional but strongly encouraged by the system.
+      
       \item \textbf{Provide suggestions} \\
+      After the student has completed the digital version of their curriculum, the system will provide them with a series of suggestions on how to improve and expand their CV, so that it can be more easily found by companies relevant to them. One suggestion could be to add missing information (for example tags) in a particular section. The suggestions are also provided to company members. However, these will focus on the information related to the internship provided by company members.
+
       \item \textbf{Interrupt an internship} \\
-      \item 
+      The university member accesses the system and, after reviewing the complaints from a student regarding a particular internship, decides to terminate the activity. Once the decision is confirmed on the platform, both parties involved (the student and the company member) will be notified.
 \end{itemize}
 
 \subsection{User characteristics}
@@ -189,4 +251,6 @@ complaints and can interrupt an internship when necessary. The university is rep
     \item \text{[DA11]} During the registration process, the student must enter his correct university email contact.
     \item \text{[DA12]} When a company member registers, the associated company must already exist in the system (previously created).
     \item \text{[DA13]} When a student or a university member registers, the associated university must already exist in the system (previously created).
+    \item \text{[DA14]} University member who registers his university into the system inserts correct information.
+    \item \text{[DA15]} Company member who registers his company into the system inserts correct information.
 \end{itemize}

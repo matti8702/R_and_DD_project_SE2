@@ -1,4 +1,4 @@
-@startuml uml
+@startuml class_diagram
 left to right direction
 
 abstract class User{

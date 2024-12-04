@@ -1,0 +1,13 @@
+@startuml studentSelectionProcess_state_diagram
+
+[*] -> InterviewNotScheduledYet
+InterviewNotScheduledYet --> AwaitingInterview: the interview has been scheduled
+AwaitingInterview --> InterviewCompleted: the interview has been conducted
+InterviewCompleted --> Evaluated: the company member has decided\nwhether to select the student or not
+Evaluated -> [*]
+
+InterviewNotScheduledYet: selected = NOT_DEFINED
+AwaitingInterview: selected = NOT_DEFINED
+InterviewCompleted: selected = NOT_DEFINED
+Evaluated: selected = YES or selected = NO
+@enduml

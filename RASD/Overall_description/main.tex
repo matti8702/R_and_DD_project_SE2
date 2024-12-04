@@ -113,7 +113,7 @@ These evaluations are used by the system to generate recommendations.
 The \textbf{Chat} class describes communication between the student and the company member. It is instantiated only after the match is confirmed by both the two parties.
 
 The \textbf{StudentSelectionProcess} class handles all stages of selecting an \textbf{individual} student, from matching to communicating the results (including interviews). The outcome referred
-to a specific student is represented by the attribute "selected".
+to a specific student is represented by the attribute "selected" that can take the following values: \textit{NOT\_DEFINED}, \textit{YES} or \textit{NO}. As long as the company members do not select candidates for the internship, the "selected" field will be \textit{NOT\_DEFINED}.
 
 Additionally, the \textbf{Request} class models a "match request" made by either the student or the company and directed to the other party.
 If both parties accept, the attribute "approved" will be set to true and then the selection process begins.
@@ -122,8 +122,8 @@ Finally, the \textbf{Suggestion} class represents tips that the system provides,
 
 \subsubsection{State diagrams}
 
-In this section, the state diagrams associated with some classes from the previously presented class diagram are shown.
-We thought to model the diagrams associated with the Internship and InternshipStatus classes to better clarify their lifecycle within the system.
+This section presents the state diagrams corresponding to selected classes from the previously introduced class diagram.
+We thought to model the diagrams associated with the Internship, InternshipStatus and StudentSelectionProcess classes to better clarify their lifecycle within the system.
 Additionally, these classes represent the core concepts of the system.
 
 \begin{itemize}
@@ -136,6 +136,11 @@ Additionally, these classes represent the core concepts of the system.
       %TODO: add diagram
       %\begin{center}
       %      \includegraphics[scale = 0.]{Overall_description/uml_diagrams/internshipStatus_state_diagram.png}
+      %\end{center}
+      \item \textbf{StudentSelectionProcess}
+      %TODO: add diagram
+      %\begin{center}
+      %      \includegraphics[scale = 0.]{Overall_description/uml_diagrams/studentSelectionProcess_state_diagram.png}
       %\end{center}
 \end{itemize}
 

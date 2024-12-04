@@ -83,7 +83,7 @@ Request "0..*" -- Internship : refer
 Request "0..*" -- User : requestedBy
 
 class StudentSelectionProcess{
-    + selected: Boolean
+    + selected: SELECTION_STATUS
 }
 
 StudentSelectionProcess "0..*" -- Student : partecipate

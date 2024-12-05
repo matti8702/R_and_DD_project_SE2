@@ -128,7 +128,7 @@ Suggestion "0..*" -- "0,1" CurriculumVitae : refer
 Suggestion "0..*" -- "0,1" InternshipDescription : refer
 
 class Recommendation{
-    compatibilityRate: Float
+    + compatibilityRate: Float
 }
 Recommendation "0..*" -- Internship : recommend
 Recommendation "0..*" -- Student : recommend

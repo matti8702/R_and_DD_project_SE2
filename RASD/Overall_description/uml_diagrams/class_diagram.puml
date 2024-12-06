@@ -43,6 +43,7 @@ class Internship{
     + openForApplication: Boolean
 }
 Company -- "0..*" Internship : offer
+Internship "0..*" -- CompanyMember : publisher
 
 class InternshipDescription{
     + description: String
@@ -81,6 +82,7 @@ class Request{
 }
 Request "0..*" -- Internship : refer
 Request "0..*" -- User : requestedBy
+Request "0..*" -- User : requestedTo
 
 class StudentSelectionProcess{
     + selected: SELECTION_STATUS

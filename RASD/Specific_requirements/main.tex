@@ -47,6 +47,8 @@
 
 - Login of an user
 
+- Apply a suggestion to the curriculum vitae (or description internship)
+
 - Creation of an internship
 - Modify an internship
 - Searching for an internship %by inserting keywords
@@ -58,28 +60,343 @@
 - Modify the curriculum vitae %upload a new version of the cv
 - Modify the curriculum vitae %modify the digitalized version of cv (tags,...)
 
-% --- %
+% ----------- %
 
-- Accept a matching proposal made by the company
-- Accept a matching proposal to the student
+% student sends a request
+\usecase
+{
+    Student sends a request for an opened internship 
+}
+{
+    Student
+}
+{
+    The student is logged into the platform's homepage and intends to apply for an available internship.
+}
+{
+    \begin{enumerate}
+        \item The student selects an internship from the system's suggestions.
+        \item The system redirects the student to the internship details page.
+        \item The student clicks the \textit{"Send Request"} button to apply.
+        \item The system successfully submits the application to the company.
+    \end{enumerate}
+}
+{
+    The request arrives to the company.
+}
+{
+    The student clicks the \textit{"Send request"} button the second time. The system shows an error.
+}
+{}
 
-- Seeing reports regarding internships
-- Posting a report regarding the internship
+% company member sends a request
 
-- Interrupt an internship %it involves this: Seeing complaints regarding internships
+\usecase
+{
+    Company member sends a request for an opened internship 
+}
+{
+    Company member
+}
+{
+    The company member is logged into the platform's homepage and intends to requests a student for an opened internship
+}
+{
+    \begin{enumerate}
+        \item The company member selects a student profile suggested by the system.
+        \item The system redirects the company member to the student's profile page.
+        \item The company member clicks the \textit{"Send Request"} button to send an invitation.
+        \item The system successfully sends the invitation to the student.
+    \end{enumerate}
+}
+{
+    The request arrives to the student.
+}
+{
+    The company member clicks the \textit{"Send request"} button the second time. The system shows an error.
+}
+{}
 
-- Posting a feedback referred to the company
-- Posting a feedback referred to the student
+% Accept/refuse a matching proposal made by the company 
 
-- Schedule an online interview
-- Schedule an in-person interview
+\usecase 
+{
+    Student confirms their decision about a match
+}
+{
+    Student
+} 
+{
+The student is logged into the platform's homepage.
+}
+{
+    \begin{enumerate}
+        \item The student views the proposal from the company and selects either the \textit{"Accept"} or \textit{"Refuse"} button.
+        \item The system verifies if the internship is still available.
+        \item The system notifies the recruiter about the student's decision.
+        \item If accepted, the system initiates a private chat between the student and the recruiter for further communication.
+    \end{enumerate}
+}
+{
+The system has successfully sent the notification to the company member.
+}
+{
+The internship is closed. An error message appears on the screen and the system automatically redirects the student to the homepage.
+}
+{}
 
-- Select candidate(s) in order to start the internship
+% Accept/refuse a matching proposal made by the company member
+\usecase{Company member accepts or refuses a student's request}
+{
+    Company member
+}
+{The company member is logged in the platform's homepage where the student's request is visible.}
+{
+    \begin{enumerate}
+        \item The company member reviews the student's request and selects either the \textit{"Accept"} or \textit{"Refuse"} button.
+        \item The system notifies the student of the decision.
+        \item If the student is accepted, the system creates a private chat for communication.
+    \end{enumerate}
 
-- Apply a suggestion to the curriculum vitae (or description internship)
+}
+{The notification arrives to the student. If the student has been accepted, a private chat is created.}
+{}
+{}
 
-- Send a message to the company member
-- Send a message to the student
+% Schedule the meeting
+\usecase{
+    Schedule the meeting
+}
+{Company member and the student.}
+{The company member and the student are correctly logged in with their chat opened. They agree on the meeting time and where it will be held.}
+{
+    \begin{enumerate}
+        \item The recruiter clicks the \textit{"Schedule a Meeting"} button.
+        \item The system displays a form for meeting details (e.g., date, time, location, purpose).
+        \item The recruiter fills in the required details and confirms the entry.
+        \item The system notifies the student of the scheduled meeting.
+        \item The system adds the meeting to the calendars of both the recruiter and the student. If the meeting is online, the system generates a link for the video conference and attaches it to the event.
+    \end{enumerate}
+}
+{The meeting is in the student's and recruiter's calendar.}
+{
+    \begin{itemize}
+        \item The system identifies errors in the scheduled meeting (e.g illegal time frame) and shows a message to the screen.
+        \item The system detects an overlap with an event already in the calendar and shows a warning to the user.
+    \end{itemize}
+}
+{}
+
+% Recruiter accepts/rejects the student about the result of the interview
+\usecase
+{Company member communicates to the student the result of the interview}
+{Company member}
+{The company member is logged into the platform with the interview process result finalized.}
+{
+    \begin{enumerate}
+        \item The recruiter selects a student from the list of candidates.
+        \item The system displays the student's profile.
+        \item The recruiter clicks either the \textit{"Accept"} or \textit{"Reject"} button to finalize the decision.
+        \item The system notifies the student of the decision. If accepted, the system attaches the contract specified in the internship offer; otherwise, the private chat is deleted.
+    \end{enumerate}
+}
+{The notification arrives to the student. If the student is rejected, the chat is no more available: any access will show an error message.}
+{}
+{}
+
+\usecase
+{Decision on the offer}
+{Student}
+{
+    The student is logged into the platform's homepage. The notification of the acceptance from the company has arrived.
+}
+{
+    \begin{enumerate}
+        \item The student clicks on the notification about the company member's decision.
+        \item The system displays the decision along with \textit{"Accept"} and \textit{"Refuse"} buttons.
+        \item The student selects their choice by clicking one of the buttons.
+        \item The system notifies the company member of the student's response. If the student refuses, the private chat is deleted.
+    \end{enumerate}
+
+}
+{The notification arrives to the company member. If the student rejects the offer, the chat is no more available: any access will show an error message.}
+{}
+{}
+
+% students writes a report regarding internships
+\usecase
+{Student writes a report regarding the ongoing internship}
+{Student}
+{The student is logged into the platform's homepage}
+{
+    \begin{enumerate}
+        \item The student navigates to the list of reports.
+        \item The student clicks the \textit{"Create a New Report"} button.
+        \item The system displays a text box for the student to compose the report.
+        \item The student completes and submits the report.
+        \item The system automatically adds the student's name and surname to the report.
+        \item The report is shared with all relevant parties, including the student, the university, and the company members.
+    \end{enumerate}
+}
+{The report is added to the list of all interested users.}
+{The report is empty. The system displays an error message. }
+{}
+
+% company member writes a report regarding internships
+\usecase
+{Company member writes a report regarding the ongoing internship}
+{Company member}
+{The company member is logged into the platform's homepage}
+{
+    \begin{enumerate}
+        \item The company member navigates to the list of reports.
+        \item The company member clicks the \textit{"Create a Report"} button.
+        \item The system displays a text box for composing the report.
+        \item The company member writes the report and selects the student it pertains to.
+        \item The company member submits the report.
+        \item The system automatically adds the company member's name and surname to the report.
+        \item The system shares the report with relevant parties, including the selected student and their university.
+    \end{enumerate}
+}
+{The report is added to the list of all interested users.}
+{No student is selected or the report is empty, the system shows an error message.}
+{}
+
+\usecase
+{User writes a message}
+{User} % User has been defined in the class diagram, that is anyone
+{User is logged into the platform's homepage and knows the message to write along with the recipient's information}
+{
+    \begin{enumerate}
+        \item The user clicks on the chat icon to open the messaging interface.
+        \item The system displays a text box for the message.
+        \item The user composes the message.
+        \item The user selects the intended recipient.
+        \item The user clicks the \textit{"Submit"} button to send the message.
+        \item The system delivers the message to the recipient.
+    \end{enumerate}
+}
+{The message arrives to the recipient.}
+{The message is empty or no recipient is specified, the system shows an error message.}
+{}
+
+% Writing a complaint
+\usecase
+{Student writes a complaint}
+{The student is in the homepage.}
+{
+    \begin{enumerate}
+        \item The student clicks the \textit{"Write Complaint"} button.
+        \item The system displays a text box for the complaint.
+        \item The student writes the complaint and submits it.
+        \item If the complaint involves another student, the student must specify the relevant individual.
+        \item The system attaches the student's information to the complaint and forwards it to the university's list of complaints.
+    \end{enumerate}
+}
+{The report is correctly added to the university member's list of complaints.}
+{
+The complaint is empty. The system shows an error message.
+}
+{}
+{}
+
+% student closes the university 
+\usecase
+{Interrupt Internship} 
+{
+University member
+}
+{
+    University member is logged into the platform's homepage.
+}
+{
+    \begin{enumerate}
+        \item The university member clicks the \textit{"Manage Students"} button.
+        \item The system displays a list of students currently participating in internships.
+        \item The university member selects a student and clicks the \textit{"Interrupt Internship"} button.
+        \item The system notifies all involved parties, including the student and the company members, about the interruption.
+        \item The system updates the internship page to display the message \textit{"Interrupted Internship"}.
+    \end{enumerate}
+
+}
+{
+    All users involved received the notification regarding the interruption of the internship. 
+    Any access to the page related to the internship will show the message \textit{"Interrupted Internship"}. 
+}{}{}
+
+%\usecase
+%{Interrupt Internship} 
+%{
+%Company member
+%}
+%{
+%    \begin{enumerate}
+%        \item The company member clicks the button \textit{"Select interns"}.
+%        \item The system shows the list of all interns.
+%        \item The internship coordinator selects the student from the list and clicks the button \textit{"Terminate Internship"}.
+%        \item The system removes the student from the list of interns.
+%        \item The system notifies the student about the event.
+%    \end{enumerate} 
+%}
+%{
+%The student is not an intern anymore and they are notified about the new situation. 
+%}{}{}
+
+% why commented -> delete because the effect of the end of an internship is described when a member (student or company member) writes a feedback.
+
+%\usecase
+%{
+%    \begin{itemize}
+%        \item Company member
+%        \item Student
+%    \end{itemize}
+%}
+%{The internship period is over. The internship coordinator is logged in the platform.}
+%{
+%    \begin{enumerate}
+%        \item The internship coordinator clicks on the section related to all opened internships
+%        \item The system displays a list of all opened internships. The ones terminated have a button for completing the termination.
+%        \item The coordinator  
+%        \item The system shows the list of all interns.
+%        \item The internship coordinator selects the student from the list and clicks the button \textit{"Terminate Internship"}.
+%        \item The system removes the student from the list of interns.
+%        \item The system notifies the student about the event.
+%    \end{enumerate} 
+%}
+%{
+%The student is not an intern anymore and they are notified about the new situation. 
+%}
+
+% Posting a feedback.
+% Even when an internship is interrupted, it must be possible to write a feedback. In this way, the analyzer will penalize the company from being suggested to students.
+\usecase
+{Post a feedback}
+{
+    \begin{itemize}
+    \item Student
+    \item Company member
+    \end{itemize}
+}
+{
+    The student or company member is logged into the platform's homepage. 
+    The internship is ended.
+}
+{
+    \begin{enumerate}
+        \item The user notices the system notification indicating the end of the internship.
+        \item The user clicks on the notification.
+        \item The system prompts the user with the message \textit{"Would you like to write a feedback?"} and provides \textit{"Yes"} and \textit{"No"} options.
+        \item If the user selects \textit{"No"}, the system closes the notification and returns the user to the homepage.
+        \item If the user selects \textit{"Yes"}, the system redirects them to the feedback page.
+        \item The user writes a comment and rates the internship experience.
+        \item The user clicks the \textit{"Post"} button to submit the feedback.
+        \item The system processes and forwards the feedback to the relevant external tool.
+    \end{enumerate}
+
+}
+{The user either refuses to write a feedback or posts it}
+{The feedback is incomplete, the system shows an error message.}
+{}
 
 \subsection{Performance Requirements}
 \subsection{Design Constraints}

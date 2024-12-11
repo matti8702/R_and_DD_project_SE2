@@ -4,7 +4,7 @@ left to right direction
 abstract class User{
     + name: String
     + surname: String
-    + dateOfBirthday: Date
+    + dateOfBirth: Date
     + email: String
     + password: String
 }

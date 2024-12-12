@@ -27,22 +27,22 @@
     \def\arraystretch{1.5} % This adds padding to table rows (and more)
 
     \subsection*{[UC \arabic{usecasecounter}] - #1}
-    \begin{tabular}{|l|p{0.7\textwidth}|}
-        \hline
+    \begin{tabular}{lp{0.7\textwidth}}
+        \toprule
         \textbf{Name} & #1\\
-        \hline
+        \midrule
         \textbf{Actors} & #2 \\
-        \hline
+        \midrule
         \textbf{Entry Condition} & #3 \\
-        \hline
+        \midrule
         \textbf{Event Flow} & #4 \\
-        \hline
+        \midrule
         \textbf{Exit Condition} & #5 \\
-        \hline
+        \midrule
         \textbf{Exceptions} & #6 \\
-        \hline
+        \midrule
         \textbf{Notes} & #7 \\
-        \hline
+        \bottomrule
     \end{tabular}
     \addtocounter{usecasecounter}{1}
 }

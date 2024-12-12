@@ -1,0 +1,24 @@
+@startuml UC16_diagram
+hide footbox
+
+participant "Student" as ST
+participant "S&C" AS S
+participant "Company Member" as CM
+
+activate ST
+activate S
+ST -> S: matchChoice(choice)
+alt Internship is still available
+    S -> CM : sendChoice(choice, student)
+    activate CM
+    alt Student has accepted
+        S -> S  : createChat(student, companyMember)
+        S -> CM : openChat(student)
+        S -> ST : openChat(companyMember)
+    else 
+        S -> CM : removeCandidate(student)
+    end
+else 
+    S --> ST: error message
+end
+@enduml

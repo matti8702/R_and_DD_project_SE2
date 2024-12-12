@@ -1,0 +1,25 @@
+@startuml UC24_diagram
+hide footbox
+
+participant "Student" as ST
+participant "S&C" AS S
+participant "University Member" as UM
+participant "Company Member" as CM
+
+activate ST
+activate S
+
+ST -> S : submitComplaint(complaint)
+S  -> S : checkComplaint()
+loop until complaint is not empty
+    S -> ST : showError(message)
+    ST -> S : submitComplaint(complaint)
+    S  -> S : checkComplaint()
+end
+S -> S : retrieveStudentInformation()
+S -> ST : addComplaint(complaint)
+S -> UM : addComplaint(complaint)
+activate UM
+S -> CM : addComplaint(complaint)
+activate CM
+@enduml

@@ -1,0 +1,19 @@
+@startuml UC23_diagram
+hide footbox
+
+participant "Generic User" as U
+participant "S&C" AS S
+participant "Recipient" as R
+
+activate U
+activate S
+
+U -> S : sendMessage(message, recipient)
+loop until message is empty or the recipient's information are missing/incorrect
+    S --> U : error message
+    U -> S : sendMessage(message, recipient)
+end
+S -> R : addMessage(message)
+activate R
+S -> U : addMessage(message)
+@enduml

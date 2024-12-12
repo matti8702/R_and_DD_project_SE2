@@ -1,0 +1,24 @@
+@startuml UC22_diagram
+hide footbox
+
+participant "Company Member" as CM
+participant "S&C" AS S
+participant "Student" as ST
+participant "University Member" as UM
+
+activate CM
+activate S
+
+CM -> S : createReport()
+S --> CM : report to be filled
+CM -> S : submitReport(report, student)
+loop until report is not empty and student's information are correct
+    S --> CM : error message
+    CM -> S : submitReport(report, student)
+end
+S -> ST : addReport(report, companyMember)
+activate ST
+S -> CM : addReport(report, companyMember)
+S -> UM : addReport(report, companyMember)
+activate UM
+@enduml

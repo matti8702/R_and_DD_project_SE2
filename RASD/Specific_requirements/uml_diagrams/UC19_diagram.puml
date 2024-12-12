@@ -1,0 +1,26 @@
+@startuml UC19_diagram
+hide footbox
+
+participant "Company Member" as CM
+participant "S&C" AS S
+participant "Student" as ST
+
+activate CM
+activate S
+
+CM -> S: showCandidates(internshipName)
+S --> CM: list of candidates
+CM -> S : selectStudent(student)
+S --> CM : student's info
+CM -> S : admission(result, companyMember)
+alt Student is accepted
+    S -> S  : collectInternshipInfo()
+    S -> ST : sendOffer(contract)
+    activate ST
+else
+    S -> ST : sendResult(result)
+    S -> ST : deleteChat()
+    S -> CM : deleteChat()
+end 
+S -> CM : removeCandidate()
+@enduml

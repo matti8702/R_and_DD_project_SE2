@@ -1,0 +1,17 @@
+@startuml UC20_diagram
+hide footbox
+
+participant "Student" as ST
+participant "S&C" AS S
+participant "Company Member" as CM
+
+activate ST
+activate S
+
+ST -> S: offerDecision(choice)
+S  -> CM : sendDecision(choice, student)
+activate CM
+alt Student has rejected the offer
+    S -> CM : deleteChat()
+end
+@enduml

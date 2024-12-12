@@ -1,0 +1,21 @@
+@startuml UC25_diagram
+hide footbox
+
+participant "University Member" as UM
+participant "S&C" AS S
+participant "Student" as ST
+participant "Comany Member" as CM
+
+activate UM
+activate S
+
+UM -> S : getStudents(university)
+S -> S  : retrieveAllStudent(university)
+S --> UM : list of students currently on an internship
+UM -> S : interrupInternship(internshipName, student)
+S -> CM  : notifyInterruptionInternship(student, internshipName) 
+activate CM
+S -> ST  : notifyInterruptionInternship(student, internshipName) 
+activate ST
+S -> S : updateInternshipPage(internshipName)
+@enduml

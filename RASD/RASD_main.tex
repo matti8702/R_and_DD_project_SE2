@@ -8,10 +8,15 @@
 \usepackage{import}
 \usepackage{amsmath} % required for \text
 
+\usepackage[explicit]{titlesec}
+
+\newcounter{usecasecounter}
+\setcounter{usecasecounter}{1}
 % add macro to create a table automatically
 \newcommand{\usecase}[7]{
     \def\arraystretch{1.5} % This adds padding to table rows (and more)
-    \subsubsection{Use Case: #1}
+
+    \subsection*{[UC \arabic{usecasecounter}] - #1}
     \begin{tabular}{|l|p{0.7\textwidth}|}
         \hline
         \textbf{Name} & #1\\
@@ -29,6 +34,7 @@
         \textbf{Notes} & #7 \\
         \hline
     \end{tabular}
+    \addtocounter{usecasecounter}{1}
 }
 \usepackage{booktabs}
 

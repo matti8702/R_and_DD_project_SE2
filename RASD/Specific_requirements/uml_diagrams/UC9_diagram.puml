@@ -9,7 +9,6 @@ activate S
 activate ST
 ST -> S: modifyDigitalizedCV()
 S --> ST: show "modification form"
-ST -> ST: performModifications()
 ST -> S: confirmModifications(changes)
 S -> EXT: updateStatistics(currentState, newData)
 activate EXT

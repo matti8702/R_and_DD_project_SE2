@@ -9,7 +9,6 @@ activate S
 activate CM
 CM -> S: modifyInternship(internshipName)
 S --> CM: show internship form
-CM -> CM: edit data
 CM -> S: seeModifications()
 S --> CM: modified fields
 alt company member confirms modifications

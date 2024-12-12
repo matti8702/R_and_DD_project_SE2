@@ -65,7 +65,6 @@
           Finally, he submits his feedback by clicking the \textit{"Post"} button.
 \end{itemize}
 
-\subsubsection{Further details on the shared phenomena}
 \subsubsection{Class diagrams}
 
 %TODO: put diagram
@@ -122,11 +121,9 @@ If both parties accept, the attribute "approved" will be set to true and then th
 Finally, the \textbf{Suggestion} class represents tips that the system provides, either to students (e.g., for their CV) or to companies (e.g., for internship descriptions).
 
 \subsubsection{State diagrams}
-
 This section presents the state diagrams corresponding to selected classes from the previously introduced class diagram.
 We thought to model the diagrams associated with the Internship, InternshipStatus and StudentSelectionProcess classes to better clarify their lifecycle within the system.
 Additionally, these classes represent the core concepts of the system.
-
 \begin{itemize}
       \item \textbf{Internship}
       %TODO: add diagram
@@ -146,7 +143,7 @@ Additionally, these classes represent the core concepts of the system.
 \end{itemize}
 
 \subsection{Product functions}
-
+The product functions are presented. They represent the main features that the system must support.
 \begin{itemize}
       \item \textbf{Register to the system} \\
       A user who wishes to use the platform must register by providing their first name, last name, an email address, date of birth and a password that will be used for authentication in subsequent logins. If the user is a student or a university member, they must provide their institutional email address. On the other hand, if the user is a company member, they must specify a company domain email address.
@@ -218,30 +215,24 @@ Additionally, these classes represent the core concepts of the system.
 \end{itemize}
 
 \subsection{User characteristics}
-
 There are three types of users: Students, Company Members, and University Members. Each user is identified by an email and a password, and once registered, 
 they can log in using only these two credentials.
 
 \subsubsection{Student}
-
 The student registers by providing their name, surname, an email associated with the university they belong to (registered on the platform), and a password. The student joins the Students\&Companies platform to find an internship that fulfills their needs. 
 They can apply to multiple internship proposals, and if accepted, they can track their experiences through their account on the platform. Each student account is linked to 
 the same university associated with their email and is responsible for handling their complaints.
 
 \subsubsection{Company Member}
-
 The company member is a user who represents an employee of a company registered on the Students\&Companies platform. The set of all company members constitutes the company on the system. 
 They register by providing their name, surname, an email from their company's domain, and a password. A company member can publish internships offered by their company, 
 review student applications, communicate with applicants to arrange interviews. After the interviews are concluded, company members will select the candidates who will be 
 hired for the internship.
 
 \subsubsection{University Member}
-
 The university member is a user who represents a worker at a university registered on the Students\&Companies platform. A university member handles all student 
 complaints and can interrupt an internship when necessary. The university is represented by the set of all its members.
 
-
-%todo: specify somewhere that if the university it's not registered the student can't register to the platform (same for university members and company member but with company)
 %todo: if student change university he creates a new account
 %todo: when a university email expires the student account is deleted by the platform (when periodically or when he tries to log in)
 

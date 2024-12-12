@@ -1,17 +1,32 @@
 \documentclass{article}
 \usepackage{enumitem}
 
-%\newenvironment{worldPhenomenaList}{\begin{enumerate}[label=\textbf{[WP\arabic*]}, align=left]}%
-%{\end{enumerate}}
+\newcounter{cnt}  
+\newenvironment{listInSquareBrackets}[1]
+  {\begin{list}
+    {\textbullet\hspace{0.3em}[#1\arabic{cnt}]}
+    {\usecounter{cnt}
+     \setlength{\labelwidth}{0em}
+     \setlength{\labelsep}{0.5em}
+     \setlength{\leftmargin}{1.5em}
+     \setlength{\itemindent}{0.5em} % equals \labelwidth+\labelsep
+    }
+  }
+{\end{list}}
 
 \usepackage{graphicx} % required for inserting images
 \usepackage{import}
 \usepackage{amsmath} % required for \text
 
+\usepackage[explicit]{titlesec}
+
+\newcounter{usecasecounter}
+\setcounter{usecasecounter}{1}
 % add macro to create a table automatically
 \newcommand{\usecase}[7]{
     \def\arraystretch{1.5} % This adds padding to table rows (and more)
-    \subsubsection{Use Case: #1}
+
+    \subsection*{[UC \arabic{usecasecounter}] - #1}
     \begin{tabular}{|l|p{0.7\textwidth}|}
         \hline
         \textbf{Name} & #1\\
@@ -29,6 +44,7 @@
         \textbf{Notes} & #7 \\
         \hline
     \end{tabular}
+    \addtocounter{usecasecounter}{1}
 }
 \usepackage{booktabs}
 

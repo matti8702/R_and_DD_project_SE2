@@ -5,25 +5,25 @@
     %we thought that student look for an internship in two methods: 1 search by keyword 2 use recommendation (which appears in home page)
     %convert all in must, should 
 
-    \item The system must permit students to register by providing their personal information and an institutional email\footnote{This is the email assigned to the student by their university.}.%specify differences in registrations.
+    \item The system must permit students to register by providing their personal information and an institutional email.\footnote{"Institutional email" stand for the email assigned to the student by their university.}
     \item The system must permit companies to register.
     \item The system must permit universities to register.
     \item The system must allow users to log in by inserting their credentials.
     \item The system must allow student to publish his CV.
     \item The system must allow companies to publish internships.
-    \item The system shall inform students when suitable internships are available through recommendation. %specify that this is an out assumption on how the system provides recommendations --> point to specific section
-    \item The system shall inform companies about the availability of student CVs corresponding to their needs, through recommendation. %specify that this is an out assumption on how the system provides recommendations --> point to specific section
+    \item The system shall inform students when suitable internships are available through recommendation.
+    \item The system shall inform companies about the availability of student CVs corresponding to their needs, through recommendation.
     \item The system must use analysis produced by the statistical analysis tool to formulate recommendation for students and companies.
     \item The system shall provide suggestions to companies for the project description.
     \item The system shall provide suggestions to students regarding their CVs.
     \item The system shall allow the company to select the students, among all candidates, for the internship.
     \item The system must collect feedbacks from students and companies in order to keep statistics up-to-date.
     \item The system must send feedbacks to the statistical analysis tool in order to update its analysis.
-    \item The system must allow the student and the company to monitor the execution and the outcome of the matchmaking process. %specify allow the student to see if his candidature is accepted and then he could proceed with an interview or he isn't selected
-    \item The system must allow the student, the company and the university to monitor the ongoing internship. %specify ("By looking on reports")
-    \item The system must allow interrupting an internship when university requires it. %we thought that only the university could interrupt the internship and not the company
-    \item The system must provide to student all available internships related to the keyword specified by him. %specify that it also involves recommendation (statistical analysis) maybe in case of common keywords 
-    \item The system shall inform the company and the student that the internship has concluded cause of the decision of the student's university. %specify due to student complains
+    \item The system must allow the student and the company to monitor the execution and the outcome of the matchmaking process.
+    \item The system must allow the student, the company and the university to monitor the ongoing internship.\footnote{The monitoring is achieved through report visualization.}
+    \item The system must allow interrupting an internship when university requires it.\footnote{Only the university could interrupt the internship and not the company.}
+    \item The system must provide to student all available internships related to the keyword specified by him.
+    \item The system shall inform the company and the student that the internship has concluded cause of the decision of the student's university.
     \item The system must prevent students to apply for the internship once the company has selected the eligible candidate for it.
     \item The system shall allow students to modify their CV.
     \item The system shall allow companies to modify internship description.
@@ -41,6 +41,7 @@
 \subsection{Use cases}
 %TODO: add use cases diagram
 
+%TODO: put showError(message)
 \usecase
 {
     Registration of a university member
@@ -49,17 +50,17 @@
     University member and eMail provider
 }
 {
-    The university member clicks on button "Register as a university member".
+    The university member clicks on button \textit{"Register as a university member"}.
 }
 {
     \begin{enumerate}
-        \item The system shows the "registration" form.
+        \item The system shows the \textit{"Registration form"}.
         \item The university member enters his name, surname and date of birth, a password and his institutional email.
         \item The university member selects his university amoung all the universities registered to the system.
-        \item The university member clicks the button "Register".
+        \item The university member clicks the button \textit{"Register"}.
         \item The system verifies that the email is associated to the university provided.
         \item The system verifies that the email is not already registered to the system.
-        \item The system sends an email to the unibversity member by an eMail provider.
+        \item The system sends an email to the university member by an eMail provider.
     \end{enumerate}
 }
 {
@@ -67,9 +68,9 @@
 }
 {
     \begin{itemize}
-        \item The email is already registered to the system. The system will show an error message "User already registered" and it will interrupt the registration process.
-        \item The email provided is not linked to the university provided by the member. In this case the system will show an error message "Invalid email domain".
-        \item The university in which the university member works is not present in the system. In this case the university member clicks the button "Create your university" and by clicking it the system will show the "university registration form" in which the university member will enter all the information regarding the university. Once he has confirmed all data, the institution will be inserted to the system and moreover it will sends a confirmation email to the university member.
+        \item The email is already registered to the system. The system will show an error message \textit{"User already registered"} and it will interrupt the registration process.
+        \item The email provided is not linked to the university provided by the member. In this case the system will show an error message \textit{"Invalid email domain"}.
+        \item The university in which the university member works is not present in the system. In this case the university member clicks the button \textit{"Create your university"} and by clicking it the system will show the \textit{"University registration form"} in which the university member will enter all the information regarding the university. Once he has confirmed all data, the institution will be inserted to the system and moreover it will sends a confirmation email to the university member.
         \item The member does not confirm their email address within one day of entering the data into the system. In this case the system will delete all provided data. The member will then need to repeat the registration process.
     \end{itemize}
 }
@@ -85,14 +86,14 @@
     Company member and eMail provider
 }
 {
-    The company member clicks on button "Register as a company member".
+    The company member clicks on button \textit{"Register as a company member"}.
 }
 {
     \begin{enumerate}
-        \item The system shows the "registration" form.
+        \item The system shows the \textit{"Registration form}.
         \item The company member enters his name, surname and date of birth, a password and his institutional email.
         \item The company member selects his company amoung all the companies registered to the system.
-        \item The company member clicks the button "Register".
+        \item The company member clicks the button \textit{"Register"}.
         \item The system verifies that the email is associated to the company provided.
         \item The system verifies that the email is not already registered to the system.
         \item The system sends an email to the company member by an eMail provider.
@@ -103,9 +104,9 @@
 }
 {
     \begin{itemize}
-        \item The email is already registered to the system. The system will show an error message "User already registered" and it will interrupt the registration process.
-        \item The email provided is not linked to the company provided by the company member. In this case the system will show an error message "Invalid email domain".
-        \item The company in which the company member works is not present in the system. In this case the comapany member clicks the button "Create your company" and by clicking it the system will show the "company registration form" in which the company member will enter all the information regarding the company. Once he has confirmed all data, the institution will be inserted to the system and moreover it will sends a confirmation email to the company member.
+        \item The email is already registered to the system. The system will show an error message \textit{"User already registered"} and it will interrupt the registration process.
+        \item The email provided is not linked to the company provided by the company member. In this case the system will show an error message \textit{"Invalid email domain"}.
+        \item The company in which the company member works is not present in the system. In this case the comapany member clicks the button \textit{"Create your company"} and by clicking it the system will show the \textit{"Company registration form"} in which the company member will enter all the information regarding the company. Once he has confirmed all data, the institution will be inserted to the system and moreover it will sends a confirmation email to the company member.
         \item The company member does not confirm their email address within one day of entering the data into the system. In this case the system will delete all provided data. The company member will then need to repeat the registration process.
     \end{itemize}
 }
@@ -113,7 +114,6 @@
 
 }
 
-%TODO: revise "university is not registered" exception
 \usecase
 {
     Registration of a student
@@ -122,14 +122,14 @@
     Student and eMail provider
 }
 {
-    The student clicks on button "Register as a student".
+    The student clicks on button \textit{"Register as a student"}.
 }
 {
     \begin{enumerate}
-        \item The system shows the "registration" form.
+        \item The system shows the \textit{"Registration form"}.
         \item The student enters his name, surname and date of birth, a password and his institutional email.
         \item The student selects his university amoung all the universities registered to the system.
-        \item The member clicks the button "Register".
+        \item The member clicks the button \textit{"Register"}.
         \item The system verifies that the email is associated to the university provided.
         \item The system verifies that the email is not already registered to the system.
         \item The system sends an email to the student by an eMail provider.
@@ -140,9 +140,9 @@
 }
 {
     \begin{itemize}
-        \item The email is already registered to the system. The system will show an error message "User already registered" and it will interrupt the registration process.
-        \item The email provided is not linked to the university provided by the student. In this case the system will show an error message "Invalid email domain".
-        \item The university in which the student is enrolled is not present in the system. In this case the system will display an error message "University not present in the system", preventing the student from completing the registration.
+        \item The email is already registered to the system. The system will show an error message \textit{"User already registered"} and it will interrupt the registration process.
+        \item The email provided is not linked to the university provided by the student. In this case the system will show an error message \textit{"Invalid email domain"}.
+        \item The university in which the student is enrolled is not present in the system. In this case the system will display an error message \textit{"University not present in the system"}, preventing the student from completing the registration.
         \item The student does not confirm their email address within one day of entering the data into the system. In this case the system will delete all provided data. The student will then need to repeat the registration process.
     \end{itemize}
 }
@@ -158,21 +158,21 @@
     User
 }
 {
-    The user clicks on button "login".
+    The user clicks on button \textit{"Login"}.
 }
 {
     \begin{enumerate}
-        \item The system shows the "login" form.
+        \item The system shows the \textit{"Login form"}.
         \item The user inserts his credentials (email and password).
-        \item The user clicks on button "Confirm".
+        \item The user clicks on button \textit{"Confirm"}.
         \item The system checks credentials.
     \end{enumerate}
 }
 {
-    The system shows the "homepage" of the application.
+    The system shows the \textit{"Homepage"} of the application.
 }
 {
-    Credentials are invalid. In this case the system will show an error message "Invalid credentials" and it will clear the input fields.
+    Credentials are invalid. In this case the system will show an error message \textit{"Invalid credentials"} and it will clear the input fields.
 }
 {
 
@@ -186,14 +186,14 @@
     Company member and external statistical analysis tool
 }
 {
-    The company member is logged to the platform and he press the button "Create an internship".
+    The company member is logged to the platform and he press the button \textit{"Create an internship"}.
 }
 {
     \begin{enumerate}
-        \item The system shows the "internship form".
+        \item The system shows the \textit{"Internship form"}.
         \item The company member enters all the required information: a name, the valid application period, the maximum number of students allowed, the description, the requirements, the domain of application, tags and the terms specified in the contract.
-        \item The company member clicks on button "Confirm".
-        \item The system sends data to the external statistical analysis tool in order to update statistics. %good?
+        \item The company member clicks on button \textit{"Confirm"}.
+        \item The system sends data to the external statistical analysis tool in order to update statistics.
         \item The system receives updated statistics from the external tool
         \item The system performs the recommendation process
     \end{enumerate}
@@ -208,7 +208,6 @@
 
 }
 
-%TODO: revise diagram (loop on CM??)
 \usecase
 {
     Modify an internship
@@ -217,15 +216,15 @@
     Company member and external statistical analysis tool
 }
 {
-    The company member is logged in the system and he is on the "internships list" section. He clicks on the button "Modify the internship" near a specific internship. The selected internship is closed for applications and there are not enorelled students.
+    The company member is logged in the system and he is on the \textit{"Internships list"} section. He clicks on the button \textit{"Modify the internship"} near a specific internship. The selected internship is closed for applications and there are not enorelled students.
 }
 {
     \begin{enumerate}
         \item The system displays the form to allow data modification.
         \item The company member edits the information.
-        \item The company member clicks the button "See modifications".
+        \item The company member clicks the button \textit{"See modifications"}.
         \item The system shows to the company member all modified fields.
-        \item The company member clicks on button "Confirm all the changes".
+        \item The company member clicks on button \textit{"Confirm all the changes"}.
         \item The system checks the uniqueness of the internship name.
         \item The system update statistics through the external statistical analysis tool (for tags modifications).
         \item The system performs the recommendation process.
@@ -243,28 +242,26 @@
 
 }
 
-%TODO: revise
 \usecase{
     Delete an internship
 }{
     Company member
 }{
-    The company member is logged in the system and he is on the "internships list" section. He clicks on the button "Delete the internship" near a specific internship. The selected internship is closed for applications and there are not enorelled students.
+    The company member is logged in the system and he is on the \textit{"Internships list"} section. He clicks on the button \textit{"Delete the internship"} near a specific internship. The selected internship is closed for applications and there are not enorelled students.
 }{
     \begin{enumerate}
         \item The system displays a banner to the company member to confirm the deletion of the internship.
-        \item The company member clicks on the button "Confirm deletion".
+        \item The company member clicks on the button \textit{"Confirm deletion"}.
         \item The system deletes the internship.
     \end{enumerate}
 }{
-    The system shows the message "Deletion performed" and redirects the company member to the "internships list" section.
+    The system shows the message \textit{"Deletion performed"} and redirects the company member to the \textit{"Internships list"} section.
 }{
-    The company member does not confirm the deletion. In this case the system will show the "internships list" section.
+    The company member does not confirm the deletion. In this case the system will show the \textit{"Internships list"} section.
 }{
 
 }
 
-%fix: loop on student??
 \usecase
 {
     Searching for an internship by means of keywords
@@ -273,11 +270,11 @@
     Student
 }
 {
-    The student is logged in and enters keywords into the "internship search bar" located on the homepage of the platform.
+    The student is logged in and enters keywords into the \textit{"Internship search bar"} located on the homepage of the platform.
 }
 {
     \begin{enumerate}
-        \item The student clicks on the "confirm" button next to the "search bar".
+        \item The student clicks on the \textit{"Confirm"} button next to the search bar.
         \item The system gathers all internships that have a common part in their name, tags, or description with the entered text.
     \end{enumerate}
 }
@@ -285,13 +282,12 @@
     The system shows to the student all the results ordered thought the recommendation system.
 }
 {
-    The system does not find any results related to the entered keywords. The system will shows the message "no internships found".
+    The system does not find any results related to the entered keywords. The system will shows the message \textit{"No internships found"}.
 }
 {
 
 }
 
-%fix loop in studente??
 \usecase
 {
     Modify the digitalized curriculum vitae version
@@ -300,14 +296,14 @@
     Student and external statistical analysis tool
 }
 {
-    The student is logged in and he clicks the button "Modify your digitalized curriculum" in their personal page.
+    The student is logged in and he clicks the button \textit{"Modify your digitalized curriculum"} in their personal page.
 }
 {
     \begin{enumerate}
-        \item The system shows the "modification form". This form includes all the sections added by the student.
-        \item The student clicks on button "Modify section" to modify a specific section of his curriculum.
+        \item The system shows the \textit{"Modification form"}. This form includes all the sections added by the student.
+        \item The student clicks on button \textit{"Modify section"} to modify a specific section of his curriculum.
         \item The student inserts all the modifications.
-        \item The student clicks on button "Save changes".
+        \item The student clicks on button \textit{"Save changes"}.
         \item The system sends information regarding tags to the external analysis tool.
         \item The system receives the updated statistics and perform the recommendation process.
     \end{enumerate}
@@ -322,7 +318,6 @@
 
 }
 
-%fix: "file selection dialog" ????
 \usecase
 {
     Upload a new CV document
@@ -331,7 +326,7 @@
     Student
 }
 {
-    The student is loggeg in. He is on the personal page and he clicks the button "Upload a new version of your curriculum".
+    The student is loggeg in. He is on the personal page and he clicks the button \textit{"Upload a new version of your curriculum"}.
 }
 {
     \begin{enumerate}
@@ -344,7 +339,7 @@
     The system shows to the student his personal page.
 }
 {
-    The file selected by the student has an invalid file extension. In this case, the system will send an error message, "Invalid file extension", to the student.
+    The file selected by the student has an invalid file extension. In this case, the system will send an error message, \textit{"Invalid file extension"}, to the student.
 }
 {
 
@@ -815,6 +810,9 @@ The complaint is empty. The system shows an error message.
 \subsection{Mapping on requirements}
 \begin{itemize}
     \item \text{[G1]} - The company aims to spread the project proposals to all interested students.
+    \begin{itemize}
+        \item 
+    \end{itemize}
     \item \text{[G2]} - The student would like to find proposals that are most suited to him.
     \item \text{[G3]} - The company would like to find student's CVs that satisfy their needs.
     \item \text{[G4]} - The student and the company would like to receive suggestions on how to improve CVs and project descriptions.

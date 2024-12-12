@@ -5,25 +5,25 @@
     %we thought that student look for an internship in two methods: 1 search by keyword 2 use recommendation (which appears in home page)
     %convert all in must, should 
 
-    \item The system must permit students to register by providing their personal information and an institutional email\footnote{This is the email assigned to the student by their university.}.%specify differences in registrations.
+    \item The system must permit students to register by providing their personal information and an institutional email.\footnote{"Institutional email" stand for the email assigned to the student by their university.}
     \item The system must permit companies to register.
     \item The system must permit universities to register.
     \item The system must allow users to log in by inserting their credentials.
     \item The system must allow student to publish his CV.
     \item The system must allow companies to publish internships.
-    \item The system shall inform students when suitable internships are available through recommendation. %specify that this is an out assumption on how the system provides recommendations --> point to specific section
-    \item The system shall inform companies about the availability of student CVs corresponding to their needs, through recommendation. %specify that this is an out assumption on how the system provides recommendations --> point to specific section
+    \item The system shall inform students when suitable internships are available through recommendation.
+    \item The system shall inform companies about the availability of student CVs corresponding to their needs, through recommendation.
     \item The system must use analysis produced by the statistical analysis tool to formulate recommendation for students and companies.
     \item The system shall provide suggestions to companies for the project description.
     \item The system shall provide suggestions to students regarding their CVs.
     \item The system shall allow the company to select the students, among all candidates, for the internship.
     \item The system must collect feedbacks from students and companies in order to keep statistics up-to-date.
     \item The system must send feedbacks to the statistical analysis tool in order to update its analysis.
-    \item The system must allow the student and the company to monitor the execution and the outcome of the matchmaking process. %specify allow the student to see if his candidature is accepted and then he could proceed with an interview or he isn't selected
-    \item The system must allow the student, the company and the university to monitor the ongoing internship. %specify ("By looking on reports")
-    \item The system must allow interrupting an internship when university requires it. %we thought that only the university could interrupt the internship and not the company
-    \item The system must provide to student all available internships related to the keyword specified by him. %specify that it also involves recommendation (statistical analysis) maybe in case of common keywords 
-    \item The system shall inform the company and the student that the internship has concluded cause of the decision of the student's university. %specify due to student complains
+    \item The system must allow the student and the company to monitor the execution and the outcome of the matchmaking process.
+    \item The system must allow the student, the company and the university to monitor the ongoing internship.\footnote{The monitoring is achieved through report visualization.}
+    \item The system must allow interrupting an internship when university requires it.\footnote{Only the university could interrupt the internship and not the company.}
+    \item The system must provide to student all available internships related to the keyword specified by him.
+    \item The system shall inform the company and the student that the internship has concluded cause of the decision of the student's university.
     \item The system must prevent students to apply for the internship once the company has selected the eligible candidate for it.
     \item The system shall allow students to modify their CV.
     \item The system shall allow companies to modify internship description.
@@ -42,6 +42,7 @@
 %TODO: add use cases diagram
 
 %TODO: put \textit{} for buttons, messages...
+%TODO: put showError(message)
 \usecase
 {
     Registration of a university member

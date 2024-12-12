@@ -1,0 +1,16 @@
+@startuml UC13_diagram
+hide footbox
+
+participant "Company member" as CM
+participant "S&C" AS S
+
+activate CM
+activate S
+S -> S: findDescriptionsSuggestions()
+S -> CM: show suggestion banner
+CM -> S: manageSuggestion()
+S --> CM: show internship form
+CM -> CM: insertInformations()
+CM -> S: confirmModifications()
+S --> CM: show internship page
+@enduml

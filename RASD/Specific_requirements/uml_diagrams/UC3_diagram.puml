@@ -1,0 +1,36 @@
+@startuml UC3_diagram
+hide footbox
+
+participant "Student" as ST
+participant "eMail provider" as EP
+participant "S&C" AS S
+
+ST -> S: registerAsStudent()
+activate S
+activate ST
+S --> ST: show registration form
+S --> ST: list of all registered universities
+alt university is registered to the system
+    ST -> S: register(name, surname, dateOfBirth, password, emailAddress, university)
+    S -> S: checkData()
+    alt email address is valid
+        S -> EP: sendEmailRequest(emailAddress, text)
+        activate EP
+        EP --> S: ok
+        EP -> ST: sendEmail(email)
+        deactivate EP
+        alt user confirm the email address within one day of registration
+            ST -> S: confirmEmailAddress()
+            S -> S: addUser()
+        else user does not confirm the email address
+            S --> ST: "registration canceled" message
+        end
+    else email is already registered to the system
+        S --> ST: "user already registered" message
+    else email address is not linked to the university provided
+        S --> ST: "invalid email domain" message
+    end
+else university is not registered to the system
+    S --> ST: "university not registered in the system" message
+end
+@enduml

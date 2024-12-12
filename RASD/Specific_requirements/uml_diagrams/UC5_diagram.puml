@@ -1,0 +1,20 @@
+@startuml UC5_diagram
+hide footbox
+
+participant "Company member" as CM
+participant "External statistical tool" AS EXT
+participant "S&C" AS S
+
+activate S
+activate CM
+CM -> S: createInternship()
+S --> CM: show internship form
+
+CM -> S: confirm(internshipData)
+S -> EXT: updateStatistics(currentState, newData)
+activate EXT
+EXT --> S: updated statistics
+deactivate EXT
+S -> S: findRecommendations()
+S --> CM: show internship details
+@enduml

@@ -1,0 +1,16 @@
+@startuml UC12_diagram
+hide footbox
+
+participant "Student" as ST
+participant "S&C" AS S
+
+activate ST
+activate S
+S -> S: findCVsSuggestions()
+S -> ST: show suggestion banner
+ST -> S: manageSuggestion()
+S --> ST: show digitalized curriculum form
+ST -> ST: insertInformations()
+ST -> S: confirmModifications()
+S --> ST: show personal page
+@enduml

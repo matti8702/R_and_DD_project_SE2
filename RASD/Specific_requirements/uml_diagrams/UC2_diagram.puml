@@ -1,0 +1,50 @@
+@startuml UC2_diagram
+hide footbox
+
+participant "Company member" as CM
+participant "eMail provider" as EP
+participant "S&C" AS S
+
+CM -> S: registerAsCompanyMember()
+activate S
+activate CM
+S --> CM: show registration form
+S --> CM: list of all registered companies
+alt company is registered to the system
+    CM -> S: register(name, surname, dateOfBirth, password, emailAddress, company)
+    S -> S: checkData()
+    alt email address is valid
+        S -> EP: sendEmailRequest(emailAddress, text)
+        activate EP
+        EP --> S: ok
+        EP -> CM: sendEmail(email)
+        deactivate EP
+        alt user confirm the email address within one day of registration
+            CM -> S: confirmEmailAddress()
+            S -> S: addUser()
+        else user does not confirm the email address
+            S --> CM: "registration canceled" message
+        end
+    else email is already registered to the system
+        S --> CM: "user already registered" message
+    else email address is not linked to the company provided
+        S --> CM: "invalid email domain" message
+    end
+else company is not registered to the system
+    CM -> S: createCompanyRequest()
+    S --> CM: show company registration form
+    CM -> S: confirmRegistration(userInformations, companyName, companyDescription)
+    S -> EP: sendEmailRequest(emailAddress, text)
+    activate EP
+    EP --> S: ok
+    EP -> CM: sendEmail(email)
+    deactivate EP
+    alt user confirm the email address within one day of registration
+        CM -> S: confirmEmailAddress()
+        S -> S: addCompany()
+        S -> S: addUser()
+    else user does not confirm the email address
+        S --> CM: "registration canceled" message
+    end
+end
+@enduml

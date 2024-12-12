@@ -1,0 +1,16 @@
+@startuml UC8_diagram
+hide footbox
+
+participant "Student" as ST
+participant "S&C" AS S
+
+activate ST
+activate S
+ST -> S: searchInternshipByKeywords(keywords)
+S -> S: filterInternship(keywords)
+alt system found at least one internship
+    S --> ST: list of internships founded
+else system did not find any internships that match the keywords
+    S --> ST: "no internships found" message
+end
+@enduml

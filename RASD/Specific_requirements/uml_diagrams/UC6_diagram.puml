@@ -1,0 +1,28 @@
+@startuml UC6_diagram
+hide footbox
+
+participant "Company member" as CM
+participant "External statistical tool" AS EXT
+participant "S&C" AS S
+
+activate S
+activate CM
+CM -> S: modifyInternship(internshipName)
+S --> CM: show internship form
+CM -> CM: edit data
+CM -> S: seeModifications()
+S --> CM: modified fields
+alt company member confirms modifications
+    CM -> S: confirm(modifications)
+    S -> S: checkData(internshipName)
+    S -> EXT: updateStatistics(currentState, newData)
+    activate EXT
+    EXT --> S: updated statistics
+    deactivate EXT
+    S -> S: findRecommendations()
+else company member does not confirm modifications
+    CM -> S: revertModifications()
+    S --> CM: "procedure canceled" message
+end
+S --> CM: show internship page
+@enduml

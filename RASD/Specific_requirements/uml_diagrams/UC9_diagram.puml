@@ -1,0 +1,20 @@
+@startuml UC9_diagram
+hide footbox
+
+participant "Student" as ST
+participant "External statistical tool" AS EXT
+participant "S&C" AS S
+
+activate S
+activate ST
+ST -> S: modifyDigitalizedCV()
+S --> ST: show "modification form"
+ST -> ST: performModifications()
+ST -> S: confirmModifications(changes)
+S -> EXT: updateStatistics(currentState, newData)
+activate EXT
+EXT --> S: updated statistics
+deactivate EXT
+S -> S: findRecommendations()
+S --> ST: show the updated version of the digitalized CV
+@enduml

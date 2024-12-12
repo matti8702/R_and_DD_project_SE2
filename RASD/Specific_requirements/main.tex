@@ -39,28 +39,400 @@
 \end{itemize}
 
 \subsection{Use cases}
-- Registration of a university
-- Registration of a company
-- Registration of a student % deal with the information shared to the university 
-- Registration of a company member 
-- Registration of an university member
+%TODO: add use cases diagram
 
-- Login of an user
+\usecase
+{
+    Registration of a university member
+}
+{
+    University member and eMail provider
+}
+{
+    The university member clicks on button "Register as a university member".
+}
+{
+    \begin{enumerate}
+        \item The system shows the "registration" form.
+        \item The university member enters his name, surname and date of birth, a password and his institutional email.
+        \item The university member selects his university amoung all the universities registered to the system.
+        \item The university member clicks the button "Register".
+        \item The system verifies that the email is associated to the university provided.
+        \item The system verifies that the email is not already registered to the system.
+        \item The system sends an email to the unibversity member by an eMail provider.
+    \end{enumerate}
+}
+{
+    The university member verifies the email provided to the system by following the instructions on the email message that he received.
+}
+{
+    \begin{itemize}
+        \item The email is already registered to the system. The system will show an error message "User already registered" and it will interrupt the registration process.
+        \item The email provided is not linked to the university provided by the member. In this case the system will show an error message "Invalid email domain".
+        \item The university in which the university member works is not present in the system. In this case the university member clicks the button "Create your university" and by clicking it the system will show the "university registration form" in which the university member will enter all the information regarding the university. Once he has confirmed all data, the institution will be inserted to the system and moreover it will sends a confirmation email to the university member.
+        \item The member does not confirm their email address within one day of entering the data into the system. In this case the system will delete all provided data. The member will then need to repeat the registration process.
+    \end{itemize}
+}
+{
 
-- Apply a suggestion to the curriculum vitae (or description internship)
+}
 
-- Creation of an internship
-- Modify an internship
-- Searching for an internship %by inserting keywords
+\usecase
+{
+    Registration of a company member
+}
+{
+    Company member and eMail provider
+}
+{
+    The company member clicks on button "Register as a company member".
+}
+{
+    \begin{enumerate}
+        \item The system shows the "registration" form.
+        \item The company member enters his name, surname and date of birth, a password and his institutional email.
+        \item The company member selects his company amoung all the companies registered to the system.
+        \item The company member clicks the button "Register".
+        \item The system verifies that the email is associated to the company provided.
+        \item The system verifies that the email is not already registered to the system.
+        \item The system sends an email to the company member by an eMail provider.
+    \end{enumerate}
+}
+{
+    The company member verifies the email provided to the system by following the instructions on the email message that he received.
+}
+{
+    \begin{itemize}
+        \item The email is already registered to the system. The system will show an error message "User already registered" and it will interrupt the registration process.
+        \item The email provided is not linked to the company provided by the company member. In this case the system will show an error message "Invalid email domain".
+        \item The company in which the company member works is not present in the system. In this case the comapany member clicks the button "Create your company" and by clicking it the system will show the "company registration form" in which the company member will enter all the information regarding the company. Once he has confirmed all data, the institution will be inserted to the system and moreover it will sends a confirmation email to the company member.
+        \item The company member does not confirm their email address within one day of entering the data into the system. In this case the system will delete all provided data. The company member will then need to repeat the registration process.
+    \end{itemize}
+}
+{
 
-- The system communicates to student and company the recommendation
+}
 
-- Update statistics for recommendation by using the external tool %by using feedbacks
+%TODO: revise "university is not registered" exception
+\usecase
+{
+    Registration of a student
+}
+{
+    Student and eMail provider
+}
+{
+    The student clicks on button "Register as a student".
+}
+{
+    \begin{enumerate}
+        \item The system shows the "registration" form.
+        \item The student enters his name, surname and date of birth, a password and his institutional email.
+        \item The student selects his university amoung all the universities registered to the system.
+        \item The member clicks the button "Register".
+        \item The system verifies that the email is associated to the university provided.
+        \item The system verifies that the email is not already registered to the system.
+        \item The system sends an email to the student by an eMail provider.
+    \end{enumerate}
+}
+{
+    The student verifies the email provided to the system by following the instructions on the email message that he received.
+}
+{
+    \begin{itemize}
+        \item The email is already registered to the system. The system will show an error message "User already registered" and it will interrupt the registration process.
+        \item The email provided is not linked to the university provided by the student. In this case the system will show an error message "Invalid email domain".
+        \item The university in which the student is enrolled is not present in the system. In this case the system will display an error message "University not present in the system", preventing the student from completing the registration.
+        \item The student does not confirm their email address within one day of entering the data into the system. In this case the system will delete all provided data. The student will then need to repeat the registration process.
+    \end{itemize}
+}
+{
 
-- Modify the curriculum vitae %upload a new version of the cv
-- Modify the curriculum vitae %modify the digitalized version of cv (tags,...)
+}
 
-% ----------- %
+\usecase
+{
+    Login of an user
+}
+{
+    User
+}
+{
+    The user clicks on button "login".
+}
+{
+    \begin{enumerate}
+        \item The system shows the "login" form.
+        \item The user inserts his credentials (email and password).
+        \item The user clicks on button "Confirm".
+        \item The system checks credentials.
+    \end{enumerate}
+}
+{
+    The system shows the "homepage" of the application.
+}
+{
+    Credentials are invalid. In this case the system will show an error message "Invalid credentials" and it will clear the input fields.
+}
+{
+
+}
+
+\usecase
+{
+    Creation of an internship
+}
+{
+    Company member and external statistical analysis tool
+}
+{
+    The company member is logged to the platform and he press the button "Create an internship".
+}
+{
+    \begin{enumerate}
+        \item The system shows the "internship form".
+        \item The company member enters all the required information: a name, the valid application period, the maximum number of students allowed, the description, the requirements, the domain of application, tags and the terms specified in the contract.
+        \item The company member clicks on button "Confirm".
+        \item The system sends data to the external statistical analysis tool in order to update statistics. %good?
+        \item The system receives updated statistics from the external tool
+        \item The system performs the recommendation process
+    \end{enumerate}
+}
+{
+    The system will redirect the company member to the details section related to the internship just created.
+}
+{
+
+}
+{
+
+}
+
+%TODO: revise diagram (loop on CM??)
+\usecase
+{
+    Modify an internship
+}
+{
+    Company member and external statistical analysis tool
+}
+{
+    The company member is logged in the system and he is on the "internships list" section. He clicks on the button "Modify the internship" near a specific internship. The selected internship is closed for applications and there are not enorelled students.
+}
+{
+    \begin{enumerate}
+        \item The system displays the form to allow data modification.
+        \item The company member edits the information.
+        \item The company member clicks the button "See modifications".
+        \item The system shows to the company member all modified fields.
+        \item The company member clicks on button "Confirm all the changes".
+        \item The system checks the uniqueness of the internship name.
+        \item The system update statistics through the external statistical analysis tool (for tags modifications).
+        \item The system performs the recommendation process.
+        \end{enumerate}
+}
+{
+    The system shows the internship page with all the updates.
+}
+{
+    \begin{itemize}
+        \item The company member does not confirm changes. In this case the system will stop the procedure.
+    \end{itemize}
+}
+{
+
+}
+
+%TODO: revise
+\usecase{
+    Delete an internship
+}{
+    Company member
+}{
+    The company member is logged in the system and he is on the "internships list" section. He clicks on the button "Delete the internship" near a specific internship. The selected internship is closed for applications and there are not enorelled students.
+}{
+    \begin{enumerate}
+        \item The system displays a banner to the company member to confirm the deletion of the internship.
+        \item The company member clicks on the button "Confirm deletion".
+        \item The system deletes the internship.
+    \end{enumerate}
+}{
+    The system shows the message "Deletion performed" and redirects the company member to the "internships list" section.
+}{
+    The company member does not confirm the deletion. In this case the system will show the "internships list" section.
+}{
+
+}
+
+%fix: loop on student??
+\usecase
+{
+    Searching for an internship by means of keywords
+}
+{
+    Student
+}
+{
+    The student is logged in and enters keywords into the "internship search bar" located on the homepage of the platform.
+}
+{
+    \begin{enumerate}
+        \item The student clicks on the "confirm" button next to the "search bar".
+        \item The system gathers all internships that have a common part in their name, tags, or description with the entered text.
+    \end{enumerate}
+}
+{
+    The system shows to the student all the results ordered thought the recommendation system.
+}
+{
+    The system does not find any results related to the entered keywords. The system will shows the message "no internships found".
+}
+{
+
+}
+
+%fix loop in studente??
+\usecase
+{
+    Modify the digitalized curriculum vitae version
+}
+{
+    Student and external statistical analysis tool
+}
+{
+    The student is logged in and he clicks the button "Modify your digitalized curriculum" in their personal page.
+}
+{
+    \begin{enumerate}
+        \item The system shows the "modification form". This form includes all the sections added by the student.
+        \item The student clicks on button "Modify section" to modify a specific section of his curriculum.
+        \item The student inserts all the modifications.
+        \item The student clicks on button "Save changes".
+        \item The system sends information regarding tags to the external analysis tool.
+        \item The system receives the updated statistics and perform the recommendation process.
+    \end{enumerate}
+}
+{
+    The system shows to the student the new version of the digitalized curriculum.
+}
+{
+
+}
+{
+
+}
+
+%fix: "file selection dialog" ????
+\usecase
+{
+    Upload a new CV document
+}
+{
+    Student
+}
+{
+    The student is loggeg in. He is on the personal page and he clicks the button "Upload a new version of your curriculum".
+}
+{
+    \begin{enumerate}
+        \item The system displays a window showing the files saved on the student's device.
+        \item The student selects the file to be uploaded in the system.
+        \item The system stores the new file.
+    \end{enumerate}
+}
+{
+    The system shows to the student his personal page.
+}
+{
+    The file selected by the student has an invalid file extension. In this case, the system will send an error message, "Invalid file extension", to the student.
+}
+{
+
+}
+
+\usecase
+{
+    Update statistics for recommendation by using the external statistical analysis tool
+}
+{
+    External statistical analysis tool, Student, Company member and eMail provider.
+}
+{
+    Feedback has been published either by the company member or the student, or tag modifications have occurred (for digitalized curriculum or internship description).
+}
+{
+    \begin{enumerate}
+        \item The system sends new data (feedback or tag) to the statistical tool and all current statistics.
+        \item The statistical tool compute new values of all provided statistics.
+        \item The statistical tool sends back updated values to the system.
+        \item The system run the recommendation process in order to detect new recommendations.
+    \end{enumerate}
+}
+{
+    The system notifies all students and company members involved in at least one recommendation by sending them an email (using the eMail provider).
+}
+{
+
+}
+{
+
+}
+
+\usecase
+{
+    Apply a suggestion to the digitalized curriculum vitae
+}
+{
+    Student
+}
+{
+    The system detects missing information in the curriculum after the student makes changes to it.
+}
+{
+    \begin{enumerate}
+        \item The system shows a banner on the homepage that suggest to student to add the missing information.
+        \item The student clicks on the banner.
+        \item The system shows to the student personal page with his digitalized curriculum in edit mode.
+        \item The student add missing information.
+    \end{enumerate}
+}
+{
+    The student save modifications.
+}
+{
+    The student close his personal page befor inserting missing data. The system will still prompt the student to provide information during the next access.
+}
+{
+
+}
+
+\usecase
+{
+    Apply a suggestion to the internship description
+}
+{
+    Company member
+}
+{
+    The system detects missing information in the internship description after the company member makes changes to it.
+}
+{
+    \begin{enumerate}
+        \item The system shows a banner on the homepage that suggest to the company member to add the missing information on a specific internship.
+        \item The company member clicks on the banner.
+        \item The system shows to the company member the internship overview in edit mode.
+        \item The company member add missing information.
+    \end{enumerate}
+}
+{
+    The company member save modifications.
+}
+{
+    The company member close the internship page befor inserting missing data. The system will still prompt the company member to provide information during the next access.
+}
+{
+
+}
 
 % student sends a request
 \usecase
@@ -397,6 +769,18 @@ University member
 {The user either refuses to write a feedback or posts it}
 {The feedback is incomplete, the system shows an error message.}
 {}
+
+%TODO
+\subsection{Mapping on requirements}
+\begin{itemize}
+    \item \text{[G1]} - The company aims to spread the project proposals to all interested students.
+    \item \text{[G2]} - The student would like to find proposals that are most suited to him.
+    \item \text{[G3]} - The company would like to find student's CVs that satisfy their needs.
+    \item \text{[G4]} - The student and the company would like to receive suggestions on how to improve CVs and project descriptions.
+    \item \text{[G5]} - The university would like to monitor the status of internships involving all its students.
+    \item \text{[G6]} - The company wants to keep track of the status of each open selection process.
+    \item \text{[G7]} - The company and the student engaged in an ongoing internship wish to keep track of its status.
+\end{itemize}
 
 \subsection{Performance Requirements}
 \subsection{Design Constraints}

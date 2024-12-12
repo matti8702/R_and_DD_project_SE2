@@ -1,0 +1,50 @@
+@startuml UC1_diagram
+hide footbox
+
+participant "University member" as UM
+participant "eMail provider" as EP
+participant "S&C" AS S
+
+UM -> S: registerAsUniversityMember()
+activate S
+activate UM
+S --> UM: show registration form
+S --> UM: list of all registered universities
+alt university is registered to the system
+    UM -> S: register(name, surname, dateOfBirth, password, emailAddress, university)
+    S -> S: checkData()
+    alt email address is valid
+        S -> EP: sendEmailRequest(emailAddress, text)
+        activate EP
+        EP --> S: ok
+        EP -> UM: sendEmail(email)
+        deactivate EP
+        alt user confirm the email address within one day of registration
+            UM -> S: confirmEmailAddress()
+            S -> S: addUser()
+        else user does not confirm the email address
+            S --> UM: "registration canceled" message
+        end
+    else email is already registered to the system
+        S --> UM: "user already registered" message
+    else email address is not linked to the university provided
+        S --> UM: "invalid email domain" message
+    end
+else university is not registered to the system
+    UM -> S: createUniversityRequest()
+    S --> UM: show university registration form
+    UM -> S: confirmRegistration(userInformations, universityName)
+    S -> EP: sendEmailRequest(emailAddress, text)
+    activate EP
+    EP --> S: ok
+    EP -> UM: sendEmail(email)
+    deactivate EP
+    alt user confirm the email address within one day of registration
+        UM -> S: confirmEmailAddress()
+        S -> S: addUniversity()
+        S -> S: addUser()
+    else user does not confirm the email address
+        S --> UM: "registration canceled" message
+    end
+end
+@enduml

@@ -1,0 +1,20 @@
+@startuml UC7_diagram
+hide footbox
+
+participant "Company member" as CM
+participant "S&C" AS S
+
+activate S
+activate CM
+CM -> S: deleteInternship(internshipName)
+S --> CM: show deletion banner
+alt company member confirms the deletion
+    CM -> S: confirmDeletion()
+    S -> S: deleteInternship(internshipName)
+    S --> CM: "deletion performed" message
+else company member does not confirm the deletion
+    CM -> S: notConfirmed()
+    S --> CM: "procedure canceled" message
+end
+S --> CM: show internship page
+@enduml

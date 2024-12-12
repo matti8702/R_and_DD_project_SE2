@@ -1,0 +1,19 @@
+@startuml UC4_diagram
+hide footbox
+
+participant User as U
+participant "S&C" AS S
+
+U -> S: loginRequest()
+activate S
+activate U
+S --> U: show login form
+U -> S: confirmLogin(email, password)
+
+S -> S: checkCredentials
+alt credentials are valid
+    S --> U: show homepage
+else invalid credentials
+    S --> U: "Invalid credentials" message
+end
+@enduml

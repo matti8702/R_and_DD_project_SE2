@@ -1,15 +1,21 @@
-//do not specify standard types like string
 
-sig UserLoginCredentials{ //contains email and password
-}
+-- SIGNATURES
+----------------------------------------------------------------------
 
-sig UserPersonalnformation{
-}
+-- USER
+
 
 abstract sig User{
-	userInformation : UserPersonalnformation,
+	userInformation : UserPersonallnformation,
 	credentials : UserLoginCredentials
 }
+
+
+-- Contains the user's email and password.
+
+sig UserLoginCredentials{ }
+
+sig UserPersonallnformation{ }
 
 sig CompanyMember extends User{
 	employedAtCompany: Company
@@ -23,95 +29,120 @@ sig Student extends User{
 	enrolled: University
 }
 
-sig UniversityInformation{
-}
+
+-- GROUP OF USERS
+
+
+-- In order to be created, a University must have at least one member.
 
 sig University{
 	universityInformation: UniversityInformation,
 	universityMailDomain: MailDomain,
-}{ some member : UniversityMember | this in member.employedAtUniversity }
+}{ some member : UniversityMember | this in member.employedAtUniversity } 
 
 
-sig CompanyInformation{
+-- Contains university information, such as its name.
+
+sig UniversityInformation{
 }
 
-sig MailDomain{
-}
+
+-- In order to be created, a Company must have at least one member.
 
 sig Company{
 	companyInformation: CompanyInformation,
 	companyMailDomain: MailDomain,
 }{ some member : CompanyMember | this in member.employedAtCompany }
 
-sig Internship{
+
+-- Contains company information, such as its name and a description.
+
+sig CompanyInformation{ }
+
+
+-- Represents the email domain of a company or university and identifies them.
+
+sig MailDomain{ }
+
+
+-- INTERNSHIP
+
+
+sig Internship{ 
+	id : InternshipId,
 	offered: Company,
 	description: InternshipDescription,
 	var candidatureStatus: CandidaturesStatus
 }
 
-enum CandidaturesStatus{ Closed, Open } //when open the internship can receive request, closed when it doesn't accept requests anymore
 
-sig InternshipDescription{
-}
+-- Represents an ID used to distinguish between different internship offers.
 
-sig Request{
+sig InternshipId { }
+
+
+-- Defines the interval during which applications for a specific internship can be submitted. According to the class diagram attributes,
+-- the internship will have a status of 'Open' between the applicationStartDate and applicationEndDate, and 'Closed' at all other times.
+
+enum CandidaturesStatus{ Closed, Open } 
+
+
+-- Contains all information related to the internship offer, including the name, terms, and duration.
+
+sig InternshipDescription{ }
+
+
+--REQUEST
+
+
+-- This signature is dynamic over time, as different requests can be sent at different moments.
+
+var sig Request{
 	var requestStatus: RequestStatus,
-	internshipReferred: Internship,
-	requestedBy: User,
-	requestedTo: User //relation 0 ..* for the user => no need to add a constraint
+	var internshipReferred: Internship,
+	var requestedBy: User,
+	var requestedTo: User
 }
 
 enum RequestStatus{ Pending, Approved, Declined }
 
-//internship availability
 
-pred internshipApplicationAvailability[ i : Internship]{
+
+----------------------------------------------------------------------
+-- PREDICATES
+----------------------------------------------------------------------
+
+
+-- The predicate is true when the internship is open for receiving applications.
+
+pred internshipOpenForApplications[ i : Internship ]{
 	i.candidatureStatus = Open
 }
 
-pred closeApplicationAvailability[ i : Internship]{
+
+-- The predicate models the closure of an internship period for receiving applications.
+
+pred closeApplicationAvailability[ i : Internship ]{
 	i.candidatureStatus = Open and i.candidatureStatus' = Closed
 }
 
-pred openApplicationAvailability[ i : Internship]{ //oss the internship can be published also already opened
+
+-- The predicate models the opening of an internship period for receiving applications (the internship may also be published as already open).
+
+pred openApplicationAvailability[ i : Internship ]{
 	i.candidatureStatus = Closed and i.candidatureStatus' = Open
 }
 
-fact applicationAvailabilityAfterClosure{
-	all i : Internship | always ( ( i.candidatureStatus = Closed and once closeApplicationAvailability[ i ] ) implies i.candidatureStatus' = Closed )
-}
 
-fact applicationAvailabilityBeforeOpening{
-	all i : Internship | always ( ( historically  i.candidatureStatus = Closed ) implies ( eventually  i.candidatureStatus = Open ))
-}
-
-fact applicationAvailabilityAfterOpening{
-	all i : Internship | always (  i.candidatureStatus = Open implies eventually  i.candidatureStatus = Closed)
-}
-
-
-//are internship unique? if yes we need an ID
-
-fact credentialsIdentifyUsers{
-	no disj u1, u2 : User | u1.credentials = u2.credentials
-}
-
-//companies and universities identified by domain 
-
-fact mailDomainIdentifiesCompanies{
-	no disj c1, c2 : Company | c1.companyMailDomain = c2.companyMailDomain
-}
-
-fact mailDomainIdentifiesUniversities{
-	no disj u1, u2 : University | u1.universityMailDomain = u2.universityMailDomain
-}
-
-//request fact
+-- The predicate models the rejection of a pending request.
 
 pred declineRequest[ r : Request ]{
 	r.requestStatus = Pending
 	r.requestStatus' = Declined
 }
+
+
+-- The predicate models the approval of a pending request.
 
 pred approveRequest[ r : Request ]{
 	r.requestStatus = Pending
@@ -119,71 +150,270 @@ pred approveRequest[ r : Request ]{
 }
 
 
-fact pendingRequestBehaviour{
-	all r : Request | always ( r.requestStatus = Pending implies ((eventually  declineRequest[ r ] ) or (eventually  approveRequest[ r ]) and (historically r.requestStatus = Pending)))	
+-- The predicate represents the addition of a new request to the model. 
+
+pred addNewRequest [ sender , receiver : User , internship : Internship ]{
+
+	//precondition
+
+	internship in Internship
+	sender in (Student + CompanyMember) 
+	receiver in (Student + CompanyMember)
+	( ( sender in Student ) implies ( receiver in CompanyMember ) )
+	( ( sender in CompanyMember ) implies ( receiver in CompanyMember ) )
+
+	//postcondition
+
+	( no r : Request | 
+		r.internshipReferred = internship and 
+		r.requestedBy = sender and 
+		r.requestedTo = receiver )
+	( after ( 
+		one r : Request | 
+			r.internshipReferred = internship and 
+			r.requestedBy = sender and 
+			r.requestedTo = receiver and 
+			r.requestStatus = Pending ) //say redundant
+	)
+
 }
+
+
+
+----------------------------------------------------------------------
+-- FACTS
+----------------------------------------------------------------------
+
+
+-- For all internships, once the period for accepting applications ends, it cannot be reopened.
+
+fact applicationAvailabilityAfterClosure{
+	all i : Internship | 
+		always ( 
+			( i.candidatureStatus = Closed and once closeApplicationAvailability[ i ] ) 
+				implies i.candidatureStatus' = Closed 
+		)
+}
+
+
+-- Every internship that has never been available for receiving applications will eventually enter a period of availability.
+
+fact applicationAvailabilityBeforeOpening{
+	all i : Internship | 
+		always ( 
+			( historically  i.candidatureStatus = Closed )
+				implies ( eventually  i.candidatureStatus = Open ) 
+		)
+}
+
+
+-- Every internship's period of availability for receiving applications will eventually end.
+
+fact applicationAvailabilityAfterOpening{
+	all i : Internship | 
+		always ( 
+			( i.candidatureStatus = Open ) 
+				implies ( eventually  i.candidatureStatus = Closed ) 
+		)
+}
+
+
+-- There are not two instances of the same internship offer
+
+fact credentialsIdentifyUsers{
+	no disj u1, u2 : User |
+		 u1.credentials = u2.credentials
+}
+
+
+-- There are not two instances of the same Company
+
+fact mailDomainIdentifiesCompanies{
+	no disj c1, c2 : Company | 
+		c1.companyMailDomain = c2.companyMailDomain
+}
+
+
+-- There are not two instances of the same University
+
+fact mailDomainIdentifiesUniversities{
+	no disj u1, u2 : University | 
+		u1.universityMailDomain = u2.universityMailDomain
+}
+
+
+-- There are not common email domain between universities and companies
+
+fact noCompanySharesMailDomainWithUniversity{
+	no c : Company , u : University | 
+		c.companyMailDomain = u.universityMailDomain
+}
+
+
+fact test{
+//	one r : Request | always ( r.requestStatus = Pending)
+}
+-- Every pending request will eventually be evaluated.
+
+fact pendingRequestBehaviour{
+	always ( 
+			all r : Request |  
+				r.requestStatus = Pending 
+					implies ( ( ( eventually  declineRequest[ r ] ) or ( eventually  approveRequest[ r ] ) ) ) 
+	)	
+}
+
+
+-- An evaluated request cannot be evaluated again or return pending.
 
 fact requestAreEvaluatedOnlyOneTime{
-	all r : Request | always ( r.requestStatus != Pending implies r.requestStatus' = r.requestStatus)
+	always ( 
+		all r : Request |  
+			r.requestStatus != Pending 
+				implies r.requestStatus' = r.requestStatus
+	)
 }
+
+
+-- All the evaluated request were once pending. //redundant
 
 fact evaluatedRequestWerePending{
-	 all r : Request | always ( r.requestStatus != Pending implies once r.requestStatus = Pending)
+	always ( 
+		all r : Request | 
+			r.requestStatus != Pending 
+				implies once r.requestStatus = Pending)
 }
+
+
+-- There cannot be a Request which sender is also the receiver.
 
 fact usersCannotSendRequestToThemselves{
-	all r : Request | r.requestedBy != r.requestedTo
+	always ( 
+		all r : Request | 
+			r.requestedBy != r.requestedTo 
+	)
 }
+
+
+-- There are not duplicate requests.
 
 fact noDuplicateRequests{
-	all disj r1, r2 : Request | (r1.requestedBy != r2.requestedBy) or (r1.internshipReferred != r2.internshipReferred)
+	always ( 
+		all disj r1, r2 : Request | 
+			(r1.requestedBy != r2.requestedBy) or (r1.internshipReferred != r2.internshipReferred) )
 }
 
-fact userRolesConstraints{ //avoid also university member as user
-	all r : Request | #(( r.requestedBy + r.requestedTo ) & Student) = 1 and #((r.requestedBy + r.requestedTo ) & CompanyMember) = 1
+
+-- The sender and receiver must always be either a Student and a CompanyMember, or a CompanyMember and a Student.
+
+fact userRolesConstraints{ 
+	always (
+		 all r : Request | 
+			# ( ( r.requestedBy + r.requestedTo ) & Student ) = 1 and
+			# ( ( r.requestedBy + r.requestedTo ) & CompanyMember ) = 1
+	)
 }
 
 
-//functions
+-- There are not duplicate internship offers
 
+fact noDuplicateInternship{
+	no disj i1, i2 : Internship | i1.id = i2.id
+}
+
+
+-- The Request signature is dynamic, but the fields "internshipReferred", "requestedBy", and "requestedTo" of a specific request 
+-- do not change over time once assigned.
+
+fact requestFieldsDoesNotChange{
+	always (
+		all r : Request | 
+			r.internshipReferred' = r.internshipReferred and 
+			r.requestedBy' =  r.requestedBy and 
+			r.requestedTo' = r.requestedTo
+	)
+}
+
+
+-- All requests sent by students are evaluated after the application period terminates, once the company has received all possible applications. 
+-- If a company member sent the request to a student, the student has no constraint on when to evaluate the request.
+
+fact requestEvaluatedAfterClosure{
+	always( 
+		all r : Request | 
+			( r.requestStatus != Pending and 
+			  r.requestedBy in Student )	
+				implies r.internshipReferred.candidatureStatus = Closed
+	)
+}
+
+
+-- It is not possible to have a request related to an internship that has not started its period of availability for receiving applications. 
+-- Requests begin to arrive only after the period starts.
+
+fact requestCannotReferInternshipsBeforeOpening{
+	always( 
+		all r : Request | 
+			r.internshipReferred.candidatureStatus = Closed
+				implies ( once  closeApplicationAvailability[ r.internshipReferred ] ) 
+	)
+}
+
+
+-- Every Request has been added to the model once
+
+fact allRequestHaveBeenOnceSent{
+	always ( 
+		all r : Request | 
+			( once ( not r in Request ) ) and 
+			( once ( addNewRequest [ r.requestedBy, r.requestedTo, r.internshipReferred ] ) ) 
+		)
+	
+}
+
+
+
+----------------------------------------------------------------------
+-- FUNCTIONS
+----------------------------------------------------------------------
+
+
+-- Returns all the company members of a Company "c".
 
 fun companyMembersEmployed[ c : Company ] : some CompanyMember{
 	{ m : CompanyMember | m.employedAtCompany = c }
 }
 
+
+-- Returns all the university members of a University "u",
+
 fun universityMembersEmployed[ u : University ] : some UniversityMember{
 	{ m : UniversityMember | m.employedAtUniversity = u }
 }
+
+
+
+-- Returns all the students of a University "u".
 
 fun studentsEnrolled[ u : University ] : set Student{
 	{ s : Student | s.enrolled = u }
 }
 
-fact {
-  some Request
+
+
+----------------------------------------------------------------------
+-- RUN EXAMPLES
+----------------------------------------------------------------------
+
+
+
+pred show {
+	#Request' > 1
+	(some c1 , c2 : User , i : Internship | eventually addNewRequest[ c1 , c2 , i]) 
+	#Internship > 1
+	#Company = 2 
+	#University = 2
+	some i : Internship | i.candidatureStatus = Closed
 }
 
-pred show{}
-
-run show for 50 but 5 Request, 5 User
-
-//4h
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+run show for 30 but 5 Request, 5 User 

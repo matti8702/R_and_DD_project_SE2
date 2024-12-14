@@ -11,3 +11,42 @@ behavior.
 %todo check after increasing the borders
 
 \lstinputlisting[language=alloy]{Alloy/RASD-Alloy.als}
+
+\newpage
+
+\subsection{ Pred Show1 Run Example}
+
+At this initial stage, the two internships are instantiated, but no 
+requests have been added yet.
+
+\begin{figure}[!htbp]
+    \centering   
+    \vspace*{0cm}
+    \includegraphics[scale = 0.35, angle = 270]{Formal_analysis_using_alloy/resources/show1-first-instant.png}
+    \caption{show1 first iteration}
+\end{figure}
+    
+\newpage
+
+At the second instant, two requests are sent, both referring to Internship0, 
+which was closed in the previous instant but is now open.
+The two requests are both in a Pending state: one is sent by a company member 
+to a student, and the other by a student to a company member.
+
+\begin{figure}[!htbp]
+    \centering   
+    \vspace*{0cm}
+    \includegraphics[scale = 0.35, angle = 270]{Formal_analysis_using_alloy/resources/show1-two-instant.png}
+    \caption{show1 first iteration}
+\end{figure}
+
+\newpage
+
+At the third instant, both requests are evaluated and declined.
+
+\begin{figure}[!htbp]
+    \centering   
+    \vspace*{0cm}
+    \includegraphics[scale = 0.35, angle = 270]{Formal_analysis_using_alloy/resources/show1-three-instant.png}
+    \caption{show1 first iteration}
+\end{figure}

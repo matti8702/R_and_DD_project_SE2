@@ -1,4 +1,4 @@
-
+----------------------------------------------------------------------
 -- SIGNATURES
 ----------------------------------------------------------------------
 
@@ -250,16 +250,13 @@ fact noCompanySharesMailDomainWithUniversity{
 }
 
 
-fact test{
-//	one r : Request | always ( r.requestStatus = Pending)
-}
 -- Every pending request will eventually be evaluated.
 
 fact pendingRequestBehaviour{
 	always ( 
-			all r : Request |  
-				r.requestStatus = Pending 
-					implies ( ( ( eventually  declineRequest[ r ] ) or ( eventually  approveRequest[ r ] ) ) ) 
+		all r : Request |  
+			r.requestStatus = Pending 
+				implies ( ( ( eventually  declineRequest[ r ] ) or ( eventually  approveRequest[ r ] ) ) ) 
 	)	
 }
 
@@ -407,13 +404,22 @@ fun studentsEnrolled[ u : University ] : set Student{
 
 
 
-pred show {
-	#Request' > 1
-	(some c1 , c2 : User , i : Internship | eventually addNewRequest[ c1 , c2 , i]) 
-	#Internship > 1
+pred show1 {
+	#Request' = 2
+	#Internship = 2
 	#Company = 2 
-	#University = 2
-	some i : Internship | i.candidatureStatus = Closed
+	#University = 1
+	#Student = 2
+	#CompanyMember = 2
 }
 
-run show for 30 but 5 Request, 5 User 
+pred show2 {
+	( some c1, c2 : User, i : Internship | eventually addNewRequest[ c1, c2, i ] )
+	eventually ( some r1, r2 : Request | r1.requestStatus = Approved and r2.requestStatus = Declined )
+	#Internship > 2
+	#Company = 2 
+	#University = 2
+	( some i : Internship | i.candidatureStatus = Closed )
+} 
+
+run show1 for 10 

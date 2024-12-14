@@ -1,0 +1,38 @@
+@startuml use_cases_diagram2
+left to right direction
+
+together{
+    actor :Student: as ST
+    actor :Company member: as CM
+    actor :External statistical analysis tool: as STAT
+    actor :eMail provider: as EMAIL
+}
+
+rectangle "S&C system"{
+    usecase (Delete an internship) as UC7
+    usecase (Searching for an internship by means of keywords) as UC8
+    usecase (Modify the digitalized curriculum vitae version) as UC9
+    usecase (Upload a new CV document) as UC10
+    usecase (Update statistics for recommendation by using the external statistical analysis tool) as UC11
+    usecase (Apply a suggestion to the digitalized curriculum vitae) as UC12
+    usecase (Apply a suggestion to the internship description) as UC13
+}
+
+CM -> UC7: initiate
+
+ST -> UC8: initiate
+
+ST -> UC9: initiate
+STAT -> UC9: participate
+
+ST -> UC10: initiate
+
+STAT --> UC11: participate
+ST --> UC11: initiate*
+CM --> UC11: initiate*
+EMAIL --> UC11: participate
+
+ST -> UC12: initiate
+
+CM -> UC13: initiate
+@enduml

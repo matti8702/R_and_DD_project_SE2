@@ -1,0 +1,38 @@
+@startuml use_cases_diagram1
+left to right direction
+
+together{
+    actor :User: as U
+    actor :Student: as ST
+    actor :Company member: as CM
+    actor :University member: as UM
+    actor :External statistical analysis tool: as STAT
+    actor :eMail provider: as EMAIL
+}
+
+rectangle "S&C system"{
+    usecase (Registration of a university member) as UC1
+    usecase (Registration of a company member) as UC2
+    usecase (Registration of a student) as UC3
+    usecase (Login of an user) as UC4
+    usecase (Creation of an internship) as UC5
+    usecase (Modify an internship) as UC6
+}
+
+UM -> UC1: initiate
+EMAIL -> UC1: participate
+
+CM --> UC2: initiate
+EMAIL --> UC2: participate
+
+ST -> UC3: initiate
+EMAIL --> UC3: participate
+
+U -> UC4: initiate
+
+CM --> UC5: initiate
+STAT -> UC5: participate
+
+CM --> UC6: initiate
+STAT --> UC6: participate
+@enduml

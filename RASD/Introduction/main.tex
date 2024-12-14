@@ -69,12 +69,6 @@ In this section, the phenomena are presented: world phenomena (WP) and shared ph
 \end{listInSquareBrackets}
 \subsection{Definitions, Acronyms, Abbreviations}
 
-\begin{itemize}
-    %TODO
-    \item CV: 
-    \item suggestion system
-\end{itemize}
-
 \subsubsection{Interviewer}
 
 An interviewer is a company member responsible for leading interviews, either online or in person. Their user account is identical to that of other company members,
@@ -85,14 +79,27 @@ An interviewer is a company member responsible for leading interviews, either on
 A candidate for a specific internship refers to a student who has successfully matched with a company for that internship. Their user account remains a standard student 
 account and is not treated as a different user type.
 
-\subsection{Project}
+\subsubsection{Project}
 
 A project is a term used to refer to an internship offered by a company.
 
-\subsection{Curriculum Vitae}
+\subsubsection{Curriculum Vitae}
 
 The Curriculum Vitae of students is a fundamental part of their profile. It is composed of a file uploaded by the student and a structured version represented by tags. 
 This serves as the main source of information for companies to evaluate candidates.
+
+\subsubsection{Tag}
+
+A tag is a term that describes a particular skill or role possessed by a student or required for an internship. Tags are used in the structured version of the students' 
+curriculum and also appear in internship offers to enhance the clarity of the internship's topic and improve the accuracy of recommendations. Examples of tags include 
+"Software Engineer", "Data Scientist", or "User Interface Designer".
+The primary purpose of tags is to feed the statistical analysis tool with structured information, along with feedbacks, to assign different weights to feedbacks based on the
+ compatibility of tags. For example, if a student with the tag 'Software Engineer' searches for an internship, the compatibility of the offer will be evaluated by the 
+ statistical analysis tool. Feedbacks from students sharing the same tags as the searcher will carry more weight than feedbacks from students with a different background.
+Moreover, another important parameter is the alignment between a student's tags and the tags associated with internship offers. In conclusion, tags provide the 
+system with concise and standardized information to improve matching and evaluation processes.
+
+\subsubsection{Suggestion System}
 
 \subsubsection{Video Conference Tool}
 
@@ -112,7 +119,8 @@ The recommendation process is composed by two main functionality:
     process associated with this functionality, that sends an email to the user whenever a new recommendation becomes available.
 
     \item \textbf{Search :} This function can only be performed by a student and provides the results of a search after entering
-    a keyword. The results consist of a list of available internship proposals, determined through keyword matching and statistical analysis produced by an external tool. For example, multiple projects with similar keywords might be returned, sorted based on the value derived from the analysis.
+    a keyword. The results consist of a list of available internship proposals, determined through keyword matching and statistical analysis produced by an external tool. 
+    For example, multiple projects with similar keywords might be returned, sorted based on the value derived from the analysis.
     
 \end{itemize}
 

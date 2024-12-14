@@ -23,12 +23,12 @@ alt company is registered to the system
             CM -> S: confirmEmailAddress()
             S -> S: addUser()
         else user does not confirm the email address
-            S --> CM: "registration canceled" message
+            S --> CM: showError("registration canceled")
         end
     else email is already registered to the system
-        S --> CM: "user already registered" message
+        S --> CM: showError("user already registered")
     else email address is not linked to the company provided
-        S --> CM: "invalid email domain" message
+        S --> CM: showError("invalid email domain")
     end
 else company is not registered to the system
     CM -> S: createCompanyRequest()
@@ -44,7 +44,7 @@ else company is not registered to the system
         S -> S: addCompany()
         S -> S: addUser()
     else user does not confirm the email address
-        S --> CM: "registration canceled" message
+        S --> CM: showError("registration canceled")
     end
 end
 @enduml

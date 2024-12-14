@@ -23,14 +23,14 @@ alt university is registered to the system
             ST -> S: confirmEmailAddress()
             S -> S: addUser()
         else user does not confirm the email address
-            S --> ST: "registration canceled" message
+            S --> ST: showError("registration canceled")
         end
     else email is already registered to the system
-        S --> ST: "user already registered" message
+        S --> ST: showError("user already registered")
     else email address is not linked to the university provided
-        S --> ST: "invalid email domain" message
+        S --> ST: showError("invalid email domain")
     end
 else university is not registered to the system
-    S --> ST: "university not registered in the system" message
+    S --> ST: showError("university not registered in the system")
 end
 @enduml

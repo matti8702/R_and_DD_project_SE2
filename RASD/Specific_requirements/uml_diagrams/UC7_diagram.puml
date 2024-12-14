@@ -11,10 +11,10 @@ S --> CM: show deletion banner
 alt company member confirms the deletion
     CM -> S: confirmDeletion()
     S -> S: deleteInternship(internshipName)
-    S --> CM: "deletion performed" message
+    S --> CM: showMessage("deletion performed")
 else company member does not confirm the deletion
     CM -> S: notConfirmed()
-    S --> CM: "procedure canceled" message
+    S --> CM: showError("procedure canceled")
 end
 S --> CM: show internship page
 @enduml

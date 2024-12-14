@@ -11,9 +11,9 @@ S --> ST: show file selection dialog
 ST -> S: selectFile(file)
 alt file extension is valid
     S -> S: storeCVDocument(file)
-    S --> ST: "document uploaded" message
+    S --> ST: showMessage("document uploaded")
 else file extension is not valid
-    S --> ST: "invalid file extension" message
+    S --> ST: showError("invalid file extension")
 end
 S --> ST: show personal page
 @enduml

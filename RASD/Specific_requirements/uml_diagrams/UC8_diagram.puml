@@ -11,6 +11,6 @@ S -> S: filterInternship(keywords)
 alt system found at least one internship
     S --> ST: list of internships founded
 else system did not find any internships that match the keywords
-    S --> ST: "no internships found" message
+    S --> ST: showMessage("no internships found")
 end
 @enduml

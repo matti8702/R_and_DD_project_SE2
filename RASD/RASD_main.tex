@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage{enumitem}
-
+\usepackage[a4paper,margin=3.5cm]{geometry} %TODO: check margin
 
 \newcounter{cnt}  
 \newenvironment{listInSquareBrackets}[1]
@@ -63,7 +63,12 @@
 \usepackage{listings}
 \usepackage{alloy-style}
 
-\title{\textbf{RASD}}
+\usepackage{titling} % center vertically the title of the document
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+
+\title{\textbf{Requirements Analysis and Specification Document\\
+        \large (RASD)}}
 \author{
     Riccardo Cerberi\\
     10775421
@@ -78,7 +83,11 @@
 
 \begin{document}
 
-\maketitle
+\begin{titlingpage}
+    \maketitle
+\end{titlingpage}
+
+\newpage
 \tableofcontents
 
 \newpage

@@ -21,7 +21,7 @@ alt company member confirms modifications
     S -> S: findRecommendations()
 else company member does not confirm modifications
     CM -> S: revertModifications()
-    S --> CM: "procedure canceled" message
+    S --> CM: showError("procedure canceled")
 end
 S --> CM: show internship page
 @enduml

@@ -7,8 +7,8 @@ actor :Company member: as CM
 rectangle "S&C system" {
     usecase (Student sends a request) as UC14
     usecase (Company member sends a request) as UC15
-    usecase (Student confirms their decision about a match) as UC16
-    usecase (Company member accepts or refuses a student's request) as UC17
+    usecase (Student responds to a company's request) as UC16
+    usecase (Company member responds to student's request) as UC17
 }
 
 ST ---> UC14 : initiate

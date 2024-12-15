@@ -1,0 +1,26 @@
+@startuml use_cases_diagram1
+left to right direction
+
+together{
+    actor :Student: as ST
+    actor :Company member: as CM
+    actor :University member: as UM
+    actor :User: as U
+}
+
+rectangle "S&C system"{
+    usecase (User writes a message) as UC21
+    usecase (Student writes a report) as UC22
+    usecase (Company member writes a report) as UC23
+}
+
+U --> UC21 : initiate
+
+ST --> UC22: initiate
+CM --> UC22: participate
+UM --> UC22 : participate
+
+ST -> UC23 : participate
+CM --> UC23: initiate
+UM --> UC23: participate
+@enduml

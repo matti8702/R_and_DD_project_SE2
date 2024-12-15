@@ -1,0 +1,25 @@
+@startuml use_cases_diagram3
+left to right direction
+
+actor :Student: as ST
+actor :Company member: as CM
+
+rectangle "S&C system" {
+    usecase (Student sends a request) as UC14
+    usecase (Company member sends a request) as UC15
+    usecase (Student confirms their decision about a match) as UC16
+    usecase (Company member accepts or refuses a student's request) as UC17
+}
+
+ST ---> UC14 : initiate
+CM ---> UC14 : participate
+
+CM ---> UC15 : initiate
+ST ---> UC15 : participate
+
+ST ---> UC16 : initiate
+CM ---> UC16 : participate
+
+CM ---> UC17 : initiate
+ST ---> UC17 : participate
+@enduml

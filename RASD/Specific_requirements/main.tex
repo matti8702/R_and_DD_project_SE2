@@ -429,7 +429,7 @@ Below there are the functional requirements that the system must guarantee.
 % student sends a request
 \usecase
 {
-    Student sends a request for an opened internship 
+    Student sends a request
 }
 {
     \begin{itemize}
@@ -461,7 +461,7 @@ Below there are the functional requirements that the system must guarantee.
 
 \usecase
 {
-    Company member sends a request for an opened internship 
+    Company member sends a request
 }
 {
     \begin{itemize}
@@ -543,11 +543,12 @@ The internship is closed. An error message appears on the screen and the system 
 
 % Schedule the meeting
 \usecase{
-    Schedule the meeting
+    Company member schedules the meeting
 }
 {\begin{itemize}
     \item Company member
     \item Student
+    \item External videoconference tool
 \end{itemize}
 }
 {The company member and the student are correctly logged in with their chat opened. They agree on the meeting time and where it will be held.}
@@ -557,7 +558,7 @@ The internship is closed. An error message appears on the screen and the system 
         \item The system displays a form for meeting details (e.g., date, time, location, purpose).
         \item The company member fills in the required details and confirms the entry.
         \item The system notifies the student of the scheduled meeting.
-        \item The system adds the meeting to the calendars of both the company member and the student. If the meeting is online, the system generates a link for the video conference and attaches it to the event.
+        \item The system adds the meeting to the calendars of both the company member and the student. If the meeting is online, the system contacts an external tool to generate a link for the video conference and attaches it to the event.
     \end{enumerate}
 }
 {The meeting is in the student's and company member's calendar.}
@@ -571,7 +572,7 @@ The internship is closed. An error message appears on the screen and the system 
 
 % Recruiter accepts/rejects the student about the result of the interview
 \usecase
-{Company member communicates to the student the result of the interview}
+{Company member communicates the result of the interview}
 {\begin{itemize}
     \item Company member
     \item Student
@@ -590,7 +591,7 @@ The internship is closed. An error message appears on the screen and the system 
 {}
 
 \usecase
-{Decision on the offer}
+{Student decides on the offer}
 {\begin{itemize}
     \item Company member
     \item Student
@@ -603,16 +604,35 @@ The internship is closed. An error message appears on the screen and the system 
         \item The student clicks on the notification about the company member's decision.
         \item The system displays the decision along with \textit{"Accept"} and \textit{"Refuse"} buttons.
         \item The student selects their choice by clicking one of the buttons.
-        \item The system notifies the company member of the student's response. If the student refuses, the private chat is deleted.
+        \item The system notifies the company member of the student's response. 
+        \item The private chat is deleted.
     \end{enumerate}
 }
 {The notification arrives to the company member. If the student rejects the offer, the chat is no more available: any access will show an error message.}
 {}
 {}
 
+\usecase
+{User writes a message}
+{User} % User has been defined in the class diagram, that is anyone
+{User is logged into the platform's homepage and knows the message to write along with the recipient's information}
+{
+    \begin{enumerate}
+        \item The user clicks on the chat icon to open the messaging interface.
+        \item The system displays a text box for the message.
+        \item The user composes the message.
+        \item The user selects the intended recipient.
+        \item The user clicks the \textit{"Submit"} button to send the message.
+        \item The system adds the message to the sender's and recipient's chat.
+    \end{enumerate}
+}
+{The message is part of the sender's and recipient's chat.}
+{The message is empty or no recipient is specified, the system shows an error message.}
+{}
+
 % students writes a report regarding internships
 \usecase
-{Student writes a report regarding the ongoing internship}
+{Student writes a report}
 {\begin{itemize}
     \item Student
     \item Company member
@@ -635,7 +655,7 @@ The internship is closed. An error message appears on the screen and the system 
 
 % company member writes a report regarding internships
 \usecase
-{Company member writes a report regarding the ongoing internship}
+{Company member writes a report}
 {\begin{itemize}
     \item Company member
     \item Student
@@ -660,23 +680,6 @@ The internship is closed. An error message appears on the screen and the system 
 \end{itemize}}
 {}
 
-\usecase
-{User writes a message}
-{User} % User has been defined in the class diagram, that is anyone
-{User is logged into the platform's homepage and knows the message to write along with the recipient's information}
-{
-    \begin{enumerate}
-        \item The user clicks on the chat icon to open the messaging interface.
-        \item The system displays a text box for the message.
-        \item The user composes the message.
-        \item The user selects the intended recipient.
-        \item The user clicks the \textit{"Submit"} button to send the message.
-        \item The system adds the message to the sender's and recipient's chat.
-    \end{enumerate}
-}
-{The message is part of the sender's and recipient's chat.}
-{The message is empty or no recipient is specified, the system shows an error message.}
-{}
 
 % Writing a complaint
 \usecase
@@ -703,7 +706,7 @@ The complaint is empty. The system shows an error message.
 {}
 
 \usecase
-{Interrupt Internship} 
+{University member interrupts an internship} 
 {
     \begin{itemize}
         \item University member
@@ -775,7 +778,7 @@ The complaint is empty. The system shows an error message.
 % Posting a feedback.
 % Even when an internship is interrupted, it must be possible to write a feedback. In this way, the analyzer will penalize the company from being suggested to students.
 \usecase
-{Post a feedback}
+{User posts a feedback}
 {
     \begin{itemize}
     \item Student

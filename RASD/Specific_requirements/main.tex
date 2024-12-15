@@ -1,47 +1,44 @@
 \subsection{External Interface Requirements}
 \subsection{Functional Requirements}
+Below there are the functional requirements that the system must guarantee.
 
 \begin{listInSquareBrackets}{R}
-    %we thought that student look for an internship in two methods: 1 search by keyword 2 use recommendation (which appears in home page)
-    %convert all in must, should 
-
     \item The system must permit students to register by providing their personal information and an institutional email.\footnote{"Institutional email" stand for the email assigned to the student by their university.}
-    \item The system must permit companies to register.
-    \item The system must permit universities to register.
+    \item The system must permit company members to register.
+    \item The system must permit universities members to register.
+    \item The system must permit universities members to register their universities.
+    \item The system must permit companies members to register their companies.
     \item The system must allow users to log in by inserting their credentials.
     \item The system must allow student to publish his CV.
-    \item The system must allow companies to publish internships.
+    \item The system must allow companies members to publish internships.
     \item The system shall inform students when suitable internships are available through recommendation.
-    \item The system shall inform companies about the availability of student CVs corresponding to their needs, through recommendation.
+    \item The system shall inform companies members about the availability of student CVs corresponding to their needs, through recommendation.
     \item The system must use analysis produced by the statistical analysis tool to formulate recommendation for students and companies.
-    \item The system shall provide suggestions to companies for the project description.
+    \item The system shall provide suggestions to companies members for the project description.
     \item The system shall provide suggestions to students regarding their CVs.
-    \item The system shall allow the company to select the students, among all candidates, for the internship.
-    \item The system must collect feedbacks from students and companies in order to keep statistics up-to-date.
+    \item The system shall allow the company members to select the students, among all candidates, for the internship.
+    \item The system must collect feedbacks from students and companies members in order to keep statistics up-to-date.
     \item The system must send feedbacks to the statistical analysis tool in order to update its analysis.
-    \item The system must allow the student and the company to monitor the execution and the outcome of the matchmaking process.
-    \item The system must allow the student, the company and the university to monitor the ongoing internship.\footnote{The monitoring is achieved through report visualization.}
-    \item The system must allow interrupting an internship when university requires it.\footnote{Only the university could interrupt the internship and not the company.}
+    \item The system must allow the student and the company members to monitor the execution and the outcome of the matchmaking process.
+    \item The system must allow the student, the company members and the university members to monitor the ongoing internship.\footnote{The monitoring is achieved through report visualization.}
+    \item The system must allow interrupting an internship when university members requires it.\footnote{Only university members could interrupt the internship and not company members.}
     \item The system must provide to student all available internships related to the keyword specified by him.
-    \item The system shall inform the company and the student that the internship has concluded cause of the decision of the student's university.
+    \item The system shall inform the company members and the student that the internship has concluded cause of the decision of the student's university.
     \item The system must prevent students to apply for the internship once the company has selected the eligible candidate for it.
     \item The system shall allow students to modify their CV.
-    \item The system shall allow companies to modify internship description.
-    \item The system must allow students and companies (that are involved in the same internship) to send messages to each other.
-    \item The system must allow students and companies to posts reports regarding internship.
-    \item The system must notify the company about the new matching proposal made by the student.
-    \item The system shall allow the student to send a matching proposal to a company.
-    \item The system must inform the student about a new matching proposal made by the company.
-    \item The system must inform the student or the company of the outcome of the matching proposal he sent to the counterpart.
-    \item The system shall allow the company or the student to either accept or decline the matching proposal made by the counterpart.
-    \item The system must allow future members of the company to add their company to the application by providing a name, a description and a mail domain.
-    \item The system must allow future members of the university to add their university to the application by providing a name and a mail domain.
+    \item The system shall allow companies members to modify internship description.
+    \item The system must allow students and companies members (that are involved in the same internship) to send messages to each other.
+    \item The system must allow students and companies members to posts reports regarding internship.
+    \item The system must notify the company members about the new matching proposal made by the student.
+    \item The system shall allow the student to send a matching proposal to company members.
+    \item The system must inform the student about a new matching proposal made by the company members.
+    \item The system must inform the student or the company member of the outcome of the matching proposal he sent to the counterpart.
+    \item The system shall allow the company members or the student to either accept or decline the matching proposal made by the counterpart.
 \end{listInSquareBrackets}
 
 \subsection{Use cases}
 %TODO: add use cases diagram
 
-%TODO: put showError(message)
 \usecase
 {
     Registration of a university member
@@ -808,18 +805,120 @@ The complaint is empty. The system shows an error message.
 
 %TODO
 \subsection{Mapping on requirements}
+This section serves as a bridge between the high-level goals of the system and the specific functionalities required to achieve them.\\\\
+For each goal, the corresponding requirements are listed.
 \begin{itemize}
-    \item \text{[G1]} - The company aims to spread the project proposals to all interested students.
+    \item \textbf{\text{[G1]} - The company members aims to spread the project proposals to students.}
     \begin{itemize}
-        \item 
+        \item R1: The system must permit students to register by providing their personal information and an institutional email.
+        \item R2: The system must permit company members to register.
+        \item R3: The system must permit universities members to register.
+        \item R4: The system must permit universities members to register their universities.
+        \item R5: The system must permit companies members to register their companies.
+        \item R6: The system must allow users to log in by inserting their credentials.
+        \item R8: The system must allow companies members to publish internships. 
+        \item R9: The system shall inform students when suitable internships are available through recommendation.
+        \item R12: The system shall provide suggestions to companies members for the project description.
+        \item R20: The system must provide to student all available internships related to the keyword specified by him.
+        \item R24: The system shall allow companies members to modify internship description.\\
     \end{itemize}
-    \item \text{[G2]} - The student would like to find proposals that are most suited to him.
-    \item \text{[G3]} - The company would like to find student's CVs that satisfy their needs.
-    \item \text{[G4]} - The student and the company would like to receive suggestions on how to improve CVs and project descriptions.
-    \item \text{[G5]} - The university would like to monitor the status of internships involving all its students.
-    \item \text{[G6]} - The company wants to keep track of the status of each open selection process.
-    \item \text{[G7]} - The company and the student engaged in an ongoing internship wish to keep track of its status.
+    \item \textbf{\text{[G2]} - The student would like to find proposals that are most suited to him.}
+    \begin{itemize}
+        \item R1: The system must permit students to register by providing their personal information and an institutional email.
+        \item R2: The system must permit company members to register.
+        \item R3: The system must permit universities members to register.
+        \item R4: The system must permit universities members to register their universities.
+        \item R5: The system must permit companies members to register their companies.
+        \item R6: The system must allow users to log in by inserting their credentials.
+        \item R8: The system must allow companies members to publish internships.
+        \item R9: The system shall inform students when suitable internships are available through recommendation.
+        \item R11: The system must use analysis produced by the statistical analysis tool to formulate recommendation for students and companies.
+        \item R15: The system must collect feedbacks from students and companies members in order to keep statistics up-to-date.
+        \item R16: The system must send feedbacks to the statistical analysis tool in order to update its analysis.
+        \item R20: The system must provide to student all available internships related to the keyword specified by him.\\
+    \end{itemize}
+    \item \textbf{\text{[G3]} - The company members aim to identify student CVs that align with the requirements of their internship proposals.}
+    \begin{itemize}
+        \item R1: The system must permit students to register by providing their personal information and an institutional email.
+        \item R2: The system must permit company members to register.
+        \item R3: The system must permit universities members to register.
+        \item R4: The system must permit universities members to register their universities.
+        \item R5: The system must permit companies members to register their companies.
+        \item R6: The system must allow users to log in by inserting their credentials.
+        \item R7: The system must allow student to publish his CV.
+        \item R8: The system must allow companies members to publish internships.
+        \item R10: The system shall inform companies members about the availability of student CVs corresponding to their needs, through recommendation.
+        \item R11: The system must use analysis produced by the statistical analysis tool to formulate recommendation for students and companies.
+        \item R15: The system must collect feedbacks from students and companies members in order to keep statistics up-to-date.
+        \item R16: The system must send feedbacks to the statistical analysis tool in order to update its analysis.\\
+    \end{itemize}
+    \item \textbf{\text{[G4]} - The student and the company members would like to receive suggestions on how to improve CVs and project descriptions.}
+    \begin{itemize}
+        \item R1: The system must permit students to register by providing their personal information and an institutional email.
+        \item R2: The system must permit company members to register.
+        \item R3: The system must permit universities members to register.
+        \item R4: The system must permit universities members to register their universities.
+        \item R5: The system must permit companies members to register their companies.
+        \item R6: The system must allow users to log in by inserting their credentials.
+        \item R7: The system must allow student to publish his CV.
+        \item R8: The system must allow companies members to publish internships.
+        \item R12: The system shall provide suggestions to companies members for the project description.
+        \item R13: The system shall provide suggestions to students regarding their CVs.
+        \item R23: The system shall allow students to modify their CV.
+        \item R24: The system shall allow companies members to modify internship description.\\
+    \end{itemize}
+    \item \textbf{\text{[G5]} - The university members would like to monitor the status of internships involving all their students.}
+    \begin{itemize}
+        \item R1: The system must permit students to register by providing their personal information and an institutional email.
+        \item R2: The system must permit company members to register.
+        \item R3: The system must permit universities members to register.
+        \item R4: The system must permit universities members to register their universities.
+        \item R5: The system must permit companies members to register their companies.
+        \item R6: The system must allow users to log in by inserting their credentials.
+        \item R7: The system must allow student to publish his CV.
+        \item R8: The system must allow companies members to publish internships.
+        \item R14: The system shall allow the company members to select the students, among all candidates, for the internship.
+        \item R18: The system must allow the student, the company members and the university members to monitor the ongoing internship.
+        \item R19: The system must allow interrupting an internship when university members requires it.
+        \item R21: The system shall inform the company members and the student that the internship has concluded cause of the decision of the student's university.
+        \item R26: The system must allow students and companies members to posts reports regarding internship.\\
+    \end{itemize}
+    \item \textbf{\text{[G6]} - The company members and the students aim to carry out the matching and selection processes.}
+    \begin{itemize}
+        \item R1: The system must permit students to register by providing their personal information and an institutional email.
+        \item R2: The system must permit company members to register.
+        \item R3: The system must permit universities members to register.
+        \item R4: The system must permit universities members to register their universities.
+        \item R5: The system must permit companies members to register their companies.
+        \item R6: The system must allow users to log in by inserting their credentials.
+        \item R7: The system must allow student to publish his CV.
+        \item R8: The system must allow companies members to publish internships.
+        \item R14: The system shall allow the company members to select the students, among all candidates, for the internship.
+        \item R17: The system must allow the student and the company members to monitor the execution and the outcome of the matchmaking process.
+        \item R22: The system must prevent students to apply for the internship once the company has selected the eligible candidate for it.
+        \item R25: The system must allow students and companies members (that are involved in the same internship) to send messages to each other.
+        \item R27: The system must notify the company members about the new matching proposal made by the student.
+        \item R28: The system shall allow the student to send a matching proposal to company members.
+        \item R29: The system must inform the student about a new matching proposal made by the company members.
+        \item R30: The system must inform the student or the company member of the outcome of the matching proposal he sent to the counterpart.
+        \item R31: The system shall allow the company members or the student to either accept or decline the matching proposal made by the counterpart.\\
+    \end{itemize}
+    \item \textbf{\text{[G7]} - The company members and the student engaged in an ongoing internship wish to keep track of its status.}
+    \begin{itemize}
+        \item R1: The system must permit students to register by providing their personal information and an institutional email.
+        \item R2: The system must permit company members to register.
+        \item R3: The system must permit universities members to register.
+        \item R4: The system must permit universities members to register their universities.
+        \item R5: The system must permit companies members to register their companies.
+        \item R6: The system must allow users to log in by inserting their credentials.
+        \item R7: The system must allow student to publish his CV.
+        \item R8: The system must allow companies members to publish internships.
+        \item R18: The system must allow the student, the company members and the university members to monitor the ongoing internship.
+        \item R21: The system shall inform the company members and the student that the internship has concluded cause of the decision of the student's university.
+        \item R26: The system must allow students and companies members to posts reports regarding internship.
+    \end{itemize}
 \end{itemize}
+%TODO: draw table
 
 \subsection{Performance Requirements}
 \subsection{Design Constraints}

@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage{enumitem}
 \usepackage[a4paper,margin=3.5cm]{geometry} %TODO: check margin
+\usepackage{amssymb}  % enabling to use ✔ symbol
+\usepackage{longtable} % splitting long tables in multiple pages
 
 \newcounter{cnt}  
 \newenvironment{listInSquareBrackets}[1]
@@ -28,7 +30,7 @@
     \def\arraystretch{1.5} % This adds padding to table rows (and more)
 
     \subsection*{[UC\arabic{usecasecounter}] - #1}
-    \begin{tabular}{lp{0.7\textwidth}}
+    \begin{tabular}{lp{0.7\textwidth}} %FIX: use longtable?
         \toprule
         \textbf{Name} & #1\\
         \midrule

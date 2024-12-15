@@ -12,13 +12,12 @@ S --> CM: student info
 CM -> S: sendRequest(request, student)
 S -> S:  checkNumberRequest()
 alt First time the request is sent
-    S -> CM : addCandidate(student)
     S -> S: retrieveCompanyMemberInfo()
-    S -> ST : sendRequest(request, companyMember)
-    S -> CM : sucess message
+    S ->> ST : sendRequest(request, companyMember)
     activate ST
     deactivate ST
-else 
+    S --> CM : new list of candidates 
+else else
     S --> CM: error message
 end
 @enduml

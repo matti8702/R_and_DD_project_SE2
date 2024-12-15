@@ -17,9 +17,9 @@ loop until complaint is not empty
     S  -> S : checkComplaint()
 end
 S -> S : retrieveStudentInformation()
-S -> ST : addComplaint(complaint)
-S -> UM : addComplaint(complaint)
+S -> ST : updated list of complaints
+S ->> UM : addComplaint(complaint)
 activate UM
-S -> CM : addComplaint(complaint)
+S ->> CM : addComplaint(complaint)
 activate CM
 @enduml

@@ -11,14 +11,14 @@ activate S
 U -> S : choiceOnFeedback(choice)
 alt user wants to write a feedback
     S --> U : feedback page
-    U -> S : post(feedback)
+    U ->> S : post(feedback)
     S -> S : checkFeedback(feedback)
     loop until the feedback is complete
         S --> U : error message
         U -> S : post(feedback)
         S -> S : checkFeedback(feedback)
     end
-    S -> EXT : addFeedback(feedback)
+    S ->> EXT : addFeedback(feedback)
 else 
     S -> U : removeNotification()
 end

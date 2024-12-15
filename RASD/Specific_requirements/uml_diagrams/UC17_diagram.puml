@@ -9,16 +9,16 @@ activate CM
 activate S
 CM -> S: matchChoice(choice, student)
 alt Internship is still available
-    S -> ST : sendChoice(choice, companyMember)
     activate ST
-    alt Student has accepted
-        S -> CM : addCandidate(student)
-        S -> CM : openChat(student)
-        S -> ST : openChat(companyMember)
-    else 
-        S -> CM : removeFromCandidate(student)
+    alt Company member has accepted the student
+        S -> S  : createChat(student, companyMember)
+        S --> CM : page with the new chat and the updated list of candidates
+        S ->> ST : sendChoice(choice, companyMember)
+        S ->> ST : openChat(companyMember)
+    else else
+        S --> CM : new list of candidates without the student
     end
-else 
-    S -> CM: error message
+else else
+    S --> CM: error message
 end
 @enduml

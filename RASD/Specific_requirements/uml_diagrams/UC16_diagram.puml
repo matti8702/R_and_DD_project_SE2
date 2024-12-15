@@ -9,16 +9,16 @@ activate ST
 activate S
 ST -> S: matchChoice(choice)
 alt Internship is still available
-    S -> CM : sendChoice(choice, student)
     activate CM
-    alt Student has accepted
+    alt Student has accepted the match
         S -> S  : createChat(student, companyMember)
-        S -> CM : openChat(student)
-        S -> ST : openChat(companyMember)
-    else 
-        S -> CM : removeCandidate(student)
+        S ->> CM : notifyChoice(choice, student)
+        S ->> CM : openChat(student)
+        S --> ST : new chat
+    else Student has rejected the match
+        S ->> CM : removeCandidate(student)
     end
-else 
+else Internship closed
     S --> ST: error message
 end
 @enduml

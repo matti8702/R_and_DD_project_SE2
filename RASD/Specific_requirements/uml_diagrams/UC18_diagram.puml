@@ -4,6 +4,7 @@ hide footbox
 participant "Company Member" as CM
 participant "S&C" AS S
 participant "Student" as ST
+participant "ExternalTool" as ET 
 
 activate CM
 activate S
@@ -12,17 +13,23 @@ CM -> S: scheduleMeeting()
 S --> CM: form for meeting details
 CM -> S : submitMeeting(meeting)
 S -> S : checkMeeting(meeting)
-loop meeting information are correct
+loop until meeting information are correct
     S --> CM: error message
     CM -> S : submitMeeting(meeting)
     S -> S : checkMeeting(meeting)
 end
-S -> ST : sendNotification()
-activate ST
-S -> ST : addMeeting(meeting)
-S --> CM : addMeeting(meeting)
-deactivate ST
+alt meeting will be online
+S -> ET : generateLink(meeting)
+activate ET
+ET --> S : link
+S -> S : add link to meeting
+end 
+S -> S : checkOverlapping(meeting)
 alt meeting overlaps with other scheduled events 
-    S -> CM: warning message
+S -> S : addWarningToMeeting(meeting)
 end
+S -> ST : addMeeting(meeting)
+activate ST
+ST --> S : ok
+S --> CM : meeting
 @enduml

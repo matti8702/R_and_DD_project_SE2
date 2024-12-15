@@ -1,24 +1,19 @@
 @startuml UC21_diagram
 hide footbox
 
-participant "Student" as ST
+participant "Generic User" as U
 participant "S&C" AS S
-participant "Company Member" as CM
-participant "University Member" as UM
+participant "Recipient" as R
 
-activate ST
+activate U
 activate S
 
-ST -> S : createReport()
-S --> ST : report to be filled
-ST -> S : submitReport(report)
-loop until report is not empty
-    S --> ST : error message
-    ST -> S : submitReport(report)
+U -> S : sendMessage(message, recipient)
+loop until message is empty or the recipient's information are missing/incorrect
+    S --> U : error message
+    U -> S : sendMessage(message, recipient)
 end
-S -> ST : addReport(report)
-S -> CM : addReport(report)
-activate CM
-S -> UM : addReport(report)
-activate UM
+S ->> R : addMessage(message)
+activate R
+S --> U : chat with the new message 
 @enduml

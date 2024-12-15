@@ -13,11 +13,11 @@ ST -> S: sendRequest(request)
 S -> S:  checkNumberRequest()
 alt First time the request is sent
     S -> S: retrieveStudentInfo()
-    S -> CM : sendRequest(request)
-    S -> ST : sucess message
+    S ->> CM : sendRequest(request)
     activate CM
     deactivate CM
-else 
+    S --> ST : ok
+else else
     S --> ST: error message
 end
 @enduml

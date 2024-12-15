@@ -9,9 +9,12 @@ activate ST
 activate S
 
 ST -> S: offerDecision(choice)
+S -> S : retrieveInternshipInfo(student)
+S -> S : deleteChat(student, company member)
 S  -> CM : sendDecision(choice, student)
 activate CM
-alt Student has rejected the offer
-    S -> CM : deleteChat()
-end
+CM --> S : ok
+S -> CM : deleteChat()
+CM --> S : ok
+S --> ST : page without the chat
 @enduml

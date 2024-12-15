@@ -1,19 +1,24 @@
 @startuml UC23_diagram
 hide footbox
 
-participant "Generic User" as U
+participant "Student" as ST
 participant "S&C" AS S
-participant "Recipient" as R
+participant "Company Member" as CM
+participant "University Member" as UM
 
-activate U
+activate ST
 activate S
 
-U -> S : sendMessage(message, recipient)
-loop until message is empty or the recipient's information are missing/incorrect
-    S --> U : error message
-    U -> S : sendMessage(message, recipient)
+ST -> S : createReport()
+S --> ST : report to be filled
+ST -> S : submitReport(report)
+loop until report is not empty
+    S --> ST : error message
+    ST -> S : submitReport(report)
 end
-S -> R : addMessage(message)
-activate R
-S -> U : addMessage(message)
+S --> ST : updated list of reports
+S ->> CM : addReport(report)
+activate CM
+S ->> UM : addReport(report)
+activate UM
 @enduml

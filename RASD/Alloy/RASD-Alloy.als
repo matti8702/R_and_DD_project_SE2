@@ -190,7 +190,8 @@ pred addNewRequest [ sender , receiver : User , internship : Internship ]{
 fact applicationAvailabilityAfterClosure{
 	all i : Internship | 
 		always ( 
-			( i.candidatureStatus = Closed and once closeApplicationAvailability[ i ] ) 
+			( i.candidatureStatus = Closed and 
+			  once closeApplicationAvailability[ i ] ) 
 				implies i.candidatureStatus' = Closed 
 		)
 }
@@ -256,7 +257,8 @@ fact pendingRequestBehaviour{
 	always ( 
 		all r : Request |  
 			r.requestStatus = Pending 
-				implies ( ( ( eventually  declineRequest[ r ] ) or ( eventually  approveRequest[ r ] ) ) ) 
+				implies ( ( ( eventually  declineRequest[ r ] ) or 
+					( eventually  approveRequest[ r ] ) ) ) 
 	)	
 }
 
@@ -297,7 +299,8 @@ fact usersCannotSendRequestToThemselves{
 fact noDuplicateRequests{
 	always ( 
 		all disj r1, r2 : Request | 
-			(r1.requestedBy != r2.requestedBy) or (r1.internshipReferred != r2.internshipReferred) )
+			(r1.requestedBy != r2.requestedBy) or 
+			(r1.internshipReferred != r2.internshipReferred) )
 }
 
 
@@ -352,7 +355,7 @@ fact requestCannotReferInternshipsBeforeOpening{
 	always( 
 		all r : Request | 
 			r.internshipReferred.candidatureStatus = Closed
-				implies ( once  closeApplicationAvailability[ r.internshipReferred ] ) 
+				implies ( once closeApplicationAvailability[ r.internshipReferred ] ) 
 	)
 }
 

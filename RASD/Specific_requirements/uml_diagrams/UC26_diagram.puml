@@ -18,7 +18,8 @@ alt user wants to write a feedback
         U -> S : post(feedback)
         S -> S : checkFeedback(feedback)
     end
-    S ->> EXT : addFeedback(feedback)
+    S -> S: retrieveInfoFromFeedback(feedback)
+    S ->> EXT : update(internshipId, internshipTags, studentTags)
 else 
     S -> U : removeNotification()
 end

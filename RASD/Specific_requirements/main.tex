@@ -778,7 +778,7 @@ The complaint is empty. The system shows an error message.
 % Posting a feedback.
 % Even when an internship is interrupted, it must be possible to write a feedback. In this way, the analyzer will penalize the company from being suggested to students.
 \usecase
-{User posts a feedback}
+{Student or company member posts a feedback}
 {
     \begin{itemize}
     \item Student
@@ -798,9 +798,8 @@ The complaint is empty. The system shows an error message.
         \item If the user selects \textit{"Yes"}, the system redirects them to the feedback page.
         \item The user writes a comment and rates the internship experience.
         \item The user clicks the \textit{"Post"} button to submit the feedback.
-        \item The system processes and forwards the feedback to the relevant external tool.
+        \item The system processes and forwards the student's and company member's tags along with the internship id to the relevant external tool.
     \end{enumerate}
-
 }
 {The user either refuses to write a feedback or posts it}
 {The feedback is incomplete, the system shows an error message.}
@@ -967,4 +966,43 @@ For explanatory purposes, the mapping is also represented using a table.
 
 \subsection{Performance Requirements}
 \subsection{Design Constraints}
+
+\subsubsection{Privacy Complaints}
+All users' sensible information must be handled accordingly to existing regulations (e.g GPDR).
+
+\subsubsection{Hardware limitations}
+\begin{itemize}
+    \item Web Application
+        \begin{itemize}
+            \item Internet connection
+            \item Device with a display
+            \item Web browser  
+        \end{itemize}
+    \item Backend
+        \begin{itemize}
+            \item Scalable webserver
+            \item Database Management System
+        \end{itemize}
+\end{itemize}
+
 \subsection{Software System Attributes}
+
+\subsubsection{Reliability}
+The system must be fault and byzantine tolerant to prevent the system from propagating erroneous information to the user and along the internal components. 
+
+\subsubsection{Availability}
+The system must be as available as possible, with a minimum value of 99.9\% of time.
+It shall prevent maintenance break during the day, limiting such breaks only at nightime when it is unlike to have users interacting with the platform.
+
+\subsubsection{Security}
+The system must validate any user accessing the platform, always verifying the permissions of each user's operation.
+Measures to protect the database from malicious attacks must be adopted.
+The user's personal data must be encrypted.
+
+\subsubsection{Maintainability}
+All the code produced should be well commented and tested.
+The system structure should provide the ability to deploy updates in the backend without the user noticing it.
+System components should be created to be as modular as possible. 
+
+\subsubsection{Portability}
+The system must be accessible by the Users from every kind of Web Browser.

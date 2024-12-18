@@ -1083,6 +1083,15 @@ For explanatory purposes, the mapping is also represented using a table.
 \end{longtable}
 
 \subsection{Performance Requirements}
+\subsubsection{Response time}
+The system's response time must be minimized to ensure an optimal and seamless user experience, even during peak load periods.
+\subsubsection{Scalability}
+The system must be scalable to ensure continued functionality in the future, following an increase in users. As an application that could potentially be used by the majority of students and companies, the system must be able to handle a growing number of users without compromising performance. Scalability must be ensured both horizontally and vertically.
+\subsubsection{Data volume}
+The system must support the permanent storage of user information for a large number of students from various universities and company/university members. It should ensure high performance and responsiveness, even as the volume of stored data grows significantly.
+\subsubsection{Latency}
+The latency of communication with external tools (e.g., video conferencing tools and statistical analysis tools) and with end-user devices must be low, ensuring a seamless user experience. The maximum acceptable latency for critical operations should be below 200 ms. An example of a critical operation is sending the communication of internship termination, due to the student's university decision.
+
 \subsection{Design Constraints}
 
 \subsubsection{Privacy Complaints}

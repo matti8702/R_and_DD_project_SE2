@@ -3,7 +3,7 @@ hide footbox
 
 participant "User" AS U
 participant "S&C" AS S
-participant "External statistical tool" AS EXT
+participant "External statistical analysis tool" AS EXT
 
 activate U
 activate S

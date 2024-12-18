@@ -1,4 +1,4 @@
-@startuml use_cases_diagram1
+@startuml use_cases_diagram6
 left to right direction
 
 together{
@@ -10,20 +10,19 @@ together{
 }
 
 rectangle "S&C system"{
-    usecase (Student writes a complaint) as UC24
-    usecase (University member interrupts an internship) as UC25
-    usecase (User posts a feedback) as UC26
+    usecase (Student writes a complaint) as UC26
+    usecase (University member interrupts an internship) as UC27
+    usecase (User posts a feedback) as UC28
 }
 
-ST --> UC24: initiate
-UM --> UC24 : participate
-CM --> UC24 : participate
+ST --> UC26: initiate
+UM --> UC26 : participate
+CM --> UC26 : participate
 
-UM ---> UC25: initiate
-CM --> UC25 : participate
-ST --> UC25 : participate
+UM ---> UC27: initiate
+CM --> UC27 : participate
+ST --> UC27 : participate
 
-STAT -> UC25: participate
-
-U --> UC26: initiate
+STAT -> UC28: participate
+U --> UC28: initiate
 @enduml

@@ -1,0 +1,28 @@
+@startuml use_cases_diagram7
+left to right direction
+
+together{
+    actor :Student: as ST
+    actor :Company member: as CM
+    actor :University member: as UM
+    actor :External statistical analysis tool: as STAT
+    actor :User: as U
+}
+
+rectangle "S&C system"{
+    usecase (Student writes a complaint) as UC26
+    usecase (University member interrupts an internship) as UC27
+    usecase (User posts a feedback) as UC28
+}
+
+ST --> UC26: initiate
+UM --> UC26 : participate
+CM --> UC26 : participate
+
+UM ---> UC27: initiate
+CM --> UC27 : participate
+ST --> UC27 : participate
+
+STAT -> UC28: participate
+U --> UC28: initiate
+@enduml

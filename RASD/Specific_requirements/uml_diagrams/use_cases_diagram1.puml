@@ -19,7 +19,7 @@ rectangle "S&C system"{
 }
 
 UM -> UC1: initiate
-EMAIL -> UC1: participate
+EMAIL --> UC1: participate
 
 CM --> UC2: initiate
 EMAIL --> UC2: participate
@@ -32,8 +32,8 @@ STAT --> UC3: participate
 UM -> UC4: initiate
 
 ST -> UC5: initiate
-STAT -> UC5: participate
+STAT --> UC5: participate
 
 CM -> UC6: initiate
-STAT -> UC6: participate
+STAT --> UC6: participate
 @enduml

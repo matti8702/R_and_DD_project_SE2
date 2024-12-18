@@ -5,24 +5,22 @@ together{
     actor :Student: as ST
     actor :Company member: as CM
     actor :University member: as UM
-    actor :External statistical analysis tool: as STAT
     actor :User: as U
 }
 
 rectangle "S&C system"{
-    usecase (Student writes a complaint) as UC26
-    usecase (University member interrupts an internship) as UC27
-    usecase (User posts a feedback) as UC28
+    usecase (User writes a message) as UC23
+    usecase (Student writes a report) as UC24
+    usecase (Company member writes a report) as UC25
 }
 
-ST --> UC26: initiate
-UM --> UC26 : participate
-CM --> UC26 : participate
+U --> UC23 : initiate
 
-UM ---> UC27: initiate
-CM --> UC27 : participate
-ST --> UC27 : participate
+ST --> UC24: initiate
+CM --> UC24: participate
+UM --> UC24 : participate
 
-STAT -> UC28: participate
-U --> UC28: initiate
+ST -> UC25 : participate
+CM --> UC25: initiate
+UM --> UC25: participate
 @enduml

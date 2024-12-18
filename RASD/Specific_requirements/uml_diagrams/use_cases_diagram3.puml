@@ -1,31 +1,26 @@
 @startuml use_cases_diagram3
 left to right direction
 
-actor :Student: as ST
-actor :Company member: as CM
-
-rectangle "S&C system" {
-    usecase (Apply a suggestion to the digitalized curriculum vitae) as UC14
-    usecase (Apply a suggestion to the internship description) as UC15
-    usecase (Student sends a request) as UC16
-    usecase (Company member sends a request) as UC17
-    usecase (Student responds to a company's request) as UC18
-    usecase (Company member responds to student's request) as UC19
+together{
+    actor :Student: as ST
+    actor :Company member: as CM
+    actor :External statistical analysis tool: as STAT
+    actor :eMail provider: as EMAIL
 }
 
-ST -> UC14: initiate
+rectangle "S&C system"{
+    usecase (Modify the digitalized curriculum vitae version) as UC11
+    usecase (Upload a new CV document) as UC12
+    usecase (Notify new recommendations) as UC13
+}
 
-CM -> UC15: initiate
+ST -> UC11: initiate
+STAT -> UC11: participate
 
-ST ---> UC16 : initiate
-CM ---> UC16 : participate
+ST --> UC12: initiate
 
-CM ---> UC17 : initiate
-ST ---> UC17 : participate
-
-ST ---> UC18 : initiate
-CM ---> UC18 : participate
-
-CM ---> UC19 : initiate
-ST ---> UC19 : participate
+STAT -> UC13: participate
+ST --> UC13: participate
+CM --> UC13: participate
+EMAIL --> UC13: participate
 @enduml

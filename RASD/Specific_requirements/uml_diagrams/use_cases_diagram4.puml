@@ -1,25 +1,31 @@
 @startuml use_cases_diagram4
 left to right direction
 
-together {
-    actor :Student: as ST
-    actor :Company member: as CM
-    actor :External videoconference tool: as EVT
-}
+actor :Student: as ST
+actor :Company member: as CM
 
 rectangle "S&C system" {
-    usecase (Company member schedules the meeting) as UC20
-    usecase (Company member communicates the result of the interview) as UC21
-    usecase (Student decides on the offer) as UC22
+    usecase (Apply a suggestion to the digitalized curriculum vitae) as UC14
+    usecase (Apply a suggestion to the internship description) as UC15
+    usecase (Student sends a request) as UC16
+    usecase (Company member sends a request) as UC17
+    usecase (Student responds to a company's request) as UC18
+    usecase (Company member responds to student's request) as UC19
 }
 
-CM  --> UC20 : initiate
-ST  --> UC20 : participate
-EVT --> UC20 : participate
+ST -> UC14: initiate
 
-CM -> UC21 : initiate
-ST --> UC21 : participate
+CM -> UC15: initiate
 
-ST ---> UC22 : initiate
-CM ---> UC22 : participate
+ST ---> UC16 : initiate
+CM ---> UC16 : participate
+
+CM ---> UC17 : initiate
+ST ---> UC17 : participate
+
+ST ---> UC18 : initiate
+CM ---> UC18 : participate
+
+CM ---> UC19 : initiate
+ST ---> UC19 : participate
 @enduml

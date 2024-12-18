@@ -5,7 +5,6 @@ together{
     actor :Student: as ST
     actor :Company member: as CM
     actor :External statistical analysis tool: as STAT
-    actor :eMail provider: as EMAIL
 }
 
 rectangle "S&C system"{
@@ -13,30 +12,17 @@ rectangle "S&C system"{
     usecase (Modify an internship) as UC8
     usecase (Delete an internship) as UC9
     usecase (Searching for an internship by means of keywords) as UC10
-    usecase (Modify the digitalized curriculum vitae version) as UC11
-    usecase (Upload a new CV document) as UC12
-    usecase (Notify new recommendations) as UC13
 }
 
 CM --> UC7: initiate
 STAT -> UC7: participate
 
 CM --> UC8: initiate
-STAT --> UC8: participate
+STAT -> UC8: participate
 
 CM -> UC9: initiate
-STAT --> UC9: participate
+STAT -> UC9: participate
 
-ST -> UC10: initiate
-STAT --> UC10: participate
-
-ST -> UC11: initiate
-STAT -> UC11: participate
-
-ST -> UC12: initiate
-
-STAT --> UC13: participate
-ST --> UC13: participate
-CM --> UC13: participate
-EMAIL --> UC13: participate
+ST --> UC10: initiate
+STAT -> UC10: participate
 @enduml

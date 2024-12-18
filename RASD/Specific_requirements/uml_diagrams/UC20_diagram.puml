@@ -1,20 +1,35 @@
 @startuml UC20_diagram
 hide footbox
 
-participant "Student" as ST
-participant "S&C" AS S
 participant "Company Member" as CM
+participant "S&C" AS S
+participant "Student" as ST
+participant "ExternalTool" as ET 
 
-activate ST
+activate CM
 activate S
 
-ST -> S: offerDecision(choice)
-S -> S : retrieveInternshipInfo(student)
-S -> S : deleteChat(student, company member)
-S  -> CM : sendDecision(choice, student)
-activate CM
-CM --> S : ok
-S -> CM : deleteChat()
-CM --> S : ok
-S --> ST : page without the chat
+CM -> S: scheduleMeeting()
+S --> CM: form for meeting details
+CM -> S : submitMeeting(meeting)
+S -> S : checkMeeting(meeting)
+loop until meeting information are correct
+    S --> CM: error message
+    CM -> S : submitMeeting(meeting)
+    S -> S : checkMeeting(meeting)
+end
+alt meeting will be online
+S -> ET : generateLink(meeting)
+activate ET
+ET --> S : link
+S -> S : add link to meeting
+end 
+S -> S : checkOverlapping(meeting)
+alt meeting overlaps with other scheduled events 
+S -> S : addWarningToMeeting(meeting)
+end
+S -> ST : addMeeting(meeting)
+activate ST
+ST --> S : ok
+S --> CM : meeting
 @enduml

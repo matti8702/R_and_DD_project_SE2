@@ -5,21 +5,27 @@ actor :Student: as ST
 actor :Company member: as CM
 
 rectangle "S&C system" {
-    usecase (Student sends a request) as UC14
-    usecase (Company member sends a request) as UC15
-    usecase (Student responds to a company's request) as UC16
-    usecase (Company member responds to student's request) as UC17
+    usecase (Apply a suggestion to the digitalized curriculum vitae) as UC14
+    usecase (Apply a suggestion to the internship description) as UC15
+    usecase (Student sends a request) as UC16
+    usecase (Company member sends a request) as UC17
+    usecase (Student responds to a company's request) as UC18
+    usecase (Company member responds to student's request) as UC19
 }
 
-ST ---> UC14 : initiate
-CM ---> UC14 : participate
+ST -> UC14: initiate
 
-CM ---> UC15 : initiate
-ST ---> UC15 : participate
+CM -> UC15: initiate
 
 ST ---> UC16 : initiate
 CM ---> UC16 : participate
 
 CM ---> UC17 : initiate
 ST ---> UC17 : participate
+
+ST ---> UC18 : initiate
+CM ---> UC18 : participate
+
+CM ---> UC19 : initiate
+ST ---> UC19 : participate
 @enduml

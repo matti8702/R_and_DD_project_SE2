@@ -9,18 +9,18 @@ together{
 }
 
 rectangle "S&C system"{
-    usecase (User writes a message) as UC21
-    usecase (Student writes a report) as UC22
-    usecase (Company member writes a report) as UC23
+    usecase (User writes a message) as UC23
+    usecase (Student writes a report) as UC24
+    usecase (Company member writes a report) as UC25
 }
 
-U --> UC21 : initiate
+U --> UC23 : initiate
 
-ST --> UC22: initiate
-CM --> UC22: participate
-UM --> UC22 : participate
+ST --> UC24: initiate
+CM --> UC24: participate
+UM --> UC24 : participate
 
-ST -> UC23 : participate
-CM --> UC23: initiate
-UM --> UC23: participate
+ST -> UC25 : participate
+CM --> UC25: initiate
+UM --> UC25: participate
 @enduml

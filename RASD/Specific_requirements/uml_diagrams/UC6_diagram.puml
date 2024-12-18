@@ -5,23 +5,19 @@ participant "Company member" as CM
 participant "External statistical tool" AS EXT
 participant "S&C" AS S
 
+CM -> S: loginRequest()
 activate S
 activate CM
-CM -> S: modifyInternship(internshipName)
-S --> CM: show internship form
-CM -> S: seeModifications()
-S --> CM: modified fields
-alt company member confirms modifications
-    CM -> S: confirm(modifications)
-    S -> S: checkData(internshipName)
-    S -> EXT: updateStatistics(currentState, newData)
+S --> CM: show login form
+CM -> S: confirmLogin(email, password)
+S -> S: checkCredentials
+alt credentials are valid
+    S -> EXT: findCompanyRecommendations(companyID)
     activate EXT
-    EXT --> S: updated statistics
+    EXT --> S: [(studentID, internshipID), ...]
     deactivate EXT
-    S -> S: findRecommendations()
-else company member does not confirm modifications
-    CM -> S: revertModifications()
-    S --> CM: showError("procedure canceled")
+    S --> CM: show homepage
+else invalid credentials
+    S --> CM: showError("invalid credentials")
 end
-S --> CM: show internship page
 @enduml

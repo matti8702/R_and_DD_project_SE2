@@ -1,26 +1,25 @@
 @startuml UC26_diagram
 hide footbox
 
-participant "User" AS U
+participant "Student" as ST
 participant "S&C" AS S
-participant "External statistical analysis tool" AS EXT
+participant "University Member" as UM
+participant "Company Member" as CM
 
-activate U
+activate ST
 activate S
 
-U -> S : choiceOnFeedback(choice)
-alt user wants to write a feedback
-    S --> U : feedback page
-    U ->> S : post(feedback)
-    S -> S : checkFeedback(feedback)
-    loop until the feedback is complete
-        S --> U : error message
-        U -> S : post(feedback)
-        S -> S : checkFeedback(feedback)
-    end
-    S -> S: retrieveInfoFromFeedback(feedback)
-    S ->> EXT : update(internshipId, internshipTags, studentTags)
-else 
-    S -> U : removeNotification()
+ST -> S : submitComplaint(complaint)
+S  -> S : checkComplaint()
+loop until complaint is not empty
+    S -> ST : showError(message)
+    ST -> S : submitComplaint(complaint)
+    S  -> S : checkComplaint()
 end
+S -> S : retrieveStudentInformation()
+S -> ST : updated list of complaints
+S ->> UM : addComplaint(complaint)
+activate UM
+S ->> CM : addComplaint(complaint)
+activate CM
 @enduml

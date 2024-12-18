@@ -1,19 +1,29 @@
 @startuml UC21_diagram
 hide footbox
 
-participant "Generic User" as U
+participant "Company Member" as CM
 participant "S&C" AS S
-participant "Recipient" as R
+participant "Student" as ST
 
-activate U
+activate CM
 activate S
 
-U -> S : sendMessage(message, recipient)
-loop until message is empty or the recipient's information are missing/incorrect
-    S --> U : error message
-    U -> S : sendMessage(message, recipient)
-end
-S ->> R : addMessage(message)
-activate R
-S --> U : chat with the new message 
+CM -> S: showCandidates(internshipName)
+S --> CM: list of candidates
+CM -> S : selectStudent(student)
+S --> CM : student's info
+CM -> S : admission(result, companyMember)
+S -> S : remotion of the student from the list of candidates
+alt Student is accepted
+    S -> S  : collectInternshipInfo()
+    S ->> ST : sendOffer(contract)
+    activate ST
+    S --> CM : updated list of candidates
+else Student is rejected
+    S -> ST : sendResult(result)
+    ST --> S : ok
+    S -> ST : deleteChat()
+    ST --> S : ok
+    S --> CM : page with the updated list of candidates with the chat deleted
+end 
 @enduml

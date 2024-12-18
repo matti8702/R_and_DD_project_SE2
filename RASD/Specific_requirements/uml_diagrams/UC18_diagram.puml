@@ -1,35 +1,24 @@
 @startuml UC18_diagram
 hide footbox
 
-participant "Company Member" as CM
-participant "S&C" AS S
 participant "Student" as ST
-participant "ExternalTool" as ET 
+participant "S&C" AS S
+participant "Company Member" as CM
 
-activate CM
-activate S
-
-CM -> S: scheduleMeeting()
-S --> CM: form for meeting details
-CM -> S : submitMeeting(meeting)
-S -> S : checkMeeting(meeting)
-loop until meeting information are correct
-    S --> CM: error message
-    CM -> S : submitMeeting(meeting)
-    S -> S : checkMeeting(meeting)
-end
-alt meeting will be online
-S -> ET : generateLink(meeting)
-activate ET
-ET --> S : link
-S -> S : add link to meeting
-end 
-S -> S : checkOverlapping(meeting)
-alt meeting overlaps with other scheduled events 
-S -> S : addWarningToMeeting(meeting)
-end
-S -> ST : addMeeting(meeting)
 activate ST
-ST --> S : ok
-S --> CM : meeting
+activate S
+ST -> S: matchChoice(choice)
+alt Internship is still available
+    activate CM
+    alt Student has accepted the match
+        S -> S  : createChat(student, companyMember)
+        S ->> CM : notifyChoice(choice, student)
+        S ->> CM : openChat(student)
+        S --> ST : new chat
+    else Student has rejected the match
+        S ->> CM : removeCandidate(student)
+    end
+else Internship closed
+    S --> ST: error message
+end
 @enduml

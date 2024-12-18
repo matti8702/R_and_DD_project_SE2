@@ -7,18 +7,17 @@ participant "Company Member" as CM
 
 activate ST
 activate S
-ST -> S: matchChoice(choice)
-alt Internship is still available
+ST -> S: selectInternship(internshipName)
+S --> ST: internship details
+ST -> S: sendRequest(request)
+S -> S:  checkNumberRequest()
+alt First time the request is sent
+    S -> S: retrieveStudentInfo()
+    S ->> CM : sendRequest(request)
     activate CM
-    alt Student has accepted the match
-        S -> S  : createChat(student, companyMember)
-        S ->> CM : notifyChoice(choice, student)
-        S ->> CM : openChat(student)
-        S --> ST : new chat
-    else Student has rejected the match
-        S ->> CM : removeCandidate(student)
-    end
-else Internship closed
+    deactivate CM
+    S --> ST : ok
+else else
     S --> ST: error message
 end
 @enduml

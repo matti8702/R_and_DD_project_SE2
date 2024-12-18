@@ -9,30 +9,34 @@ together{
 }
 
 rectangle "S&C system"{
-    usecase (Delete an internship) as UC7
-    usecase (Searching for an internship by means of keywords) as UC8
-    usecase (Modify the digitalized curriculum vitae version) as UC9
-    usecase (Upload a new CV document) as UC10
-    usecase (Update statistics for recommendation by using the external statistical analysis tool) as UC11
-    usecase (Apply a suggestion to the digitalized curriculum vitae) as UC12
-    usecase (Apply a suggestion to the internship description) as UC13
+    usecase (Creation of an internship) as UC7
+    usecase (Modify an internship) as UC8
+    usecase (Delete an internship) as UC9
+    usecase (Searching for an internship by means of keywords) as UC10
+    usecase (Modify the digitalized curriculum vitae version) as UC11
+    usecase (Upload a new CV document) as UC12
+    usecase (Notify new recommendations) as UC13
 }
 
-CM -> UC7: initiate
+CM --> UC7: initiate
+STAT -> UC7: participate
 
-ST -> UC8: initiate
+CM --> UC8: initiate
+STAT --> UC8: participate
 
-ST -> UC9: initiate
-STAT -> UC9: participate
+CM -> UC9: initiate
+STAT --> UC9: participate
 
 ST -> UC10: initiate
+STAT --> UC10: participate
 
-STAT --> UC11: participate
-ST --> UC11: initiate*
-CM --> UC11: initiate*
-EMAIL --> UC11: participate
+ST -> UC11: initiate
+STAT -> UC11: participate
 
 ST -> UC12: initiate
 
-CM -> UC13: initiate
+STAT --> UC13: participate
+ST --> UC13: participate
+CM --> UC13: participate
+EMAIL --> UC13: participate
 @enduml

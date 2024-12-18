@@ -8,18 +8,18 @@ together {
 }
 
 rectangle "S&C system" {
-    usecase (Company member schedules the meeting) as UC18
-    usecase (Company member communicates the result of the interview) as UC19
-    usecase (Student decides on the offer) as UC20
+    usecase (Company member schedules the meeting) as UC20
+    usecase (Company member communicates the result of the interview) as UC21
+    usecase (Student decides on the offer) as UC22
 }
 
-CM  --> UC18 : initiate
-ST  --> UC18 : participate
-EVT --> UC18 : participate
+CM  --> UC20 : initiate
+ST  --> UC20 : participate
+EVT --> UC20 : participate
 
-CM -> UC19 : initiate
-ST --> UC19 : participate
+CM -> UC21 : initiate
+ST --> UC21 : participate
 
-ST ---> UC20 : initiate
-CM ---> UC20 : participate
+ST ---> UC22 : initiate
+CM ---> UC22 : participate
 @enduml

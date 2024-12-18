@@ -2,6 +2,7 @@
 hide footbox
 
 participant "Company member" as CM
+participant "External statistical tool" AS EXT
 participant "eMail provider" as EP
 participant "S&C" AS S
 
@@ -42,6 +43,10 @@ else company is not registered to the system
     alt user confirm the email address within one day of registration
         CM -> S: confirmEmailAddress()
         S -> S: addCompany()
+        S -> EXT: newCompany(companyID)
+        activate EXT
+        EXT --> S: ok
+        deactivate EXT
         S -> S: addUser()
     else user does not confirm the email address
         S --> CM: showError("registration canceled")

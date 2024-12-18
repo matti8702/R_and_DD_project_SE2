@@ -7,17 +7,16 @@ participant "Student" as ST
 
 activate CM
 activate S
-CM -> S: matchChoice(choice, student)
-alt Internship is still available
+CM -> S: selectStudent(student)
+S --> CM: student info
+CM -> S: sendRequest(request, student)
+S -> S:  checkNumberRequest()
+alt First time the request is sent
+    S -> S: retrieveCompanyMemberInfo()
+    S ->> ST : sendRequest(request, companyMember)
     activate ST
-    alt Company member has accepted the student
-        S -> S  : createChat(student, companyMember)
-        S --> CM : page with the new chat and the updated list of candidates
-        S ->> ST : sendChoice(choice, companyMember)
-        S ->> ST : openChat(companyMember)
-    else else
-        S --> CM : new list of candidates without the student
-    end
+    deactivate ST
+    S --> CM : new list of candidates 
 else else
     S --> CM: error message
 end

@@ -1,16 +1,31 @@
 @startuml UC13_diagram
 hide footbox
 
+participant "Student" as ST
 participant "Company member" as CM
+participant "External statistical tool" AS EXT
+participant "eMail provider" as EP
 participant "S&C" AS S
 
+activate ST
 activate CM
 activate S
-S -> S: findDescriptionsSuggestions()
-S -> CM: show suggestion banner
-CM -> S: manageSuggestion()
-S --> CM: show internship form
-CM -> CM: insertInformations()
-CM -> S: confirmModifications()
-S --> CM: show internship page
+S -> EXT: findStudentsRecommendations()
+activate EXT
+EXT --> S: students recommendations
+deactivate EXT
+S -> EXT: findCompanyRecommendations()
+activate EXT
+EXT --> S: companies recommendations
+deactivate EXT
+S -> EP: sendEmailRequest(studentEmailAddress, text)
+activate EP
+EP --> S: ok
+EP -> ST: sendEmail(email)
+deactivate EP
+S -> EP: sendEmailRequest(companyMemberEmailAddress, text)
+activate EP
+EP --> S: ok
+EP -> CM: sendEmail(email)
+deactivate EP
 @enduml

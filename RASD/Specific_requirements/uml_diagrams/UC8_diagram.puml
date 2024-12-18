@@ -1,16 +1,25 @@
 @startuml UC8_diagram
 hide footbox
 
-participant "Student" as ST
+participant "Company member" as CM
+participant "External statistical tool" AS EXT
 participant "S&C" AS S
 
-activate ST
 activate S
-ST -> S: searchInternshipByKeywords(keywords)
-S -> S: filterInternship(keywords)
-alt system found at least one internship
-    S --> ST: list of internships founded
-else system did not find any internships that match the keywords
-    S --> ST: showMessage("no internships found")
+activate CM
+CM -> S: modifyInternship(internshipName)
+S --> CM: show internship form
+CM -> S: seeModifications()
+S --> CM: modified fields
+alt company member confirms modifications
+    CM -> S: confirm(modifications)
+    S -> EXT: updateInternship(companyID, internshipID, newSetOfTags)
+    activate EXT
+    EXT --> S: ok
+    deactivate EXT
+else company member does not confirm modifications
+    CM -> S: revertModifications()
+    S --> CM: showError("procedure canceled")
 end
+S --> CM: show internship page
 @enduml

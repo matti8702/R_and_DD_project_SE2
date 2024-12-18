@@ -2,19 +2,18 @@
 hide footbox
 
 participant "Company member" as CM
+participant "External statistical tool" AS EXT
 participant "S&C" AS S
 
 activate S
 activate CM
-CM -> S: deleteInternship(internshipName)
-S --> CM: show deletion banner
-alt company member confirms the deletion
-    CM -> S: confirmDeletion()
-    S -> S: deleteInternship(internshipName)
-    S --> CM: showMessage("deletion performed")
-else company member does not confirm the deletion
-    CM -> S: notConfirmed()
-    S --> CM: showError("procedure canceled")
-end
-S --> CM: show internship page
+CM -> S: createInternship()
+S --> CM: show internship form
+
+CM -> S: confirm(internshipData)
+S -> EXT: newInternship(companyID, internshipID, tags)
+activate EXT
+EXT --> S: ok
+deactivate EXT
+S --> CM: show internship details
 @enduml

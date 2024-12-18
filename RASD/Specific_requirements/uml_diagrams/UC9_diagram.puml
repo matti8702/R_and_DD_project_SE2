@@ -1,19 +1,25 @@
 @startuml UC9_diagram
 hide footbox
 
-participant "Student" as ST
+participant "Company member" as CM
 participant "External statistical tool" AS EXT
 participant "S&C" AS S
 
 activate S
-activate ST
-ST -> S: modifyDigitalizedCV()
-S --> ST: show "modification form"
-ST -> S: confirmModifications(changes)
-S -> EXT: updateStatistics(currentState, newData)
-activate EXT
-EXT --> S: updated statistics
-deactivate EXT
-S -> S: findRecommendations()
-S --> ST: show the updated version of the digitalized CV
+activate CM
+CM -> S: deleteInternship(internshipName)
+S --> CM: show deletion banner
+alt company member confirms the deletion
+    CM -> S: confirmDeletion()
+    S -> S: deleteInternship(internshipName)
+    S -> EXT: deleteInternship(companyID, internshipID)
+    activate EXT
+    EXT --> S: ok
+    deactivate EXT
+    S --> CM: showMessage("deletion performed")
+else company member does not confirm the deletion
+    CM -> S: notConfirmed()
+    S --> CM: showError("procedure canceled")
+end
+S --> CM: show internship page
 @enduml

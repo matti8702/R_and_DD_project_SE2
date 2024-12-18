@@ -3,6 +3,7 @@ hide footbox
 
 participant "Student" as ST
 participant "eMail provider" as EP
+participant "External statistical tool" AS EXT
 participant "S&C" AS S
 
 ST -> S: registerAsStudent()
@@ -22,6 +23,10 @@ alt university is registered to the system
         alt user confirm the email address within one day of registration
             ST -> S: confirmEmailAddress()
             S -> S: addUser()
+            S -> EXT: newStudent(studentID)
+            activate EXT
+            EXT --> S: ok
+            deactivate EXT
         else user does not confirm the email address
             S --> ST: showError("registration canceled")
         end

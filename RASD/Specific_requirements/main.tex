@@ -61,6 +61,7 @@ Below there are the functional requirements that the system must guarantee.
 \subsection{Use cases}
 %TODO: add use cases diagram
 
+%TDO: update use case diagrams
 \usecase
 {
     Registration of a university member
@@ -106,8 +107,9 @@ Below there are the functional requirements that the system must guarantee.
 }
 {
     \begin{itemize}
-        \item Company member 
-        \item EMail provider
+        \item Company member
+        \item External statistical analysis tool
+        \item eMail provider
     \end{itemize}
 }
 {
@@ -146,7 +148,8 @@ Below there are the functional requirements that the system must guarantee.
 {
     \begin{itemize}
         \item Student
-        \item EMail provider
+        \item External statistical analysis tool
+        \item eMail provider
     \end{itemize}
 }
 {
@@ -161,10 +164,11 @@ Below there are the functional requirements that the system must guarantee.
         \item The system verifies that the email is associated to the university provided.
         \item The system verifies that the email is not already registered to the system.
         \item The system sends an email to the student by an eMail provider.
+        \item The student verifies the email provided to the system by following the instructions on the email message that he received.
     \end{enumerate}
 }
 {
-    The student verifies the email provided to the system by following the instructions on the email message that he received.
+    The system sends the identifier of the student newly created to the external statistical analysis tool.
 }
 {
     \begin{itemize}
@@ -180,13 +184,44 @@ Below there are the functional requirements that the system must guarantee.
 
 \usecase
 {
-    Login of an user
+    Login of a university member
 }
 {
-    User
+    University member
 }
 {
-    The user clicks on button \textit{"Login"}.
+    The university member clicks on button \textit{"Login"}.
+}
+{
+    \begin{enumerate}
+        \item The system shows the \textit{"Login form"}.
+        \item The university member inserts his credentials (email and password).
+        \item The university member clicks on button \textit{"Confirm"}.
+        \item The system checks credentials.
+    \end{enumerate}
+}
+{
+    The system shows the \textit{"Homepage"} of the application.
+}
+{
+    Credentials are invalid. In this case the system will show an error message \textit{"Invalid credentials"} and it will clear the input fields.
+}
+{
+
+}
+
+\usecase
+{
+    Login of student
+}
+{
+    \begin{itemize}
+        \item Student
+        \item External statistical analysis tool
+    \end{itemize}
+}
+{
+    The student clicks on button \textit{"Login"}.
 }
 {
     \begin{enumerate}
@@ -194,10 +229,45 @@ Below there are the functional requirements that the system must guarantee.
         \item The user inserts his credentials (email and password).
         \item The user clicks on button \textit{"Confirm"}.
         \item The system checks credentials.
+        \item The system requests all the recommendations associated with the student from the external statistical analysis tool.
+        \item The system receives the recommendations.
     \end{enumerate}
 }
 {
-    The system shows the \textit{"Homepage"} of the application.
+    The system displays the application's \textit{"homepage"} containing the recommendations found.
+}
+{
+    Credentials are invalid. In this case the system will show an error message \textit{"Invalid credentials"} and it will clear the input fields.
+}
+{
+
+}
+
+\usecase
+{
+    Login of company member
+}
+{
+    \begin{itemize}
+        \item Company member
+        \item External statistical analysis tool
+    \end{itemize}
+}
+{
+    The company member clicks on button \textit{"Login"}.
+}
+{
+    \begin{enumerate}
+        \item The system shows the \textit{"Login form"}.
+        \item The company member inserts his credentials (email and password).
+        \item The company member clicks on button \textit{"Confirm"}.
+        \item The system checks credentials.
+        \item The system requests all the recommendations associated with the company of the member from the external statistical analysis tool.
+        \item The system receives the recommendations.
+    \end{enumerate}
+}
+{
+    The system displays the application's \textit{"homepage"} containing the recommendations found.
 }
 {
     Credentials are invalid. In this case the system will show an error message \textit{"Invalid credentials"} and it will clear the input fields.
@@ -215,6 +285,10 @@ Below there are the functional requirements that the system must guarantee.
         \item Company member
         \item External statistical analysis tool
     \end{itemize}
+    \begin{itemize}
+        \item Company member
+        \item External statistical analysis tool
+    \end{itemize}
 }
 {
     The company member is logged to the platform and he press the button \textit{"Create an internship"}.
@@ -224,9 +298,7 @@ Below there are the functional requirements that the system must guarantee.
         \item The system shows the \textit{"Internship form"}.
         \item The company member enters all the required information: a name, the valid application period, the maximum number of students allowed, the description, the requirements, the domain of application, tags and the terms specified in the contract.
         \item The company member clicks on button \textit{"Confirm"}.
-        \item The system sends data to the external statistical analysis tool in order to update statistics.
-        \item The system receives updated statistics from the external tool
-        \item The system performs the recommendation process
+        \item The system sends the internship identifier and all the internship tags to the external statistical analysis tool.
     \end{enumerate}
 }
 {
@@ -248,6 +320,10 @@ Below there are the functional requirements that the system must guarantee.
         \item Company member
         \item External statistical analysis tool
     \end{itemize}
+    \begin{itemize}
+        \item Company member
+        \item External statistical analysis tool
+    \end{itemize}
 }
 {
     The company member is logged in the system and he is on the \textit{"Internships list"} section. He clicks on the button \textit{"Modify the internship"} near a specific internship. The selected internship is closed for applications and there are not enorelled students.
@@ -259,9 +335,7 @@ Below there are the functional requirements that the system must guarantee.
         \item The company member clicks the button \textit{"See modifications"}.
         \item The system shows to the company member all modified fields.
         \item The company member clicks on button \textit{"Confirm all the changes"}.
-        \item The system checks the uniqueness of the internship name.
-        \item The system update statistics through the external statistical analysis tool (for tags modifications).
-        \item The system performs the recommendation process.
+        \item The system sends the new set of tags related to the modified internship to the external statistical analysis tool.
         \end{enumerate}
 }
 {
@@ -279,7 +353,10 @@ Below there are the functional requirements that the system must guarantee.
 \usecase{
     Delete an internship
 }{
-    Company member
+    \begin{itemize}
+        \item Company member
+        \item External statistical analysis tool
+    \end{itemize}
 }{
     The company member is logged in the system and he is on the \textit{"Internships list"} section. He clicks on the button \textit{"Delete the internship"} near a specific internship. The selected internship is closed for applications and there are not enorelled students.
 }{
@@ -287,6 +364,7 @@ Below there are the functional requirements that the system must guarantee.
         \item The system displays a banner to the company member to confirm the deletion of the internship.
         \item The company member clicks on the button \textit{"Confirm deletion"}.
         \item The system deletes the internship.
+        \item The system notifies the external statistical analysis tool of the deletion.
     \end{enumerate}
 }{
     The system shows the message \textit{"Deletion performed"} and redirects the company member to the \textit{"Internships list"} section.
@@ -301,7 +379,10 @@ Below there are the functional requirements that the system must guarantee.
     Searching for an internship by means of keywords
 }
 {
-    Student
+    \begin{itemize}
+        \item Student
+        \item External statistical analysis tool
+    \end{itemize}
 }
 {
     The student is logged in and enters keywords into the \textit{"Internship search bar"} located on the homepage of the platform.
@@ -309,11 +390,13 @@ Below there are the functional requirements that the system must guarantee.
 {
     \begin{enumerate}
         \item The student clicks on the \textit{"Confirm"} button next to the search bar.
-        \item The system gathers all internships that have a common part in their name, tags, or description with the entered text.
+        \item The system requests all recommendations associated with the student from the external statistical analysis tool.
+        \item The external statistical analysis tool sends all the retrieved recommendations to the system.
+        \item The system gathers all internships that have a common part in their name, tags, or description with the entered text, ordering them based on the retrieved recommendations.
     \end{enumerate}
 }
 {
-    The system shows to the student all the results ordered thought the recommendation system.
+    The system shows to the student all the results
 }
 {
     The system does not find any results related to the entered keywords. The system will shows the message \textit{"No internships found"}.
@@ -331,6 +414,10 @@ Below there are the functional requirements that the system must guarantee.
         \item Student
         \item External statistical analysis tool
     \end{itemize}
+    \begin{itemize}
+        \item Student
+        \item External statistical analysis tool
+    \end{itemize}
 }
 {
     The student is logged in and he clicks the button \textit{"Modify your digitalized curriculum"} in their personal page.
@@ -341,8 +428,7 @@ Below there are the functional requirements that the system must guarantee.
         \item The student clicks on button \textit{"Modify section"} to modify a specific section of his curriculum.
         \item The student inserts all the modifications.
         \item The student clicks on button \textit{"Save changes"}.
-        \item The system sends information regarding tags to the external analysis tool.
-        \item The system receives the updated statistics and perform the recommendation process.
+        \item The system sends information about tag modifications to the external analysis tool.
     \end{enumerate}
 }
 {
@@ -384,25 +470,23 @@ Below there are the functional requirements that the system must guarantee.
 
 \usecase
 {
-    Update statistics for recommendation by using the external statistical analysis tool
+    Notify new recommendations.
 }
 {
     \begin{itemize}
         \item External statistical analysis tool
         \item Student
         \item Company member
-        \item EMail provider
+        \item eMail provider.
     \end{itemize}
 }
 {
-    Feedback has been published either by the company member or the student, or tag modifications have occurred (for digitalized curriculum or internship description).
+    The timer to notify the recommendations has ended.
 }
 {
     \begin{enumerate}
-        \item The system sends new data (feedback or tag) to the statistical tool and all current statistics.
-        \item The statistical tool compute new values of all provided statistics.
-        \item The statistical tool sends back updated values to the system.
-        \item The system run the recommendation process in order to detect new recommendations.
+        \item The system requests the recommendations of registered students and company members from the external statistical analysis tool.
+        \item The system receives all the recommendations.
     \end{enumerate}
 }
 {

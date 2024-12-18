@@ -3,21 +3,14 @@ hide footbox
 
 participant "Student" as ST
 participant "S&C" AS S
-participant "Company Member" as CM
 
 activate ST
 activate S
-ST -> S: selectInternship(internshipName)
-S --> ST: internship details
-ST -> S: sendRequest(request)
-S -> S:  checkNumberRequest()
-alt First time the request is sent
-    S -> S: retrieveStudentInfo()
-    S ->> CM : sendRequest(request)
-    activate CM
-    deactivate CM
-    S --> ST : ok
-else else
-    S --> ST: error message
-end
+S -> S: findCVsSuggestions()
+S -> ST: show suggestion banner
+ST -> S: manageSuggestion()
+S --> ST: show digitalized curriculum form
+ST -> ST: insertInformations()
+ST -> S: confirmModifications()
+S --> ST: show personal page
 @enduml

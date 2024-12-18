@@ -7,23 +7,18 @@ participant "Student" as ST
 
 activate CM
 activate S
-
-CM -> S: showCandidates(internshipName)
-S --> CM: list of candidates
-CM -> S : selectStudent(student)
-S --> CM : student's info
-CM -> S : admission(result, companyMember)
-S -> S : remotion of the student from the list of candidates
-alt Student is accepted
-    S -> S  : collectInternshipInfo()
-    S ->> ST : sendOffer(contract)
+CM -> S: matchChoice(choice, student)
+alt Internship is still available
     activate ST
-    S --> CM : updated list of candidates
-else Student is rejected
-    S -> ST : sendResult(result)
-    ST --> S : ok
-    S -> ST : deleteChat()
-    ST --> S : ok
-    S --> CM : page with the updated list of candidates with the chat deleted
-end 
+    alt Company member has accepted the student
+        S -> S  : createChat(student, companyMember)
+        S --> CM : page with the new chat and the updated list of candidates
+        S ->> ST : sendChoice(choice, companyMember)
+        S ->> ST : openChat(companyMember)
+    else else
+        S --> CM : new list of candidates without the student
+    end
+else else
+    S --> CM: error message
+end
 @enduml

@@ -1,22 +1,24 @@
 @startuml UC25_diagram
 hide footbox
 
-participant "University Member" as UM
-participant "S&C" AS S
 participant "Student" as ST
-participant "Comany Member" as CM
+participant "S&C" AS S
+participant "Company Member" as CM
+participant "University Member" as UM
 
-activate UM
+activate ST
 activate S
 
-UM -> S : getStudents(university)
-S -> S  : retrieveAllStudent(university)
-S --> UM : list of students currently on an internship
-UM -> S : interrupInternship(internshipName, student)
-S -> S :  update internship status
-S ->> CM  : notifyInterruptionInternship(student, internshipName) 
+ST -> S : createReport()
+S --> ST : report to be filled
+ST -> S : submitReport(report)
+loop until report is not empty
+    S --> ST : error message
+    ST -> S : submitReport(report)
+end
+S --> ST : updated list of reports
+S ->> CM : addReport(report)
 activate CM
-S ->> ST  : notifyInterruptionInternship(student, internshipName) 
-activate ST
-S --> UM : updated internship page
+S ->> UM : addReport(report)
+activate UM
 @enduml

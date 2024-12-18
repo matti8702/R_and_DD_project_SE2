@@ -1,0 +1,26 @@
+@startuml UC28_diagram
+hide footbox
+
+participant "User" AS U
+participant "S&C" AS S
+participant "External statistical tool" AS EXT
+
+activate U
+activate S
+
+U -> S : choiceOnFeedback(choice)
+alt user wants to write a feedback
+    S --> U : feedback page
+    U ->> S : post(feedback)
+    S -> S : checkFeedback(feedback)
+    loop until the feedback is complete
+        S --> U : error message
+        U -> S : post(feedback)
+        S -> S : checkFeedback(feedback)
+    end
+    S -> S: retrieveInfoFromFeedback(feedback)
+    S ->> EXT : update(internshipId, internshipTags, studentTags)
+else 
+    S -> U : removeNotification()
+end
+@enduml

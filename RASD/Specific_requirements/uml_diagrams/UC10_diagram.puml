@@ -2,18 +2,21 @@
 hide footbox
 
 participant "Student" as ST
+participant "External statistical tool" AS EXT
 participant "S&C" AS S
 
 activate ST
 activate S
-ST -> S: uploadNewCVDocument()
-S --> ST: show file selection dialog
-ST -> S: selectFile(file)
-alt file extension is valid
-    S -> S: storeCVDocument(file)
-    S --> ST: showMessage("document uploaded")
-else file extension is not valid
-    S --> ST: showError("invalid file extension")
+ST -> S: searchInternshipByKeywords(keywords)
+S -> S: filterInternship(keywords)
+alt system found at least one internship
+    S -> EXT: getRecommendations(studentID)
+    activate EXT
+    EXT --> S: [(companyID, internshipID), ...]
+    deactivate EXT
+    S -> S: orderInternships()
+    S --> ST: list of internships founded
+else system did not find any internships that match the keywords
+    S --> ST: showMessage("no internships found")
 end
-S --> ST: show personal page
 @enduml

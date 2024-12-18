@@ -1,19 +1,19 @@
 @startuml UC4_diagram
 hide footbox
 
-participant User as U
+participant "University member" as UM
 participant "S&C" AS S
 
-U -> S: loginRequest()
+UM -> S: loginRequest()
 activate S
-activate U
-S --> U: show login form
-U -> S: confirmLogin(email, password)
+activate UM
+S --> UM: show login form
+UM -> S: confirmLogin(email, password)
 
 S -> S: checkCredentials
 alt credentials are valid
-    S --> U: show homepage
+    S --> UM: show homepage
 else invalid credentials
-    S --> U: showError("invalid credentials")
+    S --> UM: showError("invalid credentials")
 end
 @enduml

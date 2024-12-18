@@ -2,6 +2,7 @@
 left to right direction
 
 abstract class User{
+    + userID: Int
     + name: String
     + surname: String
     + dateOfBirth: Date
@@ -29,12 +30,14 @@ class University{
 }
 
 class Company{
+    + companyID: Int
     + companyName: String
     + companyDescription: String
     + mailDomain: String
 }
 
 class Internship{
+    + internshipID: Int
     + name: String
     + dateOfPublication: Date
     + applicationStartDate: Date
@@ -115,13 +118,6 @@ class Feedback {
 
 Feedback "0..*" -- InternshipStatus : refer
 Feedback "0..*" -- User : creator
-
-class FieldEvaluation{
-    + fieldName: String
-    + description:String
-    + score: Float
-}
-FieldEvaluation "0..*" -- Feedback : have
 
 class Suggestion{
     + content: String

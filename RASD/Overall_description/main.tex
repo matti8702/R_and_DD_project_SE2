@@ -76,12 +76,13 @@
           Finally, he submits his feedback by clicking the \textit{"Post"} button.
 \end{itemize}
 
-\subsubsection{Class diagrams}
+\subsubsection{Class diagram}
 
-%TODO: put diagram
-%\begin{center}
-%      \includegraphics[scale = 0.25]{Overall_description/uml_diagrams/class_diagram.png}
-%\end{center}
+\begin{figure}[H]
+      \centering
+      \includegraphics[scale = 0.25]{Overall_description/uml_diagrams/class_diagram.png}
+      \caption{Domain class diagram.}
+\end{figure}
 
 The previous diagram aims to model all relevant aspects of the system mentioned so far (e.g., in the phenomena).
 Cardinalities of type "1" have been omitted to improve the readability of the diagram.
@@ -130,27 +131,33 @@ If both parties accept, the attribute "approved" will be set to true and then th
 
 Finally, the \textbf{Suggestion} class represents tips that the system provides, either to students (e.g., for their CV) or to companies (e.g., for internship descriptions).
 
+\newpage
 \subsubsection{State diagrams}
 This section presents the state diagrams corresponding to selected classes from the previously introduced class diagram.
 We thought to model the diagrams associated with the Internship, InternshipStatus and StudentSelectionProcess classes to better clarify their lifecycle within the system.
 Additionally, these classes represent the core concepts of the system.
-\begin{itemize}
-      \item \textbf{Internship}
-      %TODO: add diagram
-      %\begin{center}
-      %      \includegraphics[scale = 0.]{Overall_description/uml_diagrams/internship_state_diagram.png}
-      %\end{center}
-      \item \textbf{InternshipStatus}
-      %TODO: add diagram
-      %\begin{center}
-      %      \includegraphics[scale = 0.]{Overall_description/uml_diagrams/internshipStatus_state_diagram.png}
-      %\end{center}
-      \item \textbf{StudentSelectionProcess}
-      %TODO: add diagram
-      %\begin{center}
-      %      \includegraphics[scale = 0.]{Overall_description/uml_diagrams/studentSelectionProcess_state_diagram.png}
-      %\end{center}
-\end{itemize}
+\begin{multicols}{2}
+
+      \begin{figure}[H]
+            \centering
+            \includegraphics[scale = 0.28]{Overall_description/uml_diagrams/internship_state_diagram.png}
+            \caption{State diagram of Internship class.} 
+      \end{figure}
+
+      \columnbreak
+
+      \begin{figure}[H]
+            \centering
+            \includegraphics[scale = 0.35]{Overall_description/uml_diagrams/internshipStatus_state_diagram.png}
+            \caption{State diagram of InternshipStatus class.} 
+      \end{figure}
+\end{multicols}
+
+\begin{figure}[H]
+      \centering
+      \includegraphics[scale = 0.35]{Overall_description/uml_diagrams/studentSelectionProcess_state_diagram.png}
+      \caption{State diagram of StudentSelectionProcess.} 
+\end{figure}
 
 \subsection{Product functions}
 The product functions are presented. They represent the main features that the system must support.

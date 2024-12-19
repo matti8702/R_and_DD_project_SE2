@@ -3,6 +3,12 @@
 \usepackage[a4paper,margin=3.5cm]{geometry} %TODO: check margin
 \usepackage{amssymb}  % enabling to use ✔ symbol
 \usepackage{longtable} % splitting long tables in multiple pages
+\usepackage{float}
+\usepackage{caption}
+\usepackage{multicol}
+
+\captionsetup{tableposition=top,figureposition=bottom,font=small}
+\captionsetup{format=hang,labelfont={sf,bf}}
 
 \newcounter{cnt}  
 \newenvironment{listInSquareBrackets}[1]
@@ -41,10 +47,15 @@
         \textbf{Exit Condition} & #5 \\
         \midrule
         \textbf{Exceptions} & #6 \\
-        \midrule
-        \textbf{Notes} & #7 \\
+        %\midrule
+        %\textbf{Notes} & #7 \\
         \bottomrule
     \end{longtable}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 0.45]{Specific_requirements/uml_diagrams/UC\theusecasecounter_diagram.png}
+        \caption{Sequence diagram of \textit{"#1"} use case.}
+    \end{figure}
     \newpage
     \addtocounter{usecasecounter}{1}
 }

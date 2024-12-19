@@ -59,13 +59,49 @@ Below there are the functional requirements that the system must guarantee.
 \end{listInSquareBrackets}
 
 \subsection{Use cases}
-%TODO: add use cases diagram
+\subsubsection{Use case diagrams}
+%TODO: specify spitting diagrams
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.45]{Specific_requirements/uml_diagrams/use_cases_diagram1.png}
+    \caption{Use cases from UC1 to UC6.} 
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.45]{Specific_requirements/uml_diagrams/use_cases_diagram2.png}
+    \caption{Use cases from UC7 to UC10.} 
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.45]{Specific_requirements/uml_diagrams/use_cases_diagram3.png}
+    \caption{Use cases from UC11 to UC13.} 
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.45]{Specific_requirements/uml_diagrams/use_cases_diagram4.png}
+    \caption{Use cases from UC14 to UC19.} 
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.45]{Specific_requirements/uml_diagrams/use_cases_diagram5.png}
+    \caption{Use cases from UC20 to UC22.} 
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.45]{Specific_requirements/uml_diagrams/use_cases_diagram6.png}
+    \caption{Use cases from UC23 to UC25.} 
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.45]{Specific_requirements/uml_diagrams/use_cases_diagram7.png}
+    \caption{Use cases from UC26 to UC28.} 
+\end{figure}
 
-%TDO: update use case diagrams
+\newpage
+\subsubsection{Use cases in details}
+
 \usecase
-{
-    Registration of a university member
-}
+{Registration of a university member}
 {
     \begin{itemize}
         \item University member
@@ -102,9 +138,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Registration of a company member
-}
+{Registration of a company member}
 {
     \begin{itemize}
         \item Company member
@@ -142,9 +176,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Registration of a student
-}
+{Registration of a student}
 {
     \begin{itemize}
         \item Student
@@ -183,9 +215,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Login of a university member
-}
+{Login of a university member}
 {
     University member
 }
@@ -211,9 +241,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Login of student
-}
+{Login of student}
 {
     \begin{itemize}
         \item Student
@@ -244,9 +272,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Login of company member
-}
+{Login of company member}
 {
     \begin{itemize}
         \item Company member
@@ -277,9 +303,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Creation of an internship
-}
+{Creation of an internship}
 {
     \begin{itemize}
         \item Company member
@@ -308,9 +332,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Modify an internship
-}
+{Modify an internship}
 {
     \begin{itemize}
         \item Company member
@@ -342,9 +364,9 @@ Below there are the functional requirements that the system must guarantee.
 
 }
 
-\usecase{
-    Delete an internship
-}{
+\usecase
+{Delete an internship}
+{
     \begin{itemize}
         \item Company member
         \item External statistical analysis tool
@@ -367,9 +389,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Searching for an internship by means of keywords
-}
+{Searching for an internship by means of keywords}
 {
     \begin{itemize}
         \item Student
@@ -398,9 +418,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Modify the digitalized curriculum vitae version
-}
+{Modify the digitalized curriculum vitae version}
 {
     \begin{itemize}
         \item Student
@@ -430,9 +448,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Upload a new CV document
-}
+{Upload a new CV document}
 {
     Student
 }
@@ -457,9 +473,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Notify new recommendations.
-}
+{Notify new recommendations.}
 {
     \begin{itemize}
         \item External statistical analysis tool
@@ -488,9 +502,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Apply a suggestion to the digitalized curriculum vitae
-}
+{Apply a suggestion to the digitalized curriculum vitae}
 {
     Student
 }
@@ -516,9 +528,7 @@ Below there are the functional requirements that the system must guarantee.
 }
 
 \usecase
-{
-    Apply a suggestion to the internship description
-}
+{Apply a suggestion to the internship description}
 {
     Company member
 }
@@ -545,9 +555,7 @@ Below there are the functional requirements that the system must guarantee.
 
 % student sends a request
 \usecase
-{
-    Student sends a request
-}
+{Student sends a request}
 {
     \begin{itemize}
         \item Student   
@@ -577,9 +585,7 @@ Below there are the functional requirements that the system must guarantee.
 % company member sends a request
 
 \usecase
-{
-    Company member sends a request
-}
+{Company member sends a request}
 {
     \begin{itemize}
         \item Student   
@@ -611,9 +617,7 @@ Below there are the functional requirements that the system must guarantee.
 % Accept/refuse a matching proposal made by the company 
 
 \usecase 
-{
-Student responds to company's request
-}
+{Student responds to company's request}
 {
     \begin{itemize}
         \item Student
@@ -659,9 +663,7 @@ The internship is closed. An error message appears on the screen and the system 
 {}
 
 % Schedule the meeting
-\usecase{
-    Company member schedules the meeting
-}
+\usecase{Company member schedules the meeting}
 {\begin{itemize}
     \item Company member
     \item Student
@@ -1133,3 +1135,4 @@ System components should be created to be as modular as possible.
 
 \subsubsection{Portability}
 The system must be accessible by the Users from every kind of Web Browser.
+\newpage

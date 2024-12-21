@@ -7,10 +7,10 @@ actor :Company member: as CM
 rectangle "S&C system" {
     usecase (Apply a suggestion to the digitalized curriculum vitae) as UC14
     usecase (Apply a suggestion to the internship description) as UC15
-    usecase (Student sends a request) as UC16
-    usecase (Company member sends a request) as UC17
-    usecase (Student responds to a company's request) as UC18
-    usecase (Company member responds to student's request) as UC19
+    usecase (Student sends a match proposal) as UC16
+    usecase (Company member sends a match proposal) as UC17
+    usecase (Student responds to a company's match proposal) as UC18
+    usecase (Company member responds to student's match proposal) as UC19
 }
 
 ST -> UC14: initiate

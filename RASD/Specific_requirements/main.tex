@@ -31,7 +31,7 @@ Below there are the functional requirements that the system must guarantee.
     \item The system must permit universities members to register their universities.
     \item The system must permit companies members to register their companies.
     \item The system must allow users to log in by inserting their credentials.
-    \item The system must allow student to publish his CV.
+    \item The system must allow student to publish their CV.
     \item The system must allow companies members to publish internships.
     \item The system shall inform students when suitable internships are available through recommendation.
     \item The system shall inform companies members about the availability of student CVs corresponding to their needs, through recommendation.
@@ -558,9 +558,8 @@ Below there is the use cases diagram. For clarity, it has been divided into mult
 
 }
 
-% student sends a request
 \usecase
-{Student sends a request}
+{Student sends a match proposal}
 {
     \begin{itemize}
         \item Student   
@@ -590,10 +589,8 @@ Below there is the use cases diagram. For clarity, it has been divided into mult
 }
 {}
 
-% company member sends a request
-
 \usecase
-{Company member sends a request}
+{Company member sends a match proposal}
 {
     \begin{itemize}
         \item Student   
@@ -625,16 +622,14 @@ Below there is the use cases diagram. For clarity, it has been divided into mult
 % Accept/refuse a matching proposal made by the company 
 
 \usecase 
-{Student responds to company's request}
+{Student responds to company's match proposal}
 {
     \begin{itemize}
         \item Student
         \item Company member
     \end{itemize}
 } 
-{
-The student is logged into the platform's homepage.
-}
+{The student is logged into the platform's homepage where the company's request is visible.}
 {
     \begin{enumerate}
         \item The student views the proposal from the company and selects either the \textit{"Accept"} or \textit{"Refuse"} button.
@@ -651,7 +646,7 @@ The internship is closed. An error message appears on the screen and the system 
 }
 {}
 
-\usecase{Company member responds to student's request}
+\usecase{Company member responds to student's match proposal}
 {
     \begin{itemize}
         \item Company member
@@ -735,7 +730,7 @@ The internship is closed. An error message appears on the screen and the system 
         \item The private chat is deleted.
     \end{enumerate}
 }
-{The notification arrives to the company member. If the student rejects the offer, the chat is no more available: any access will show an error message.}
+{The notification arrives to the company member. The chat is no more available.}
 {}
 {}
 

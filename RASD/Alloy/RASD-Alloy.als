@@ -15,22 +15,28 @@ abstract sig User{
 
 sig UserLoginCredentials{ }
 
+
 sig UserPersonallnformation{ }
+
 
 sig CompanyMember extends User{
 	employedAtCompany: Company
 }
 
+
 sig UniversityMember extends User{
 	employedAtUniversity: University
 }
+
 
 sig Student extends User{
 	enrolled: University
 }
 
 
+
 -- GROUP OF USERS
+
 
 
 -- In order to be created, a University must have at least one member.
@@ -41,10 +47,12 @@ sig University{
 }{ some member : UniversityMember | this in member.employedAtUniversity } 
 
 
+
 -- Contains university information, such as its name.
 
 sig UniversityInformation{
 }
+
 
 
 -- In order to be created, a Company must have at least one member.
@@ -55,9 +63,11 @@ sig Company{
 }{ some member : CompanyMember | this in member.employedAtCompany }
 
 
+
 -- Contains company information, such as its name and a description.
 
 sig CompanyInformation{ }
+
 
 
 -- Represents the email domain of a company or university and identifies them.
@@ -65,7 +75,9 @@ sig CompanyInformation{ }
 sig MailDomain{ }
 
 
+
 -- INTERNSHIP
+
 
 
 sig Internship{ 
@@ -76,9 +88,11 @@ sig Internship{
 }
 
 
+
 -- Represents an ID used to distinguish between different internship offers.
 
 sig InternshipId { }
+
 
 
 -- Defines the interval during which applications for a specific internship can be submitted. According to the class diagram attributes,
@@ -87,12 +101,15 @@ sig InternshipId { }
 enum CandidaturesStatus{ Closed, Open } 
 
 
+
 -- Contains all information related to the internship offer, including the name, terms, and duration.
 
 sig InternshipDescription{ }
 
 
+
 --REQUEST
+
 
 
 -- This signature is dynamic over time, as different requests can be sent at different moments.
@@ -113,11 +130,13 @@ enum RequestStatus{ Pending, Approved, Declined }
 ----------------------------------------------------------------------
 
 
+
 -- The predicate is true when the internship is open for receiving applications.
 
 pred internshipOpenForApplications[ i : Internship ]{
 	i.candidatureStatus = Open
 }
+
 
 
 -- The predicate models the closure of an internship period for receiving applications.
@@ -127,11 +146,13 @@ pred closeApplicationAvailability[ i : Internship ]{
 }
 
 
+
 -- The predicate models the opening of an internship period for receiving applications (the internship may also be published as already open).
 
 pred openApplicationAvailability[ i : Internship ]{
 	i.candidatureStatus = Closed and i.candidatureStatus' = Open
 }
+
 
 
 -- The predicate models the rejection of a pending request.
@@ -142,12 +163,14 @@ pred declineRequest[ r : Request ]{
 }
 
 
+
 -- The predicate models the approval of a pending request.
 
 pred approveRequest[ r : Request ]{
 	r.requestStatus = Pending
 	r.requestStatus' = Approved
 }
+
 
 
 -- The predicate represents the addition of a new request to the model. 
@@ -185,6 +208,7 @@ pred addNewRequest [ sender , receiver : User , internship : Internship ]{
 ----------------------------------------------------------------------
 
 
+
 -- For all internships, once the period for accepting applications ends, it cannot be reopened.
 
 fact applicationAvailabilityAfterClosure{
@@ -195,6 +219,7 @@ fact applicationAvailabilityAfterClosure{
 				implies i.candidatureStatus' = Closed 
 		)
 }
+
 
 
 -- Every internship that has never been available for receiving applications will eventually enter a period of availability.
@@ -208,6 +233,7 @@ fact applicationAvailabilityBeforeOpening{
 }
 
 
+
 -- Every internship's period of availability for receiving applications will eventually end.
 
 fact applicationAvailabilityAfterOpening{
@@ -219,12 +245,14 @@ fact applicationAvailabilityAfterOpening{
 }
 
 
+
 -- There are not two instances of the same internship offer
 
 fact credentialsIdentifyUsers{
 	no disj u1, u2 : User |
 		 u1.credentials = u2.credentials
 }
+
 
 
 -- There are not two instances of the same Company
@@ -235,6 +263,7 @@ fact mailDomainIdentifiesCompanies{
 }
 
 
+
 -- There are not two instances of the same University
 
 fact mailDomainIdentifiesUniversities{
@@ -243,12 +272,14 @@ fact mailDomainIdentifiesUniversities{
 }
 
 
+
 -- There are not common email domain between universities and companies
 
 fact noCompanySharesMailDomainWithUniversity{
 	no c : Company , u : University | 
 		c.companyMailDomain = u.universityMailDomain
 }
+
 
 
 -- Every pending request will eventually be evaluated.
@@ -284,6 +315,7 @@ fact evaluatedRequestWerePending{
 }
 
 
+
 -- There cannot be a Request which sender is also the receiver.
 
 fact usersCannotSendRequestToThemselves{
@@ -304,6 +336,7 @@ fact noDuplicateRequests{
 }
 
 
+
 -- The sender and receiver must always be either a Student and a CompanyMember, or a CompanyMember and a Student.
 
 fact userRolesConstraints{ 
@@ -315,11 +348,13 @@ fact userRolesConstraints{
 }
 
 
+
 -- There are not duplicate internship offers
 
 fact noDuplicateInternship{
 	no disj i1, i2 : Internship | i1.id = i2.id
 }
+
 
 
 -- The Request signature is dynamic, but the fields "internshipReferred", "requestedBy", and "requestedTo" of a specific request 
@@ -335,6 +370,7 @@ fact requestFieldsDoesNotChange{
 }
 
 
+
 -- All requests sent by students are evaluated after the application period terminates, once the company has received all possible applications. 
 -- If a company member sent the request to a student, the student has no constraint on when to evaluate the request.
 
@@ -348,6 +384,7 @@ fact requestEvaluatedAfterClosure{
 }
 
 
+
 -- It is not possible to have a request related to an internship that has not started its period of availability for receiving applications. 
 -- Requests begin to arrive only after the period starts.
 
@@ -358,6 +395,7 @@ fact requestCannotReferInternshipsBeforeOpening{
 				implies ( once closeApplicationAvailability[ r.internshipReferred ] ) 
 	)
 }
+
 
 
 -- Every Request has been added to the model once
@@ -378,11 +416,13 @@ fact allRequestHaveBeenOnceSent{
 ----------------------------------------------------------------------
 
 
+
 -- Returns all the company members of a Company "c".
 
 fun companyMembersEmployed[ c : Company ] : some CompanyMember{
 	{ m : CompanyMember | m.employedAtCompany = c }
 }
+
 
 
 -- Returns all the university members of a University "u",

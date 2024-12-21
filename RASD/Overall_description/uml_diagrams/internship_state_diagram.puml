@@ -1,13 +1,15 @@
 @startuml internship_state_diagram
 
 [*] --> Inactive: company publishes\nthe internship
-Inactive --> OpenForApplications: it is the opening day for student selection\n(the current day is equal to applicationStartDate)
-OpenForApplications --> Started: students are selected by the company\nto start the internship
+Inactive --> OpenForApplications: it is the opening day for matching proposals\n(the current day is equal to applicationStartDate)
+OpenForApplications --> Closed: applicationEndDate is reached
+Closed --> Started: students are selected by the company\nto start the internship
 Started --> Ended: all students have finished their internship's tasks
 Ended --> [*]
 
 Inactive: openForApplication = False
 OpenForApplications: openForApplication = True
+Closed: openForApplication = False
 Started: openForApplication = False
 Ended: openForApplication = False
 @enduml

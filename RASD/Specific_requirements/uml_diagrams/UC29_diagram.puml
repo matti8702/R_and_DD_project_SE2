@@ -1,0 +1,13 @@
+@startuml UC29_diagram
+hide footbox
+
+participant "S&C" AS S
+participant "External analysis tool" as EAT
+
+activate S
+activate EAT
+
+S -> S  : closeInternship(internshipName)
+S -> EAT : deleteInternship(internshipID)
+EAT --> S : ok
+@enduml

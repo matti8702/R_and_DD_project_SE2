@@ -13,6 +13,7 @@ rectangle "S&C system"{
     usecase (Student writes a complaint) as UC26
     usecase (University member interrupts an internship) as UC27
     usecase (User posts a feedback) as UC28
+    usecase (The system closes the internship) as UC29
 }
 
 ST --> UC26: initiate
@@ -23,6 +24,8 @@ UM ---> UC27: initiate
 CM --> UC27 : participate
 ST --> UC27 : participate
 
-STAT -> UC28: participate
+STAT ---> UC28: participate
 U --> UC28: initiate
+
+STAT --> UC29: participate
 @enduml

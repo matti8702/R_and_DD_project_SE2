@@ -568,7 +568,7 @@ Below there is the use cases diagram. For clarity, it has been divided into mult
     \end{itemize}
 }
 {
-    The student is logged into the platform's homepage and intends to apply for an available internship.
+    The student is logged into the platform's homepage and intends to apply for an internship.
 }
 {
     \begin{enumerate}
@@ -583,7 +583,10 @@ Below there is the use cases diagram. For clarity, it has been divided into mult
     The company has the student's request.
 }
 {
-    The student clicks the \textit{"Send request"} button the second time. The system shows an error.
+    \begin{itemize}
+        \item The student clicks the \textit{"Send request"} button the second time. The system shows an error.
+        \item The internship is closed (the application period is over), the system shows an error.
+    \end{itemize}
 }
 {}
 
@@ -930,6 +933,26 @@ The complaint is empty. The system shows an error message.
 {The feedback is incomplete, the system shows an error message.}
 {}
 
+\usecase
+{The system closes the internship}
+{
+    External statistical analysis tool
+}
+{
+    The application period of an internship is over.
+}
+{
+    \begin{itemize}
+        \item The system closes the application period of an internship.
+        \item The system notifies the external statistical analysis tool about the closed application period.
+    \end{itemize}
+}
+{
+    The internship announcement is no more visible and the external statistical analysis tool no more suggests the internship.
+}
+{}
+{}
+
 \subsection{Mapping on requirements}
 %fix intro
 This section serves as a bridge between the high-level goals of the system and the specific functionalities required to achieve them. It also maps use cases with requirements and domain assumptions.\\\\
@@ -997,7 +1020,6 @@ For each use case, the corresponding requirements and domain assumptions are lis
     \textbf{Use Cases} & \textbf{Requirements} & \textbf{Domain assumptions} \\
     \hline
     \endhead
-
     UC1 & R3, R4 & DA10, DA12 \\ \hline
     UC2 & R2, R5 & DA10, DA13 \\ \hline
     UC3 & R1 & DA10, DA11 \\ \hline
@@ -1026,6 +1048,7 @@ For each use case, the corresponding requirements and domain assumptions are lis
     UC26 & R35 & \\ \hline
     UC27 & R19 & DA3 \\ \hline
     UC28 & R15, R16 & \\ \hline
+    UC29 & R22 & \\ \hline
 \end{longtable}
 
 \subsection{Performance Requirements}

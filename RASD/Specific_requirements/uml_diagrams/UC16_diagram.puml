@@ -10,13 +10,16 @@ activate S
 ST -> S: selectInternship(internshipName)
 S --> ST: internship details
 ST -> S: sendRequest(request)
-S -> S:  checkNumberRequest()
-alt First time the request is sent
-    S -> S: retrieveStudentInfo()
-    S ->> CM : sendRequest(request)
-    activate CM
-    deactivate CM
-    S --> ST : ok
+alt Internship is open
+    alt First time the request is sent
+        S -> S: retrieveStudentInfo()
+        S ->> CM : sendRequest(request)
+        activate CM
+        deactivate CM
+        S --> ST : ok
+    else else
+        S --> ST: error message
+    end
 else else
     S --> ST: error message
 end

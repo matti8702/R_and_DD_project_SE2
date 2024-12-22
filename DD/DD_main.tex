@@ -1,14 +1,85 @@
 \documentclass{article}
-\usepackage{graphicx} % Required for inserting images
+\usepackage{enumitem}
+\usepackage[a4paper,margin=4cm]{geometry} %TODO: check margin
+\usepackage{caption}
+\usepackage{multicol}
+\usepackage{graphicx} % required for inserting images
+\usepackage{import}
+\usepackage{amsmath} % required for \text
 
-\title{DD}
-\author{Cerberi Gatti Ginolfi}
-\date{November 2024}
+\captionsetup{tableposition=top,figureposition=bottom,font=small}
+\captionsetup{format=hang,labelfont={sf,bf}}
+
+\usepackage[explicit]{titlesec}
+\usepackage{booktabs}
+
+% add links to Contents and manage style
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{listings}
+
+\usepackage{titling} % center vertically the title of the document
+\renewcommand\maketitlehooka{\null\mbox{}\vfill}
+\renewcommand\maketitlehookd{\vfill\null}
+
+\title{\includegraphics[scale=0.4]{resources/PolimiLogo.png}\\\textbf{Design Document\\
+        \large (DD)}}
+\author{
+    Riccardo Cerberi\\
+    10775421
+    \and
+    Matteo Gatti\\
+    10840092
+    \and
+    Alessio Ginolfi\\
+    10797951
+}
+\date{A.Y. 2024/2025 - Software engineering 2}
 
 \begin{document}
 
+\begin{titlingpage}
+    \maketitle
+\end{titlingpage}
 
-\maketitle
+\newpage
+\tableofcontents
+
+\newpage
 
 \section{Introduction}
+\label{section1}
+\import{./}{Introduction/main.tex}
+
+\section{Architectural design}
+\label{section2}
+\import{./}{Architectural_design/main.tex}
+
+\section{User interface design}
+\label{section3}
+\import{./}{User_interface_design/main.tex}
+
+\section{Requirements traceability}
+\label{section4}
+\import{./}{Requirements_traceability/main.tex}
+
+\section{Implementation, integration and test plan}
+\label{section5}
+\import{./}{Implementation_integration_and_test_plan/main.tex}
+
+\section{Effort spent}
+\label{section6}
+\import{./}{Effort_spent/main.tex}
+
+\section{References}
+\label{section7}
+\import{./}{References/main.tex}
 \end{document}

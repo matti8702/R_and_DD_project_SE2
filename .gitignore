@@ -3,7 +3,8 @@
 *.fls
 *.log
 *.out
-*.pdf
+RASD_main.pdf
+DD_main.pdf
 *.synctex.gz
 *.toc
 .vscode

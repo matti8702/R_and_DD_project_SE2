@@ -58,9 +58,8 @@ Below there are the functional requirements that the system must guarantee.
     \item The system must inform the student or the company member of the outcome of the matching proposal he sent to the counterpart.
     \item The system shall allow the company members or the student to either accept or decline the matching proposal made by the counterpart.
     \item The system must allow company members to delete an internship only when it is closed for applications.
-    \item The system must allow students to accept the contract proposed by the company.
-    \item The system must allow students to post complaints.
     \item The system must enable students to accept or decline offers after being selected to start the internship.
+    \item The system must allow students to post complaints.
 \end{listInSquareBrackets}
 
 \subsection{Use cases}
@@ -680,14 +679,14 @@ The internship is closed. An error message appears on the screen and the system 
         \item The system displays a form for meeting details (e.g., date, time, location, purpose).
         \item The company member fills in the required details and confirms the entry.
         \item The system notifies the student of the scheduled meeting.
-        \item The system adds the meeting to the calendars of both the company member and the student. If the meeting is online, the system contacts an external tool to generate a link for the video conference and attaches it to the event.
+        \item The system adds the meeting to the interview reminder of both the company member and the student. If the meeting is online, the system contacts an external tool to generate a link for the video conference and attaches it to the event.
     \end{enumerate}
 }
-{The meeting is in the student's and company member's calendar.}
+{The meeting is in the student's and company member's reminder.}
 {
     \begin{itemize}
         \item The system identifies errors in the scheduled meeting (e.g illegal time frame) and shows a message to the screen.
-        \item The system detects an overlap with an event already in the calendar and shows a warning to the user.
+        \item The system detects an overlap with an event already in the interview reminders and shows a warning to the user.
     \end{itemize}
 }
 {}
@@ -998,7 +997,6 @@ For each goal, the corresponding requirements are listed.
     R33 & \checkmark &  &  &  &  &  &  \\ \hline
     R34 &  &  &  &  &  & \checkmark &  \\ \hline
     R35 &  &  &  &  & \checkmark &  &  \\ \hline
-    R36 &  &  &  &  &  & \checkmark &  \\ \hline
 \end{longtable}
 
 \newpage
@@ -1034,9 +1032,9 @@ For each use case, the corresponding requirements and domain assumptions are lis
     UC17 & R29, R30 & \\ \hline
     UC18 & R32 & \\ \hline
     UC19 & R32 & \\ \hline
-    UC20 & R17, R25 & DA4, DA8 \\ \hline
+    UC20 & R17, R25 & DA4, DA8, DA9 \\ \hline
     UC21 & R14 & DA7 \\ \hline
-    UC22 & R34, R36 & \\ \hline
+    UC22 & R34 & \\ \hline
     UC23 & R25 & \\ \hline
     UC24 & R18, R26 & \\ \hline
     UC25 & R18, R26 & \\ \hline

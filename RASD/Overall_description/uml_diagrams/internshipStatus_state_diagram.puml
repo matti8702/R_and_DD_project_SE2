@@ -10,7 +10,7 @@ orComponent --> Interrupted
 Interrupted --> [*]
 Ended --> [*]
 
-Waiting: student was selected from the company\nand he is waitign for starting the internship
+Waiting: student was selected from the company\nand he is waiting for starting the internship
 Ongoing: student performs the tasks\nassigned by the company
 Ended: "endInternshipDate" has been reached
 Interrupted: internship interrupted by \nthe university of the student

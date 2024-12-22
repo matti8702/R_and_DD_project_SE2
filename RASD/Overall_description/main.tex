@@ -14,7 +14,7 @@
 
           Marco creates an account on the platform by entering his personal information, including his institutional email and a password.  
           He clicks the \textit{"Create your CV"} button to prepare his CV, following the on-screen guidelines.  
-          As a master's student in computer science, Marco marks his profile as open to software engineering internship opportunities.
+          As a master's student in computer science, Marco adds to his profile the software engineering tag.
 
     \item\textbf{ Sending a match proposal  }
     
@@ -34,7 +34,7 @@
           Marco receives Anna's message and uses the platform's messaging feature to confirm the interview date and format.  
           They agree on an online interview, which Anna schedules by selecting the \textit{"Online"} option.  
           Both receive a notification: \textit{"Meeting scheduled for 11 a.m. on Wednesday"}.  
-          To ensure everything is correctly arranged, Anna checks the calendar, which shows the meeting details along with the virtual room link.
+          To ensure everything is correctly arranged, Anna checks the reminder, which shows the meeting details along with the virtual room link.
 
     \item\textbf{ New interns are notified  }
 
@@ -85,18 +85,18 @@
 \end{figure}
 
 The previous diagram aims to model all relevant aspects of the system mentioned so far (e.g., in the phenomena).
-Cardinalities of type "1" have been omitted to improve the readability of the diagram.
+Cardinalities of type "1" have been omitted to improve the readability of the diagram. \\\\
 
 The first key concept is the user.
 \textbf{User} class represents a generic and abstract physical actor interacting with the system.
 A user account (email and password) is associated with it, enabling authentication in the system.
 There are three types of users: \textbf{Student}, \textbf{CompanyMember}, and \textbf{UniversityMember}. Each "member" is then associated with a
-specific institution (\textbf{University} or \textbf{Company}, depending on the user type).
+specific institution (\textbf{University} or \textbf{Company}, depending on the user type).\\
 
 The \textbf{Company} and \textbf{University} classes describe various institutions.
 The field "mailDomain" specifies the email domain associated with the company or university (e.g., "polimi.it").
 This field is used to validate the registration of new members associated with specific company or new students associated with university.
-The system will compare the domain of the email entered by the new user with the one specified by the organization. If the comparison is successful, the user will be accepted; otherwise, the registration will be canceled.
+The system will compare the domain of the email entered by the new user with the one specified by the organization. If the comparison is successful, the user will be accepted; otherwise, the registration will be canceled.\\
 
 The \textbf{CurriculumVitae} class represents a student's curriculum.
 The field "CVDocument" allows students to upload and store their curriculum in the system as a file (e.g., in pdf format).
@@ -106,32 +106,31 @@ A structured version refers to one compiled by the student directly within the s
 The \textbf{CVSection} class models this concept. It represents a specific experience undertaken by the student (either academic/university-related or work-related), such as language certificates, diplomas, and publications.
 This structured curriculum version has been introduced (in addition to the uploaded file) to perform the recommendation system.
 Using tags (specified by the \textbf{Tag} class) added by the student, the system will calculate affinity indicators between students and internships using an external tool.
-Internships also include Tags, which in this case are added by company members. To conclude, recommendation will consider curriculum and internships tags and feedbacks posted by students and company members.
+Internships also include Tags, which in this case are added by company members. To conclude, recommendation will consider curriculum and internships tags and feedbacks posted by students and company members.\\
 
 The \textbf{Internship} class represents an internship proposal created by a company.
 A few clarifications about its attributes: "maxStudentsAllowed" is the number of students the company aims to recruit
 and "openForApplication" specifies whether applications are currently allowed. Each internship proposal can involve multiple students.
 For this reason, the \textbf{InternshipStatus} class is introduced. It represents an instance of an internship for a specific student.
-This class contains all the information regarding the internship's progress, ensuring that each participant (student, company, and university) stays informed about its status.
+This class contains all the information regarding the internship's progress, ensuring that each participant (student, company, and university) stays informed about its status.\\
 
 There are three classes associated to the InternshipStatus class: InternshipComplaint, Feedback, and InternshipReport.
 
 \textbf{InternshipComplaint} models a complaint created by a student and directed to the company.
 \textbf{Feedback} represents the final evaluation written by the student and/or the company about the other party at the end of the internship.
 The "globalScore" field stores the overall score. These evaluations are used by the system to generate recommendations, through the external statistical analysis tool.
-\textbf{InternshipReport} represents a report written by a student or the company. A report is a brief description of what occurred during the internship on a specific day.
+\textbf{InternshipReport} represents a report written by a student or the company. A report is a brief description of what occurred during the internship on a specific day.\\
 
-The \textbf{Chat} class describes communication between the student and the company member. It is instantiated only after the match is confirmed by both the two parties.
+The \textbf{Chat} class describes communication between the student and the company member. It is instantiated only after the match is confirmed by both the two parties.\\
 
 The \textbf{StudentSelectionProcess} class handles all stages of selecting an \textbf{individual} student, from matching to communicating the results (including interviews). The outcome referred
-to a specific student is represented by the attribute "selected" that can take the following values: \textit{NOT\_DEFINED}, \textit{YES} or \textit{NO}. As long as the company members do not select candidates for the internship, the "selected" field will be \textit{NOT\_DEFINED}.
+to a specific student is represented by the attribute "selected" that can take the following values: \textit{NOT\_DEFINED}, \textit{YES} or \textit{NO}. As long as the company members do not select candidates for the internship, the "selected" field will be \textit{NOT\_DEFINED}.\\
 
 Additionally, the \textbf{Request} class models a "match request" made by either the student or the company and directed to the other party.
-If both parties accept, the attribute "approved" will be set to true and then the selection process begins.
+If both parties accept, the attribute "approved" will be set to true and then the selection process begins.\\
 
 Finally, the \textbf{Suggestion} class represents tips that the system provides, either to students (e.g., for their CV) or to companies (e.g., for internship descriptions).
 
-\newpage
 \subsubsection{State diagrams}
 This section presents the state diagrams corresponding to selected classes from the previously introduced class diagram.
 We thought to model the diagrams associated with the Internship, InternshipStatus and StudentSelectionProcess classes to better clarify their lifecycle within the system.
@@ -241,14 +240,14 @@ They can apply to multiple internship proposals, and if accepted, they can track
 the same university associated with their email and is responsible for handling their complaints.
 
 \subsubsection{Company Member}
-The company member is a user who represents an employee of a company registered on the Students\&Companies platform. The set of all company members constitutes the company on the system. 
+The company member is a user who represents an employee of a company registered on the Students\&Companies platform. 
 They register by providing their name, surname, an email from their company's domain, and a password. A company member can publish internships offered by their company, 
 review student applications, communicate with applicants to arrange interviews. After the interviews are concluded, company members will select the candidates who will be 
 hired for the internship.
 
 \subsubsection{University Member}
 The university member is a user who represents a worker at a university registered on the Students\&Companies platform. A university member handles all student 
-complaints and can interrupt an internship when necessary. The university is represented by the set of all its members.
+complaints and can interrupt an internship when necessary.
 
 %todo: if student change university he creates a new account
 %todo: when a university email expires the student account is deleted by the platform (when periodically or when he tries to log in)

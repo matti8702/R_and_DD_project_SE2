@@ -1,7 +1,58 @@
-%TODO
+In this section, it is briefly presented the system that has to be developed, outlining the main points from the Requirements Analysis and Specification Document (RASD). Moreover, it is presented the high-level architecture of the system.
 \subsection{Purpose}
+The goal of the \textbf{Students\&Companies} system is to provide a platform 
+where students and companies can manage and monitor all processes related to 
+internships. Internships are proposed by companies, and students can submit an 
+application by accessing the system. Additionally, companies can also initiate 
+the process by sending a match request to a student. Students and companies find each other through a recommendation system.
+The platform provides advice to students regarding the curriculum vitae and to companies regarding the
+internship descriptions. There is also a third actor involved: the university. 
+The university is responsible for tracking the status of the internships, only for its enrolled students. 
+If necessary, the university can terminate an internship if it identifies significant issues.\\
+
+\noindent
+The goals of the system are listed below:
+\begin{listInSquareBrackets}{G}
+    \item The company members aims to spread the project proposals to students.
+    \item The student would like to find proposals that are most suited to him.
+    \item The company members aim to identify student CVs that align with the requirements of their internship proposals.
+    \item The student and the company members would like to receive suggestions on how to improve CVs and project descriptions.
+    \item The university members would like to monitor the status of internships involving all their students.
+    \item The company members and the students aim to carry out the matching and selection processes.
+    \item The company members and the student engaged in an ongoing internship wish to keep track of its status.
+\end{listInSquareBrackets}
+
 \subsection{Scope}
+%TODO: refine
+The system adopts a \textbf{3-tier} architecture, structured into three layers: the presentation layer, the application logic layer, and the data layer. This approach enhances scalability, simplifies maintenance by decoupling components, and improves flexibility, allowing independent development and updates of each layer. The presentation layer and the application logic layer will communicate through API calls, using a RESTful API service.\\\\
+At the data layer, there is a \textbf{relational database}. The application layer will therefore perform the usual CRUD operations (Create, Read, Update, Delete) by sending SQL queries to the database. A relational database offers several benefits, including data integrity, robust support for transactions, consistency and durability (ACID properties).
 \subsection{Definitions, acronyms, abbreviations}
+Below there are the acronyms used in the document along with their respective definitions.
+\begin{itemize}
+    \item \textbf{S\&C}: The Students\&Companies system. This is the name of the platform to be developed.
+    \item \textbf{G}: Goal. 
+    \item \textbf{R}: Requirement.
+    \item \textbf{UC}: Use case.
+    \item \textbf{ACID}: Atomicity, Consistency, Isolation and Durability. These are the four properties that ensure reliable processing of database transactions.
+    \item \textbf{CRUD}: Create, Read, Update, Delete. These are the four basic operations that can be performed on data in a database.
+    \item \textbf{SQL}: Structured query language. It is a standard programming language used to manage and manipulate relational databases.
+\end{itemize}
 \subsection{Revision history}
+Below there are listed all the document versions in chronological order, starting from the most recent to the oldest.
+\begin{itemize}
+    \item \textbf{Version 1.0} - 07/01/2025
+\end{itemize}
 \subsection{Reference documents}
+This document has been written based on the project description provided in the assignment.
 \subsection{Document structure}
+This section presents the structure of the document.
+\begin{enumerate}
+    %TODO
+    \item \textbf{\hyperref[section1]{\underline{Introduction}}}: This section introduces the system to be developed.
+    \item \textbf{\hyperref[section2]{\underline{Architectural design}}}:
+    \item \textbf{\hyperref[section3]{\underline{User interface design}}}:
+    \item \textbf{\hyperref[section4]{\underline{Requirements traceability}}}:
+    \item \textbf{\hyperref[section5]{\underline{Implementation, integration and test plan}}}:
+    \item \textbf{\hyperref[section6]{\underline{Effort spent}}}: this section presents the work hours spent by each team member.
+    \item \textbf{\hyperref[section7]{\underline{References}}}: this section mentions all the external documents or tools used for the development of the project.
+\end{enumerate}

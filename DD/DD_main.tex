@@ -7,6 +7,22 @@
 \usepackage{import}
 \usepackage{amsmath} % required for \text
 
+\newcounter{runtimeviewcounter}
+\setcounter{runtimeviewcounter}{1}
+\newcommand{\runtimeview}[2]{
+    % title
+    \subsection*{#1}
+    % description
+    #2
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 0.45]{Specific_requirements/uml_diagrams/UC\theusecasecounter_diagram.png}
+        \caption{Run time view for \textit{"#1"}.}
+    \end{figure}
+    \newpage
+    \addtocounter{usecasecounter}{1}
+}
+
 \captionsetup{tableposition=top,figureposition=bottom,font=small}
 \captionsetup{format=hang,labelfont={sf,bf}}
 

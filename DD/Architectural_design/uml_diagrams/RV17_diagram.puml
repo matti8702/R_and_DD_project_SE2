@@ -1,0 +1,99 @@
+@startuml RV17_diagram
+hide footbox
+
+participant "Company Member" as CM 
+participant "Web App Company Member" as W
+participant "Controller" AS C
+participant "Internship Proposal Manager" as IP
+participant "Match Manager" as M
+participant "CV Manager" as CV
+participant "Data Manager" as DM
+participant "Relational DBMS" as RD
+participant "Notification Manager" as NM
+participant "Web App Student" as WA
+participant "Student" as S 
+
+
+
+
+activate S
+activate W
+activate CM
+activate WA
+
+CM -> W: click on student's profile
+
+W ->C: getCV(studentID)
+activate C
+
+C -> CV: getCV(studentID)
+activate CV
+CV -> DM: getCV(studentID)
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: student CV
+deactivate RD
+DM --> CV: student CV
+deactivate DM
+CV --> C: student CV
+deactivate CV
+C --> W: student CV
+deactivate C
+W --> CM: show student CV
+
+CM -> W: click send match proposal
+
+W -> C: CompanyMemberMatchProposal(companyMemberID, studentID, internshipID)
+activate C
+C -> M: checkAlreadyExistentMatch(studentID,internshipID)
+activate M
+
+M -> DM: getMatchCount(studentID, InternshipID)
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: number of matches
+deactivate RD
+DM --> M: number of matches
+deactivate DM
+M -> C: boolean isFirstMatch
+deactivate M
+
+alt First time the match proposal is sent
+
+    C -> M: CompanyMemberMatchProposal(companyMemberID, studentID, internshipID)
+    activate M
+
+    M -> NM: sendNotifyNewMatch(matchProposal)
+    activate NM
+    alt Student active
+        NM -> WA: showNotifyNewMatch(matchProposal)
+        WA -> S: show new match
+        WA --> NM: ok
+        NM --> M: ok
+    else Student inactive
+        NM --> M: student offline
+    end
+    deactivate NM
+    M -> DM: addMatchProposal(matchProposal)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: ok
+    deactivate RD
+    DM --> M: ok
+    deactivate DM
+    M --> C: ok
+    deactivate M
+    C --> W: ok
+    deactivate C
+    W --> CM: match proposal sent
+else else
+    activate C
+    C --> W: match proposal already sent
+    deactivate C
+    W --> CM: error match proposal already sent
+end
+
+@enduml

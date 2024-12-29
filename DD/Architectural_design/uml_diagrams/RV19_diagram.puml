@@ -1,0 +1,88 @@
+@startuml RV19_diagram
+hide footbox
+
+participant "Company Member" as CM
+participant "Web App Company Member" as W
+participant "Student" as S 
+participant "Web App Student" as W
+participant "Controller" AS C
+participant "Match Manager" as M
+participant "Chat Manager" as CH
+participant "Data Manager" as DM
+participant "Relational DBMS" as RD
+participant "Notification Manager" as NM
+participant "Web App Student" as WA
+participant "Student" as S
+
+
+
+activate S
+activate W
+activate CM
+activate WA
+
+CM -> W: select match choice
+
+alt Internship is still available
+    W -> C: evaluateMatchProposal(matchProposal, choice)
+    activate C
+    C -> M: evaluateMatchProposal(matchProposal, choice)
+    activate M
+    M -> DM: updateMatchProposal(matchProposal, choice)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: ok
+    deactivate RD
+    DM --> M: ok
+    deactivate DM
+    alt Company Member has accepted the match
+        M -> CH: createNewChat()
+        activate CH
+        CH --> M: ok
+        deactivate CH
+        M -> NM: sendNotifyMatchAccepted(matchProposal)
+        activate NM
+        alt Student active
+            NM -> WA: showNotifyMatchAccepted(matchProposal)
+            WA -> S: show accepted match proposal
+            WA --> NM: ok
+            NM -> WA: showNewChat(companyMemberID)
+            WA -> S: show new chat created
+            WA --> NM: ok
+            NM --> M: ok
+        else Student inactive
+            NM --> M: student offline
+            M --> C: ok
+            
+            C --> W: ok
+            
+            W --> CM: show new chat created and updated candidates
+        end
+        deactivate NM
+
+    else Company Member has rejected the match
+        M -> NM: sendNotifyMatchDeclined(matchProposal)
+        activate NM
+        alt Studebt active
+            NM -> WA: showNotifyMatchDeclined(matchProposal)
+            WA -> S: remove request
+            WA --> NM: ok
+            NM --> M: ok
+        else Student inactive
+            NM --> M: student offline
+        end
+        deactivate NM
+        M --> C: ok
+        deactivate M
+        C --> W: ok
+        deactivate C
+        W --> CM: update
+    end
+else Internship closed
+    W --> CM: error internship closed
+end
+
+@enduml
+
+//todo check small changes with rasd use case

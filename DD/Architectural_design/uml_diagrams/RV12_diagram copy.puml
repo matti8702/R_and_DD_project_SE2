@@ -1,0 +1,47 @@
+@startuml RV12_diagram
+hide footbox
+
+participant "Student" as S 
+participant "Web App" as W
+participant "Controller" AS C
+participant "CV Manager" AS CM
+participant "Data Manager" AS DM
+participant "Relational DBMS" AS RD
+
+activate S
+activate W
+
+S -> W: click upload new CV document
+W --> S: show file selection dialog
+S -> S: select new CV file 
+S -> W: confirm new CV file
+
+alt file extension is valid
+W -> C: publishCV(CVfile)
+activate C
+C -> CM: publishCV(CVfile)
+activate CM
+CM -> DM: addCV(CVfile)
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: ok
+deactivate RD
+DM --> CM: ok
+deactivate DM
+CM --> C: ok
+deactivate CM
+C --> W: ok
+deactivate C
+W --> S: document uploaded
+
+else file extension is not valid
+W --> S: error invalid file extension
+end
+
+W --> S: show updates
+
+@enduml
+
+//TODO
+//oss specify that the dbms saves only the path to the file

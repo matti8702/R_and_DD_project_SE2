@@ -1,0 +1,54 @@
+@startuml RV13_diagram
+hide footbox
+
+participant "Student" as S 
+participant "Company Member" as C
+participant "Recommendation Manager" as RM
+participant "Statistical Analysis Tool" as SAT
+participant "Data Manager" as DM
+participant "Email Manager" as EM
+participant "Relational DBMS" as RD
+participant "Email Server" as E
+
+
+activate S
+activate C
+activate RM
+
+RM -> SAT: getStudentsNewRecommendation()
+activate SAT
+SAT --> RM: new students recommendation
+deactivate SAT
+RM -> SAT: getCompanyNewRecommendation()
+activate SAT
+SAT --> RM: new company recommendation
+deactivate SAT
+RM -> DM: updateRecomendation(newRecommendation)
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: ok
+deactivate RD
+DM --> RM: ok
+deactivate DM
+RM -> EM: sendRecommendationEmail(users)
+activate EM
+EM -> E: sendEmail(email)
+activate E
+E --> EM: ok
+EM --> RM: ok
+deactivate EM
+deactivate RM
+E -> S: sendEmail(email)
+E -> C: sendEmail(email)
+deactivate E
+
+
+
+
+
+@enduml
+
+
+//TODO should we specify that the destination users and the emails are multiple?
+//changed component diagram

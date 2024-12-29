@@ -1,0 +1,59 @@
+@startuml RV14_diagram
+hide footbox
+
+participant "Student" as S 
+participant "Web App" as W
+participant "Controller" AS C
+participant "CV Manager" AS CM
+participant "Suggestion Manager" as SM
+participant "Reccomendation Manager" as RM
+participant "External statistical tool" AS EXT
+participant "Data Manager" AS DM
+participant "Relational DBMS" AS RD
+
+
+
+activate S
+activate W
+S -> W: click apply suggestion
+W --> S: show modification form
+S -> S: insert text modification
+S -> W: confirm modification
+W -> C: modifySectionDescription(text, section)
+activate C
+C -> CM: modifySectionDescription(text, section)
+activate CM
+
+CM -> DM: modifyCV(text, section)
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: ok
+deactivate RD
+DM --> CM: ok
+deactivate DM 
+
+CM -> RM: updateCV(digitalizedCV)
+activate RM
+RM -> EXT: updateCV(digitalizedCV)
+activate EXT
+EXT --> RM: ok
+deactivate EXT
+RM --> CM: ok
+deactivate RM
+
+CM -> SM: getCVSuggestions(digitalizedCvSection)
+activate SM
+SM --> CM: new suggestions
+deactivate SM
+CM --> C: ok
+deactivate CM
+C --> W: ok
+deactivate C
+W --> S: show updates
+
+
+@enduml
+
+//todo: very similar to r11 check if it should be removed
+

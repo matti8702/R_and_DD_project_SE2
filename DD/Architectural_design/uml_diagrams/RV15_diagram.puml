@@ -1,0 +1,57 @@
+@startuml RV15_diagram
+hide footbox
+
+participant "Company Member" as COM 
+participant "Web App" as W
+participant "Controller" AS C
+participant "Internship Proposal Manager" AS I
+participant "Suggestion Manager" as SM
+participant "Reccomendation Manager" as RM
+participant "External statistical tool" AS EXT
+participant "Data Manager" AS DM
+participant "Relational DBMS" AS RD
+
+
+
+activate COM
+activate W
+COM -> W: click apply suggestion
+W --> COM: show modification form
+COM -> COM: insert text modification
+COM -> W: confirm modification
+W -> C: modifyInternshipDetails(internshipDetails)
+activate C
+C -> I: modifyInternshipDetails(internshipDetails)
+activate I
+
+I -> DM: modifyInternshipDetails(internshipDetails)
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: ok
+deactivate RD
+DM --> I: ok
+deactivate DM 
+I -> RM: updateInternshipTags(tags)
+activate RM
+RM -> EXT: updateInternshipTags(tags)
+activate EXT
+EXT --> RM: ok
+deactivate EXT
+RM --> I: ok
+deactivate RM
+
+I -> SM: getInternshipSuggestion(internshipDetails)
+activate SM
+SM --> I: new suggestions
+deactivate SM
+I --> C: ok
+deactivate I
+C --> W: ok
+deactivate C
+W --> COM: show updates
+
+
+@enduml
+
+//TODO check update suggestions (is an auto loop needed)?

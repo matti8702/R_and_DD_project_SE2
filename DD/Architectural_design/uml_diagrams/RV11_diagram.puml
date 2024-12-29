@@ -12,11 +12,13 @@ participant "Data Manager" AS DM
 participant "Relational DBMS" AS RD
 
 
+
 activate S
 activate W
 S -> W: click modify button
 W --> S: show modification form
-S -> W: insert text modification
+S -> S: insert text modification
+S -> W: confirm modification
 W -> C: modifySectionDescription(text, section)
 activate C
 C -> CM: modifySectionDescription(text, section)
@@ -40,9 +42,9 @@ deactivate EXT
 RM --> CM: ok
 deactivate RM
 
-CM -> SM: getCVSuggestions()
+CM -> SM: getCVSuggestions(digitalizedCvSection)
 activate SM
-SM --> CM: update suggestions
+SM --> CM: new suggestions
 deactivate SM
 CM --> C: ok
 deactivate CM
@@ -52,3 +54,5 @@ W --> S: show updates
 
 
 @enduml
+
+//TODO check update suggestions (is an auto loop needed)?

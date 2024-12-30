@@ -1,0 +1,59 @@
+@startuml RV8_diagram
+hide footbox
+
+participant "Company Member" as CM
+participant "Web App" as W
+participant "Controller" as C
+participant "Internship Proposal Manager" as I
+participant "Recommendation Manager" as RE
+participant "Data Manager" as DM
+participant "Relational DBMS" as RD
+participant "External statistical tool" AS EXT
+
+activate CM
+activate W
+activate C
+CM -> W: click "Modify internship" button
+W --> CM: show "internship modification" form
+CM -> W: insert modifications
+W --> CM: modified fields
+alt company member confirms modifications
+    CM -> W: click "Confirm all the changes" button
+    W -> C: modifyInternship(internshipID, internshipData)
+    C -> I: modifyInternship(internshipID, internshipData)
+    activate I
+    I -> DM: modifyInternship(internshipID, internshipData)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: ok
+    deactivate RD
+    DM --> I: ok
+    deactivate DM
+
+    I -> DM: getCompanyID(companyMemberEmailAddress)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: company ID
+    deactivate RD
+    DM --> I: company ID
+    deactivate DM
+
+    I -> RE: updateInternshipTags(companyID, internshipID, tags)
+    activate RE
+    RE -> EXT: updateInternshipTags(companyID, internshipID, tags)
+    activate EXT
+    EXT --> RE: ok
+    deactivate EXT
+    RE --> I: ok
+    deactivate RE
+    I --> C: ok
+    deactivate I
+    C --> W: ok
+else company member does not confirm modifications
+    CM -> W: click "Discard modifications" button
+end
+
+W --> CM: show internship info
+@enduml

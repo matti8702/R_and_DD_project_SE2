@@ -1,0 +1,53 @@
+@startuml RV4_diagram
+hide footbox
+
+participant "University member" as UM
+participant "Web App" as W
+participant "Controller" as C
+participant "Login Manager" as L
+participant "Data Manager" as DM
+participant "Relational DBMS" as RD
+
+activate UM
+activate W
+activate C
+UM -> W: click "Login" button
+W --> UM: show login form
+UM -> W: insert data
+W -> C: login(emailAddress, password)
+C -> L: login(emailAddress, password)
+activate L
+L -> DM: getUserPassword(emailAddress)
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: password
+deactivate RD
+DM --> L: password
+deactivate DM
+L -> L: checkCredentials(userInput, userCredentials)
+
+alt credentials are valid
+    L -> L: generateToken()
+    L -> DM: addToken(userEmail, token)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: ok
+    deactivate RD
+    DM --> L: ok
+    deactivate DM
+    L --> C: user token
+    C --> W: user token
+    W -> W: store token
+    W --> UM: show the homepage
+else invalid credentials
+    L --> C: ko
+    C --> W: ko
+    W --> UM: show error message "Invalid credentials"
+end
+
+@enduml
+
+//specify that checkCredentials() check also if user has already confirmed the email address
+//describe token system

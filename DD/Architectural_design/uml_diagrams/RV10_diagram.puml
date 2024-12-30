@@ -1,0 +1,49 @@
+@startuml RV10_diagram
+hide footbox
+
+participant "Student" as S
+participant "Web App" as W
+participant "Controller" as C
+participant "Internship Proposal Manager" as I
+participant "Recommendation Manager" as RE
+participant "Data Manager" as DM
+participant "Relational DBMS" as RD
+participant "External statistical tool" AS EXT
+
+activate S
+activate W
+activate C
+S -> W: insert keywords
+W -> C: getInternshipsByKeywords(keywords)
+C -> I: getInternshipsByKeywords(keywords)
+activate I
+I -> DM: getInternshipsByKeywords(keywords)
+activate DM
+DM -> RD: executeStatement(statement)
+
+alt there is at least one internship that matches with the keywords
+    activate RD
+    RD --> DM: internships
+    DM --> I: internships
+
+    I -> RE: getStudentRecommendations(studentID)
+    activate RE
+    RE -> EXT: findStudentRecommendations(studentID)
+    activate EXT
+    EXT --> RE: recommendations
+    deactivate EXT
+    RE --> I: recommendations
+    deactivate RE
+    I -> I: sortInternships(internships, recommendations)
+    I --> C: internships
+    C --> W: internships
+    W --> S: list of all internships found
+else there are not internships that match with the keywords
+    RD --> DM: no results
+    DM --> I: no results
+    I --> C: ko
+    C --> W: ko
+    W --> S: show "No internships found" message
+end
+
+@enduml

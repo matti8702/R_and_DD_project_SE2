@@ -1,0 +1,176 @@
+@startuml RV1_diagram
+hide footbox
+
+participant "University member" as UM
+participant "Web App" as W
+participant "Controller" as C
+participant "Registration Manager" as RM
+participant "Email Manager" as EM
+participant "Data Manager" as DM
+participant "Relational DBMS" as RD
+participant "Email Server" as EP
+
+activate UM
+activate W
+activate C
+UM -> W: click "Register as a university member" button
+
+W -> C: getAllUniversitiesNames()
+C -> DM: getAllUniversitiesNames()
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: universities
+deactivate RD
+DM --> C: universities
+deactivate DM
+C --> W: universities
+W --> UM: show registration form
+
+alt university is registered to the system
+    UM -> W: insert data
+    W -> C: registerAsUniversityMember(name, surname, dateOfBirth, password, emailAddress, universityName)
+    C -> RM: registerAsUniversityMember(name, surname, dateOfBirth, password, emailAddress, universityName)
+    activate RM
+    RM -> DM: getUniversityInfo(universityName)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: university info
+    deactivate RD
+    DM --> RM: university info
+    deactivate DM
+    RM -> DM: getUsersEmail()
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: emails
+    deactivate RD
+    DM --> RM: emails
+    deactivate DM
+    RM -> RM: checkEmailAddress(universityEmailDomain, emailAddressProvided, allEmails)
+    alt email address is valid
+        RM -> DM: addUniversityMember(name, surname, dateOfBirth, password, emailAddress, universityName)
+        activate DM
+        DM -> RD: executeStatement(statement)
+        activate RD
+        RD --> DM: ok
+        deactivate RD
+        DM --> RM: ok
+        deactivate DM
+
+        RM -> EM: sendConfirmationEmail(emailAddress)
+        activate EM
+        EM -> EP: sendEmail(content, emailAddress)
+        activate EP
+        EP -> UM: email
+        EP --> EM: ok
+        deactivate EP
+        EM --> RM: ok
+        deactivate EM
+
+        alt user confirm the email address within one day of registration
+            UM -> C: confirmEmailAddress(emailAddress)
+            C -> RM: confirmEmailAddress(emailAddress) 
+            RM -> DM: confirmUserRegistration(emailAddress)
+            activate DM
+            DM -> RD: executeStatement(statement)
+            activate RD
+            RD --> DM: ok
+            deactivate RD
+            DM --> RM: ok
+            deactivate DM
+            
+        else user does not confirm the email address
+            RM -> DM: cancelUser(emailAddress)
+            activate DM
+            DM -> RD: executeStatement(statement)
+            activate RD
+            RD --> DM: ok
+            deactivate RD
+            DM --> RM: ok
+            deactivate DM
+        end
+
+    else email is already registered to the system
+        RM --> C: error
+        C --> W: error
+        W --> UM: show error message "user already registered"
+    
+    else email address is not linked to the university provided
+        RM --> C: error
+        C --> W: error
+        W --> UM: show error message "invalid email domain"
+    end
+
+else university is not registered to the system
+    UM -> W: click "Create university" button
+    W --> UM: show university form
+
+    UM -> W: insert data
+    W -> C: registerUniversity(userInfo, universityName)
+    C -> RM: registerUniversity(userInfo, universityName)
+    RM -> DM: addUniversity(universityName, emailDomain)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: ok
+    deactivate RD
+    DM --> RM: ok
+    deactivate DM
+
+    RM -> DM: addUniversityMember(name, surname, dateOfBirth, password, emailAddress, universityName)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: ok
+    deactivate RD
+    DM --> RM: ok
+    deactivate DM
+
+    RM -> EM: sendConfirmationEmail(emailAddress)
+    activate EM
+    EM -> EP: sendEmail(content, emailAddress)
+    activate EP
+    EP -> UM: email
+    EP --> EM: ok
+    deactivate EP
+    EM --> RM: ok
+    deactivate EM
+
+    alt user confirm the email address within one day of registration
+        UM -> C: confirmEmailAddress(emailAddress)
+        C -> RM: confirmEmailAddress(emailAddress)
+        RM -> DM: confirmUserRegistration(emailAddress)
+        activate DM
+        DM -> RD: executeStatement(statement)
+        activate RD
+        RD --> DM: ok
+        deactivate RD
+        DM --> RM: ok
+        deactivate DM
+    else user does not confirm the email address
+        RM -> DM: cancelUser(emailAddress)
+        activate DM
+        DM -> RD: executeStatement(statement)
+        activate RD
+        RD --> DM: ok
+        deactivate RD
+        DM --> RM: ok
+        deactivate DM
+
+        RM -> DM: cancelUniversity(emailAddress)
+        activate DM
+        DM -> RD: executeStatement(statement)
+        activate RD
+        RD --> DM: ok
+        deactivate RD
+        DM --> RM: ok
+        deactivate DM
+    end
+end
+
+@enduml
+
+//specify that addUniversityMember and addUniversity insert the user/university with a flag "notConfirmed".
+//confirmUserRegistration add the user and the university too (in case the user has created the university)

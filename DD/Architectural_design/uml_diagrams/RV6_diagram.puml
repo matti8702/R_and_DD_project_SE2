@@ -1,0 +1,81 @@
+@startuml RV6_diagram
+hide footbox
+
+participant "Company Member" as CM
+participant "Web App" as W
+participant "Controller" as C
+participant "Login Manager" as L
+participant "Recommendation Manager" as RE
+participant "Data Manager" as DM
+participant "Relational DBMS" as RD
+participant "External statistical tool" AS EXT
+
+activate CM
+activate W
+activate C
+CM -> W: click "Login" button
+W --> CM: show login form
+CM -> W: insert data
+W -> C: login(emailAddress, password)
+C -> L: login(emailAddress, password)
+activate L
+L -> DM: getUserPassword(emailAddress)
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: password
+deactivate RD
+DM --> L: password
+deactivate DM
+L -> L: checkCredentials(userInput, userCredentials)
+
+alt credentials are valid
+    L -> L: generateToken()
+    L -> DM: addToken(userEmail, token)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: ok
+    deactivate RD
+    DM --> L: ok
+    deactivate DM
+
+    L -> DM: getCompanyID(companyMemberEmailAddress)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: company ID
+    deactivate RD
+    DM --> L: company ID
+    deactivate DM
+
+    L -> RE: getCompanyRecommendations(companyID)
+    activate RE
+    RE -> EXT: findCompanyRecommendations(companyID)
+    activate EXT
+    EXT --> RE: recommendations
+    deactivate EXT
+    RE -> DM: updateRecommendations(companyID, recommendations)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: ok
+    deactivate RD
+    DM --> RE: ok
+    deactivate DM
+    RE --> L: recommendations
+    deactivate RE
+    L --> C: user token, recommendations
+    C --> W: user token, recommendations
+    W -> W: store token
+    W --> CM: show the homepage with recommendations
+else invalid credentials
+    L --> C: ko
+    C --> W: ko
+    W --> CM: show error message "Invalid credentials"
+end
+
+@enduml
+
+//specify that checkCredentials() check also if user has already confirmed the email address
+//describe token system

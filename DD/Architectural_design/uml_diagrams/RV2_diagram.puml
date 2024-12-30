@@ -1,0 +1,187 @@
+@startuml RV2_diagram
+hide footbox
+
+participant "Company member" as CM
+participant "Web App" as W
+participant "Controller" as C
+participant "Registration Manager" as RM
+participant "Email Manager" as EM
+participant "Recommendation Manager" as RE
+participant "Data Manager" as DM
+participant "Relational DBMS" as RD
+participant "Email Server" as EP
+participant "External statistical tool" AS EXT
+
+activate CM
+activate W
+activate C
+CM -> W: click "Register as a company member" button
+
+W -> C: getAllCompaniesNames()
+C -> DM: getAllCompaniesNames()
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: companies
+deactivate RD
+DM --> C: companies
+deactivate DM
+C --> W: companies
+W --> CM: show registration form
+
+alt company is registered to the system
+    CM -> W: insert data
+    W -> C: registerAsCompanyMember(name, surname, dateOfBirth, password, emailAddress, companyName)
+    C -> RM: registerAsCompanyMember(name, surname, dateOfBirth, password, emailAddress, companyName)
+    activate RM
+    RM -> DM: getCompanyInfo(companyName)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: company info
+    deactivate RD
+    DM --> RM: company info
+    deactivate DM
+    RM -> DM: getUsersEmail()
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: emails
+    deactivate RD
+    DM --> RM: emails
+    deactivate DM
+    RM -> RM: checkEmailAddress(companyEmailDomain, emailAddressProvided, allEmails)
+    alt email address is valid
+        RM -> DM: addCompanyMember(name, surname, dateOfBirth, password, emailAddress, companyName)
+        activate DM
+        DM -> RD: executeStatement(statement)
+        activate RD
+        RD --> DM: ok
+        deactivate RD
+        DM --> RM: ok
+        deactivate DM
+
+        RM -> EM: sendConfirmationEmail(emailAddress)
+        activate EM
+        EM -> EP: sendEmail(content, emailAddress)
+        activate EP
+        EP -> CM: email
+        EP --> EM: ok
+        deactivate EP
+        EM --> RM: ok
+        deactivate EM
+
+        alt user confirm the email address within one day of registration
+            CM -> C: confirmEmailAddress(emailAddress)
+            C -> RM: confirmEmailAddress(emailAddress) 
+            RM -> DM: confirmUserRegistration(emailAddress)
+            activate DM
+            DM -> RD: executeStatement(statement)
+            activate RD
+            RD --> DM: ok
+            deactivate RD
+            DM --> RM: ok
+            deactivate DM
+            
+        else user does not confirm the email address
+            RM -> DM: cancelUser(emailAddress)
+            activate DM
+            DM -> RD: executeStatement(statement)
+            activate RD
+            RD --> DM: ok
+            deactivate RD
+            DM --> RM: ok
+            deactivate DM
+        end
+
+    else email is already registered to the system
+        RM --> C: error
+        C --> W: error
+        W --> CM: show error message "user already registered"
+    
+    else email address is not linked to the company provided
+        RM --> C: error
+        C --> W: error
+        W --> CM: show error message "invalid email domain"
+    end
+
+else company is not registered to the system
+    CM -> W: click "Create company" button
+    W --> CM: show company form
+
+    CM -> W: insert data
+    W -> C: registerCompany(userInfo, companyName, companyDescription)
+    C -> RM: registerCompany(userInfo, companyName, companyDescription)
+    RM -> DM: addCompany(companyName, companyDescription, emailDomain)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: ok
+    deactivate RD
+    DM --> RM: ok
+    deactivate DM
+
+    RM -> RE: addCompany(companyID)
+    activate RE
+    RE -> EXT: addCompany(companyID)
+    activate EXT
+    EXT --> RE: ok
+    deactivate EXT
+    RE --> RM: ok
+    deactivate RE
+
+    RM -> DM: addCompanyMember(name, surname, dateOfBirth, password, emailAddress, companyName)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: ok
+    deactivate RD
+    DM --> RM: ok
+    deactivate DM
+
+    RM -> EM: sendConfirmationEmail(emailAddress)
+    activate EM
+    EM -> EP: sendEmail(content, emailAddress)
+    activate EP
+    EP -> CM: email
+    EP --> EM: ok
+    deactivate EP
+    EM --> RM: ok
+    deactivate EM
+
+    alt user confirm the email address within one day of registration
+        CM -> C: confirmEmailAddress(emailAddress)
+        C -> RM: confirmEmailAddress(emailAddress)
+        RM -> DM: confirmUserRegistration(emailAddress)
+        activate DM
+        DM -> RD: executeStatement(statement)
+        activate RD
+        RD --> DM: ok
+        deactivate RD
+        DM --> RM: ok
+        deactivate DM
+    else user does not confirm the email address
+        RM -> DM: cancelUser(emailAddress)
+        activate DM
+        DM -> RD: executeStatement(statement)
+        activate RD
+        RD --> DM: ok
+        deactivate RD
+        DM --> RM: ok
+        deactivate DM
+
+        RM -> DM: cancelCompany(emailAddress)
+        activate DM
+        DM -> RD: executeStatement(statement)
+        activate RD
+        RD --> DM: ok
+        deactivate RD
+        DM --> RM: ok
+        deactivate DM
+    end
+end
+
+@enduml
+
+//specify that addCompanyMember and addCompany insert the user/company with a flag "notConfirmed".
+//confirmUserRegistration add the user and the company too (in case the user has created the company)

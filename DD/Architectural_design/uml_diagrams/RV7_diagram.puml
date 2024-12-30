@@ -1,0 +1,54 @@
+@startuml RV7_diagram
+hide footbox
+
+participant "Company Member" as CM
+participant "Web App" as W
+participant "Controller" as C
+participant "Internship Proposal Manager" as I
+participant "Recommendation Manager" as RE
+participant "Data Manager" as DM
+participant "Relational DBMS" as RD
+participant "External statistical tool" AS EXT
+
+activate CM
+activate W
+activate C
+CM -> W: click "Create an Internship" button
+W --> CM: show "internship creation" form
+CM -> W: insert data
+W -> C: publishInternship(name, applicationStartDate, applicationEndDate, maxStudentAllowed,\n\t\t\tdescription, requirements, domain, tags, terms)
+C -> I: publishInternship(internshipData)
+activate I
+I -> DM: addInternshipProposal(internshipData)
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: internship ID
+deactivate RD
+DM --> I: internship ID
+deactivate DM
+
+I -> DM: getCompanyID(companyMemberEmailAddress)
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: company ID
+deactivate RD
+DM --> I: company ID
+deactivate DM
+
+I -> RE: addInternship(companyID, internshipID, tags)
+activate RE
+RE -> EXT: addInternship(companyID, internshipID, tags)
+activate EXT
+EXT --> RE: ok
+deactivate EXT
+RE --> I: ok
+deactivate RE
+
+I --> C: ok
+deactivate I
+C --> W: ok
+W --> CM: show internship info
+
+@enduml

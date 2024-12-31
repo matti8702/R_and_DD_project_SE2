@@ -1,0 +1,67 @@
+@startuml RV26
+hide footbox
+
+participant "Student" as ST
+participant "Web App Student " AS WAST
+participant "Controller" as C
+participant "Internship Manager" as IM
+participant "Data Manager" as DM
+participant "DBMS" as DB
+participant "Notification Manager" as NM
+participant "company member" as CM
+participant "Web App Company member" AS WACM
+participant "Web App University member" AS WAUM
+
+activate ST
+activate WAST
+
+ST -> WAST : click the write complaint button
+WAST --> ST : complaint page
+ST -> ST  : write a complaint
+ST -> WAST : click the submit complaint button
+WAST -> WAST : checkComplaint(complaint)
+loop until complaint is not empty
+    WAST --> ST : error page
+    ST -> WAST : click the submit complaint button
+    WAST -> WAST : checkComplaint(complaint)
+end
+WAST -> C  : submitComplaint(complaint)
+activate C
+C -> IM    : submitComplaint(complaint)
+activate IM
+IM -> DM   : addComplaint(complaint)
+activate DM
+DM -> DB   : executeStatement(statement)
+activate DB
+DB --> DM  : ok
+deactivate DB
+DM --> IM  : ok
+deactivate DM
+IM -> NM  : notifyNewComplaint(complaint)
+activate NM
+alt company member is online
+    NM -> WACM : showComplaint(complaint)
+    activate WACM
+    activate CM
+    WACM -> CM : page with the new complaint
+    WACM --> NM : ok
+    deactivate WACM
+    deactivate CM
+end 
+alt university member is online
+    NM -> WAUM : showComplaint(report)
+    activate WAUM
+    activate UM
+    WAUM -> UM : page with the new complaint
+    WAUM --> NM : ok
+    deactivate WAUM
+    deactivate UM
+end 
+NM --> IM : ok
+deactivate NM
+IM --> C : ok
+deactivate IM
+C --> WAST : ok
+deactivate C
+WAST --> ST : page with the new list of complaints
+@enduml

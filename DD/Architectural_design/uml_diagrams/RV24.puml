@@ -1,0 +1,67 @@
+@startuml RV24
+hide footbox
+
+participant "Student" as ST
+participant "Web App Student " AS WAST
+participant "Controller" as C
+participant "Internship Manager" as IM
+participant "Data Manager" as DM
+participant "DBMS" as DB
+participant "Notification Manager" as NM
+participant "Web App Company member" AS WACM
+participant "Company member" as CM
+participant "Web App University member" AS WAUM
+participant "University member" AS UM
+
+activate ST
+activate WAST
+ST -> WAST : click the create report button
+WAST --> ST : report page
+ST -> ST : write report
+ST -> WAST : click the submit report button
+WAST -> WAST : checkRepor(report)
+loop until report is not empty
+    WAST --> ST : error page
+    ST -> WAST : click the submit report button
+    WAST -> WAST : checkRepor(report)
+end
+WAST -> C  : submitReport(report)
+activate C
+C -> IM    : submitReport(report)
+activate IM
+IM -> DM : addReport(report)
+activate  DM
+DM -> DB : executeStatement(statement)
+activate DB
+DB --> DM : ok
+deactivate DB
+DM --> IM : ok
+deactivate DM
+IM -> NM : notifyReport(report)
+activate NM
+alt company member is online
+    activate WACM
+    activate CM
+    NM -> WACM : showReport(report)
+    WACM -> CM : page with the new list of reports
+    WACM --> NM : ok
+    deactivate WACM
+    deactivate CM
+end 
+alt university member is online
+    NM -> WAUM : showReport(report)
+    activate WAUM
+    activate UM
+    WAUM -> UM : page with the new list of reports
+    WAUM --> NM : ok
+    deactivate WAUM
+    deactivate UM
+end 
+NM --> IM : ok
+deactivate NM
+IM --> C : ok
+deactivate IM
+C --> WAST : ok 
+deactivate C
+WAST --> ST : page with the new list of reports
+@enduml

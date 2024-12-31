@@ -1,0 +1,105 @@
+@startuml RV20
+hide footbox
+
+participant "Company member" as CM
+participant "Web App Company member" as WACM
+participant "Controller" as C
+participant "Selection Manager" as SM
+participant "Interview Scheduler" as IS
+participant "External Videoconference API" as EV
+participant "Data Manager" as DM
+participant "DBMS" as DB
+participant "Notification Manager" as NM
+participant "Web App Student " as WAST
+participant "Student" as ST
+
+activate CM
+
+activate WACM
+CM -> WACM : press button to schedule the meeting
+' WACM -> C : scheduleMeeting()
+' activate C
+' C  -> SM : scheduleMeeting()
+' activate SM
+' SM -> IS : scheduleMeeting()
+' activate IS
+' IS -> IS : createForm()
+' IS --> SM : form
+' deactivate IS
+' SM --> C : form
+' deactivate SM
+' C  --> WACM : form
+' deactivate C
+WACM --> CM : form page
+CM -> CM    : fill the meeting form
+CM -> WACM  : click the submit button
+WACM -> C   : submitMeeting(form)
+activate C
+C  -> SM  : submitMeeting(form)
+activate SM
+SM -> IS  : submitMeeting(form)
+activate IS
+IS -> IS  : checkInfo(form)
+loop until meeting information are correct
+IS --> SM : error
+SM --> C  : error
+C  --> WACM : error
+WACM --> CM : error page
+CM -> WACM  : submitMeeting(form)
+WACM -> C   : submitMeeting(form)
+C  -> SM  : submitMeeting(form)
+SM -> IS  : submitMeeting(form)
+IS -> IS  : checkInfo(form)
+end
+alt online meeting
+IS -> EV  : generateLink(date)
+activate EV
+EV --> IS : link
+deactivate EV
+IS -> IS  : attachLink(meeting, link)
+end
+IS --> SM  : meeting
+deactivate IS
+SM ->  DM  : addMeeting(meeting)
+activate DM
+DM ->  DB  : executeStatement(statement)
+activate DB
+DB --> DM  : ok
+deactivate DB
+DM --> SM  : ok  
+deactivate DM
+SM ->  DM  : findOverlappingEvents(meeting)
+activate DM
+DM ->  DB  : executeStatement(statement)
+activate DB 
+' if none, empty list 
+DB --> DM  : tuples of overlapping events
+deactivate DB 
+' if none, empty list 
+DM --> SM  : list of overlapping events
+deactivate DM
+alt list of overlapping events is not empty
+SM ->  IS  : attachWarning(meeting, overlappingEvents)
+activate IS
+IS --> SM  : meeting
+deactivate IS
+end
+SM -> NM   : sendNotifyMeeting(meeting)
+activate NM
+alt student is online
+activate WAST
+activate ST
+NM -> WAST : showNotifyMeeting(meeting)
+WAST -> ST : page with the meeting in the internship reminder, optionally displaying the warning
+WAST --> NM : ok
+deactivate WAST
+deactivate ST
+end
+NM --> SM   : ok
+deactivate NM
+SM --> C   : meeting
+deactivate SM
+C  --> WACM  : meeting
+deactivate C
+WACM --> CM  : page with the meeting in the internship reminder, optionally displaying the warning
+@enduml

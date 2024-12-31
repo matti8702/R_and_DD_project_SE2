@@ -1,0 +1,77 @@
+@startuml RV27
+hide footbox
+
+participant "University member" AS UM
+participant "Web App University member" AS WAUM
+participant "Controller" as C
+participant "Internship Manager" as IM
+participant "Data Manager" as DM
+participant "DBMS" as DB
+participant "Notification Manager" as NM
+participant "Web App Student " AS WAST
+participant "Student" as ST
+participant "Web App Company member " AS WACM
+participant "company member" as CM
+
+activate UM
+activate WAUM
+
+UM -> WAUM : click the manage students button
+WAUM -> C  : getStudents(universityName)
+activate C
+C -> IM    : getStudents(universityName)
+activate IM
+IM -> DM   : getStudents(universityName)
+activate DM
+DM -> DB   : executeStatement(statement)
+activate DB
+DB --> DM  : tuples containing the students
+deactivate DB
+DM --> IM  : list of students
+deactivate DM
+IM --> C   : list of students
+deactivate IM
+C --> WAUM : list of students
+deactivate C
+WAUM --> UM : page with the students currently on an internship
+UM -> WAUM : click the interrupt internship button
+WAUM -> C  : interruptInternship(internshipID, studentID)
+activate C
+C -> IM    : interruptInternship(internshipID, studentID)
+activate IM
+IM -> DM   : interruptInternship(internshipID, studentID)
+activate DM
+DM -> DB   : executeStatement(statement)
+activate DB
+DB --> DM  : ok
+deactivate DB
+DM --> IM  : ok
+deactivate DM
+IM -> NM   : notifyInternshipInterruption(internshipID, studentID)
+activate NM
+alt student is online
+    activate ST
+    activate WAST
+    NM -> WAST : showInternshipInterruption(internshipName)
+    WAST -> ST : interrupted internship page
+    WASt --> NM : ok
+    deactivate ST
+    deactivate WAST
+end
+alt company member is online
+    NM -> WACM : showInternshipInterruption(internshipName)
+    activate WACM
+    activate CM
+    WACM -> CM : interrupted internship page
+    WACM --> NM : ok
+    deactivate WACM
+    deactivate CM
+end
+NM --> IM  : ok
+deactivate NM
+IM --> C   : ok
+deactivate IM
+C --> WAUM : ok
+deactivate C
+WAUM --> UM : interrupted internship page
+@enduml

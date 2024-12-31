@@ -1,0 +1,133 @@
+@startuml RV21
+hide footbox
+
+participant "company member" as CM
+participant "Web App Company member" AS WACM
+participant "Controller" as C
+participant "Selection Manager" as SM
+participant "Data Manager" as DM
+participant "DBMS" as DB
+participant "Notification Manager" as NM
+participant "Web App Student " AS WAST
+participant "Student" as ST
+participant "Chat Manger" as CHM
+
+activate CM
+activate WACM
+
+CM -> WACM: click show candidates button
+WACM -> C : getCandidates(internshipID)
+activate C
+C -> SM : getCandidates(internshipID)
+activate SM
+SM -> DM : getCandidates(internshipID)
+activate DM
+DM -> DB : executeStatement(statement)
+activate DB
+DB --> DM : tuples containing candidates'names
+deactivate DB
+DM --> SM : list of candidates
+deactivate DM
+SM --> C : list of candidates
+deactivate SM
+C --> WACM : list of candidates
+deactivate C
+WACM --> CM : page with the candidates
+CM -> WACM  : click on show student button
+WACM -> C : getStudentInfo(studentID)
+activate C
+C -> SM  : getStudentInfo(studentID)
+activate SM
+SM -> DM : getStudentInfo(studentID)
+activate DM
+DM -> DB : executeStatement(statement)
+activate DB
+DB --> DM : tuples containing student's info
+deactivate DB
+DM --> SM : student's info
+deactivate DM
+SM --> C : student's info
+deactivate SM
+C --> WACM : student's info
+deactivate C
+WACM --> CM : page with student's info
+CM -> WACM : click the yes/no button to upload the decision
+WACM -> C : addAdmissionChoice(result, companyMemberName, internshipID, studentName)
+activate C
+C -> SM   : addAdmissionChoice(result, companyMemberName, internshipID, studentName)
+activate SM
+SM -> DM  : removeCandidate(studentName)
+activate DM
+DM -> DB  : executeStatement(statement)
+activate DB
+DB --> DM : ok
+deactivate DB
+DM --> SM : ok
+deactivate DM
+SM -> DM  : getCandidates(internshipID)
+activate DM
+DM -> DB  : executeStatement(statement)
+activate DB
+DB --> DM : tuples containing candidates'names
+deactivate DB
+DM --> SM : list of candidates
+deactivate DM
+alt student is accepted
+    SM -> DM : getInternshipContract(internshipID)
+    activate DM
+    DM -> DB : executeStatement(statement)
+    activate DB
+    DB --> DM : contract as a tuple
+    deactivate DB
+    DM --> SM : contract
+    deactivate DM
+    SM -> NM  :  sendNotifyContract(contract)
+    activate NM
+    alt student is online
+        activate WAST
+        activate ST
+        NM -> WAST : showContract(contract)
+        WAST -> ST : page with the contract
+        WAST --> NM : ok
+        deactivate WAST
+        deactivate ST
+    end
+    NM --> SM : ok
+    SM --> C : list of candidates
+    C --> WACM : list of candidates
+    WACM --> CM : page with the updated list of candidates
+else student is rejected
+    SM -> NM : sendNotify(result)
+    alt student is online
+        activate WAST
+        activate ST
+        NM -> WAST : showResult(result)
+        WAST -> ST : page with the rejection
+        WAST --> NM : ok
+        deactivate WAST
+        deactivate ST
+    end
+    NM --> SM : ok
+    SM -> CHM : deleteChat(internshipID, studentID)
+    activate CHM
+    CHM -> DM : deleteChat(internshipID, studentID)
+    DM -> DB  : executeStatement(statement)
+    DB --> DM  : ok
+    DM --> CHM  : ok
+    CHM --> SM  : ok
+    SM -> NM : notifyRemoveChat(internshipID, studentID)
+    alt student is online
+        activate WAST
+        activate ST
+        NM -> WAST : showRemovedChat(internshipID)
+        WAST -> ST : page without the chat
+        WAST --> NM : ok
+        deactivate WAST
+        deactivate ST
+    end
+    NM --> SM : ok
+    SM --> C : list of candidates
+    C  --> WACM : list of candidates
+    WACM --> CM : page with the updated list of candidates without the chat
+end
+@enduml

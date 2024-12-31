@@ -1,0 +1,119 @@
+@startuml RV25
+hide footbox
+
+participant "Company member" as CM
+participant "Web App Company member" AS WACM
+participant "Controller" as C
+participant "Internship Manager" as IM
+participant "Data Manager" as DM
+participant "DBMS" as DB
+participant "Notification Manager" as NM
+participant "Student" as ST
+participant "Web App Student " AS WAST
+participant "Web App University member" AS WAUM
+participant "University member" AS UM
+
+activate CM
+activate WACM
+CM -> WACM : click the create report button
+WACM --> CM : report
+WACM -> C  : submitReport(report)
+WACM -> WACM : checkReport(report)
+loop until report is not empty
+
+    WACM -> C  : submitReport(report)
+    WACM -> WACM : checkReport(report)
+end
+activate C
+C -> IM    : submitReport(report)
+activate IM
+IM -> DM   : getInfoStudent(studentID)
+activate DM
+DM -> DB   : executeStatement(statement)
+activate DB
+DB --> DM  : tuple with student's info
+deactivate DB
+DM --> IM  : studentInfo
+deactivate DM
+IM -> IM   : checkInfo(studentInfo, companyName, internshipID)
+loop until student's info are correct
+IM --> C   : error
+deactivate IM
+C  --> WACM : error
+deactivate C
+WACM --> CM : error page
+CM -> WACM : click the create report button
+WACM -> C  : submitReport(studentName)
+activate C
+C -> IM    : createReport(studentName)
+activate IM
+IM -> DM   : getInfoStudent(studentName)
+activate DM
+DM -> DB   : executeStatement(statement)
+activate DB
+DB --> DM  : tuple with student's info
+deactivate DB
+DM --> IM  : studentInfo
+deactivate DM
+IM -> IM   : checkInfo(studentInfo, company name, internshipName)
+end
+IM --> C   : report
+deactivate IM
+C --> WACM : report
+deactivate C
+WACM --> CM : report page
+CM -> WACM : click the submit report button
+WACM -> C  : submitReport(report)
+activate C
+C -> IM    : submitReport(report)
+activate IM
+IM -> IM   : checkReport(report)
+loop until the report is not empty
+    IM --> C : error
+    deactivate IM
+    C --> WACM : error
+    deactivate C
+    WACM --> CM : error page
+    CM -> WACM : click the submit report button
+    WACM -> C  : submitReport(report)
+    activate C
+    C -> IM    : submitReport(report)
+    activate IM
+    IM -> IM   : checkReport(report)
+end
+IM -> DM : addReport(report)
+activate DM
+DM -> DB : executeStatement(statement)
+activate DB
+DB --> DM : ok
+deactivate DB
+DM --> IM : ok
+deactivate DM
+IM -> NM : addReport(report)
+activate NM
+alt student is online
+    activate ST
+    activate WAST
+    NM -> WAST : addReport(report)
+    WAST -> ST : page with the new list of reports
+    WAST --> NM : ok 
+    deactivate ST
+    deactivate WAST
+end 
+alt university member is online
+    NM -> WAUM : addReport(report)
+    activate WAUM
+    activate UM
+    WAUM -> UM : page with the new list of reports
+    WAUM --> NM : ok
+    deactivate WAUM
+    deactivate UM
+end 
+NM --> IM : ok
+deactivate NM
+IM --> C : ok
+deactivate IM
+C --> WACM : ok
+deactivate C
+WAST --> CM : page with the new list of reports
+@enduml

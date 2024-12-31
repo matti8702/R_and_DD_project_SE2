@@ -1,0 +1,54 @@
+@startuml RV23
+hide footbox
+
+participant "Generic User" as U
+participant "Web App User " AS WAU
+participant "Controller" as C
+participant "Chat Manger" as CHM
+participant "Data Manager" as DM
+participant "DBMS" as DB
+participant "Notification Manager" as NM
+participant "Web App Recipient " AS WAR
+participant "Recipient"    as R
+
+activate U
+activate WAU
+
+U -> WAU   : click send message button
+WAU -> WAU : checkMessage(message)
+loop until the message is not empty and the recipient's information are not missing
+    WAU --> U : error page
+    U -> WAU   : click send message button
+    WAU -> WAU : checkMessage(message)
+end
+WAU -> C  : sendMessage(message)
+activate C
+C -> CHM   : checkMessage(message)
+activate CHM
+CHM -> DM  : addMessage(message)
+activate DM
+DM ->  DB : executeStatement(statement)
+activate DB
+DB --> DM : ok
+deactivate DB
+DM --> CHM : ok
+deactivate DM
+CHM -> NM  : sendNotifyMessage(message)
+activate NM
+alt recipient is online
+    activate WAR
+    activate R
+    NM -> WAR : showMessage(message)
+    WAR -> R  : page with the message added to the chat
+    WAR --> NM : ok
+    deactivate WAR
+    deactivate R
+end
+NM --> CHM : ok
+deactivate NM
+CHM --> C  : updated chat
+deactivate CHM
+C --> WAU  : updated chat
+deactivate C
+WAU --> U  : page with the message added to the chat
+@enduml

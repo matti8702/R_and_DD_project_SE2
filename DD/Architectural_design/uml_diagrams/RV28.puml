@@ -1,0 +1,50 @@
+@startuml RV28
+hide footbox
+
+participant "User" as U
+participant "Web App Company member" AS WAU
+participant "Controller" as C
+participant "Internship Manager" as IM
+participant "Recommendation manager" as RM
+participant "External Statistical Analysis Tool" as ESAT
+
+
+activate U
+activate WAU
+U -> WAU   : click on the notification about the end of one of their internship
+WAU --> U  : page to choose whether to post a feedback or not
+U -> WAU   : click the yes/no button on writing a feedback
+alt user does not want to write a feedback
+    WAU --> U  : page without the notification
+else user wants to write a feedback
+    WAU --> U  : feedback page
+    U -> U     : write the feedback
+    U -> WAU   : click the post feedback button
+    WAU -> WAU : checkFeedback(feedback)
+    loop until feedback is not complete
+        WAU --> U : error page
+        U -> U     : write the feedback
+        U -> WAU   : click the post feedback button
+        WAU -> WAU : checkFeedback(feedback)
+    end
+    WAU -> C   : postFeedback(feedback)
+    activate C
+    C -> IM    : postFeedback(feedback)
+    activate IM
+    IM -> IM : retrieveInfo(feedback)
+    IM -> RM : update(internshipId, internshipTags, studentTags)
+    activate RM
+    RM -> ESAT : update(internshipId, internshipTags, studentTags)
+    activate ESAT
+    ESAT --> RM : ok
+    deactivate ESAT
+    RM --> IM   : ok
+    deactivate RM
+
+    IM --> C : ok
+    deactivate IM
+    C --> WAU : ok
+    deactivate C
+    WAU --> U : page without the notification
+end
+@enduml

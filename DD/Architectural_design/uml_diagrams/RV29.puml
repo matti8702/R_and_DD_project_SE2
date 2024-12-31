@@ -1,0 +1,28 @@
+@startuml RV29
+hide footbox
+
+participant "Internship Manager" as IM
+participant "Data Manager" as DM
+participant "DBMS" as DB
+participant "Recommendation manager" as RM
+participant "External Statistical Analysis Tool" as ESAT
+
+activate IM
+IM -> DM   : closeInternship(internshipName)
+activate DM
+DM -> DB   : executeStatement(statement)
+activate DB
+DB --> DM  : ok
+deactivate DB
+DM --> IM  : ok
+deactivate DM
+IM -> IM   : retrieveInternshipId(internshipName)
+IM -> RM   : deleteInternship(internshipId)
+activate RM
+RM -> ESAT   : deleteInternship(internshipId)
+activate ESAT
+ESAT --> RM : ok
+deactivate ESAT
+RM --> IM  : ok
+deactivate RM
+@enduml

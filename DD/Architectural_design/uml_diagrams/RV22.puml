@@ -1,0 +1,65 @@
+@startuml RV22
+hide footbox
+
+participant "Student" as ST
+participant "Web App Student " AS WAST
+participant "Controller" as C
+participant "Selection Manager" as SM
+participant "Interview Scheduler" as IS
+participant "Chat Manger" as CHM
+participant "Notification Manager" as NM
+participant "Data Manager" as DM
+participant "DBMS" as DB
+participant "Web App Company member" AS WACM
+participant "Company member" as CM
+
+activate ST
+activate WAST
+
+ST -> WAST : click yes/no button
+
+WAST -> C  : addDecision(choice)
+activate C
+C -> SM    : addDecision(choice)
+activate SM
+SM -> SM   : extractInfo(choice)
+SM -> DM   : getInternshipInfo(internshipID)
+activate DM
+DM -> DB  : executeStatement(statement)
+activate DB
+DB --> DM : tuples containing internship info
+deactivate DB
+DM --> SM : internshipInfo
+deactivate DM
+SM -> CHM : deleteChat(internshipID, studentID)
+activate CHM
+CHM -> DM : deleteChat(internshipID, studentID)
+activate DM
+DM -> DB  : executeStatement(statement)
+activate DB
+DB --> DM : ok
+deactivate DB
+DM --> CHM : ok
+deactivate DM
+CHM --> SM : ok
+deactivate CHM
+SM -> NM : notifyRemoveChat(internshipID, studentID)
+activate NM
+loop for all company member of that internship with a chat
+alt company member is online
+    NM -> WACM : showRemoveChat(internshipName)
+    activate WACM
+    activate CM
+    WACM -> CM : page without the chat
+    WACM --> NM : ok
+    deactivate WACM
+    deactivate CM
+end
+NM --> SM : ok
+deactivate NM
+SM --> C : ok
+deactivate SM
+C --> WAST : ok
+deactivate C
+WAST --> ST : page without the chat
+@enduml

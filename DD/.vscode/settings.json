@@ -1,0 +1,8 @@
+{
+    // NOTE. the path is relative to the workspace fodlder
+    "plantuml.exportOutDir": "./Architectural_design/uml_diagrams",
+    // do not create a subfolder containing the output file
+    "plantuml.exportSubFolder" : false,
+    // do not recreate the hierarchy
+    "plantuml.exportIncludeFolderHeirarchy": false
+}

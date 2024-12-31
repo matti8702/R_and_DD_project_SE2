@@ -1,13 +1,13 @@
 @startuml RV7_diagram
 hide footbox
 
-participant "Company Member" as CM
+actor "Company Member" as CM
 participant "Web App" as W
 participant "Controller" as C
 participant "Internship Proposal Manager" as I
 participant "Recommendation Manager" as RE
 participant "Data Manager" as DM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 participant "External statistical tool" AS EXT
 
 activate CM
@@ -39,7 +39,7 @@ deactivate DM
 
 I -> RE: addInternship(companyID, internshipID, tags)
 activate RE
-RE -> EXT: addInternship(companyID, internshipID, tags)
+RE -> EXT: addEntity(ENTITYTYPE.INTERNSHIP, companyID, internshipID, tags)
 activate EXT
 EXT --> RE: ok
 deactivate EXT

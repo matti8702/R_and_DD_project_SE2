@@ -1,13 +1,13 @@
 @startuml RV10_diagram
 hide footbox
 
-participant "Student" as S
+actor "Student" as S
 participant "Web App" as W
 participant "Controller" as C
 participant "Internship Proposal Manager" as I
 participant "Recommendation Manager" as RE
 participant "Data Manager" as DM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 participant "External statistical tool" AS EXT
 
 activate S
@@ -28,7 +28,7 @@ alt there is at least one internship that matches with the keywords
 
     I -> RE: getStudentRecommendations(studentID)
     activate RE
-    RE -> EXT: findStudentRecommendations(studentID)
+    RE -> EXT: findRecommendations(ENTITYTYPE.STUDENT, studentID)
     activate EXT
     EXT --> RE: recommendations
     deactivate EXT

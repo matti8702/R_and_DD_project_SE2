@@ -1,14 +1,14 @@
 @startuml RV2_diagram
 hide footbox
 
-participant "Company member" as CM
+actor "Company member" as CM
 participant "Web App" as W
 participant "Controller" as C
 participant "Registration Manager" as RM
 participant "Email Manager" as EM
 participant "Recommendation Manager" as RE
 participant "Data Manager" as DM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 participant "Email Server" as EP
 participant "External statistical tool" AS EXT
 
@@ -123,7 +123,7 @@ else company is not registered to the system
 
     RM -> RE: addCompany(companyID)
     activate RE
-    RE -> EXT: addCompany(companyID)
+    RE -> EXT: addEntity(ENTITYTYPE.COMPANY,companyID)
     activate EXT
     EXT --> RE: ok
     deactivate EXT
@@ -178,6 +178,15 @@ else company is not registered to the system
         deactivate RD
         DM --> RM: ok
         deactivate DM
+
+        RM -> RE: deleteCompany(companyID)
+        activate RE
+        RE -> EXT: deleteEntity(ENTITYTYPE.COMPANY, companyID)
+        activate EXT
+        EXT --> RE: ok
+        deactivate EXT
+        RE --> RM: ok
+        deactivate RE
     end
 end
 
@@ -185,3 +194,4 @@ end
 
 //specify that addCompanyMember and addCompany insert the user/company with a flag "notConfirmed".
 //confirmUserRegistration add the user and the company too (in case the user has created the company)
+//describe ENTITYTYPE

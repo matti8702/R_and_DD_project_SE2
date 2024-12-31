@@ -1,13 +1,13 @@
 @startuml RV6_diagram
 hide footbox
 
-participant "Company Member" as CM
+actor "Company Member" as CM
 participant "Web App" as W
 participant "Controller" as C
 participant "Login Manager" as L
 participant "Recommendation Manager" as RE
 participant "Data Manager" as DM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 participant "External statistical tool" AS EXT
 
 activate CM
@@ -51,7 +51,7 @@ alt credentials are valid
 
     L -> RE: getCompanyRecommendations(companyID)
     activate RE
-    RE -> EXT: findCompanyRecommendations(companyID)
+    RE -> EXT: findRecommendations(ENTITYTYPE.COMPANY, companyID)
     activate EXT
     EXT --> RE: recommendations
     deactivate EXT
@@ -65,9 +65,19 @@ alt credentials are valid
     deactivate DM
     RE --> L: recommendations
     deactivate RE
-    L --> C: user token, recommendations
-    C --> W: user token, recommendations
-    W -> W: store token
+
+    L -> DM: getUserStatus(userEmail)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: status
+    deactivate RD
+    DM --> L: status
+    deactivate DM
+
+    L --> C: user token, recommendations, status
+    C --> W: user token, recommendations, status
+    W -> W: store token, status
     W --> CM: show the homepage with recommendations
 else invalid credentials
     L --> C: ko

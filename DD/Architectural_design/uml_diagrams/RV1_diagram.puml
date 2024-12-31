@@ -1,13 +1,13 @@
 @startuml RV1_diagram
 hide footbox
 
-participant "University member" as UM
+actor "University member" as UM
 participant "Web App" as W
 participant "Controller" as C
 participant "Registration Manager" as RM
 participant "Email Manager" as EM
 participant "Data Manager" as DM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 participant "Email Server" as EP
 
 activate UM

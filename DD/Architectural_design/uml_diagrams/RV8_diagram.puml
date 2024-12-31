@@ -1,13 +1,13 @@
 @startuml RV8_diagram
 hide footbox
 
-participant "Company Member" as CM
+actor "Company Member" as CM
 participant "Web App" as W
 participant "Controller" as C
 participant "Internship Proposal Manager" as I
 participant "Recommendation Manager" as RE
 participant "Data Manager" as DM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 participant "External statistical tool" AS EXT
 
 activate CM
@@ -42,7 +42,7 @@ alt company member confirms modifications
 
     I -> RE: updateInternshipTags(companyID, internshipID, tags)
     activate RE
-    RE -> EXT: updateInternshipTags(companyID, internshipID, tags)
+    RE -> EXT: updateEntity(ENTITYTYPE.INTERNSHIP, companyID, internshipID, tags)
     activate EXT
     EXT --> RE: ok
     deactivate EXT

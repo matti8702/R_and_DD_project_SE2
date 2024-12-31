@@ -1,14 +1,14 @@
 @startuml RV3_diagram
 hide footbox
 
-participant "Student" as S
+actor "Student" as S
 participant "Web App" as W
 participant "Controller" as C
 participant "Registration Manager" as RM
 participant "Email Manager" as EM
 participant "Recommendation Manager" as RE
 participant "Data Manager" as DM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 participant "Email Server" as EP
 participant "External statistical tool" AS EXT
 
@@ -60,6 +60,15 @@ alt email address is valid
     DM --> RM: ok
     deactivate DM
 
+    RM -> RE: addStudent(studentID)
+    activate RE
+    RE -> EXT: addEntity(ENTITYTYPE.STUDENT, studentID)
+    activate EXT
+    EXT --> RE: ok
+    deactivate EXT
+    RE --> RM: ok
+    deactivate RE
+
     RM -> EM: sendConfirmationEmail(emailAddress)
     activate EM
     EM -> EP: sendEmail(content, emailAddress)
@@ -91,6 +100,15 @@ alt email address is valid
         deactivate RD
         DM --> RM: ok
         deactivate DM
+        
+        RM -> RE: deleteStudent(studentID)
+        activate RE
+        RE -> EXT: deleteEntity(ENTITYTYPE.STUDENT, studentID)
+        activate EXT
+        EXT --> RE: ok
+        deactivate EXT
+        RE --> RM: ok
+        deactivate RE
     end
 
 else email is already registered to the system

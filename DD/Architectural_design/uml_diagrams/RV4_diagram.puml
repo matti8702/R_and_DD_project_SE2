@@ -1,12 +1,12 @@
 @startuml RV4_diagram
 hide footbox
 
-participant "University member" as UM
+actor "University member" as UM
 participant "Web App" as W
 participant "Controller" as C
 participant "Login Manager" as L
 participant "Data Manager" as DM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 
 activate UM
 activate W
@@ -37,9 +37,19 @@ alt credentials are valid
     deactivate RD
     DM --> L: ok
     deactivate DM
-    L --> C: user token
-    C --> W: user token
-    W -> W: store token
+
+    L -> DM: getUserStatus(userEmail)
+    activate DM
+    DM -> RD: executeStatement(statement)
+    activate RD
+    RD --> DM: status
+    deactivate RD
+    DM --> L: status
+    deactivate DM
+
+    L --> C: user token, status
+    C --> W: user token, status
+    W -> W: store token, status
     W --> UM: show the homepage
 else invalid credentials
     L --> C: ko

@@ -1,13 +1,13 @@
 @startuml RV9_diagram
 hide footbox
 
-participant "Company Member" as CM
+actor "Company Member" as CM
 participant "Web App" as W
 participant "Controller" as C
 participant "Internship Proposal Manager" as I
 participant "Recommendation Manager" as RE
 participant "Data Manager" as DM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 participant "External statistical tool" AS EXT
 
 activate CM
@@ -41,7 +41,7 @@ alt company member confirms the deletion
 
     I -> RE: deleteInternship(companyID, internshipID)
     activate RE
-    RE -> EXT: deleteInternship(companyID, internshipID)
+    RE -> EXT: deleteEntity(ENTITYTYPE.INTERNSHIP, companyID, internshipID)
     activate EXT
     EXT --> RE: ok
     deactivate EXT

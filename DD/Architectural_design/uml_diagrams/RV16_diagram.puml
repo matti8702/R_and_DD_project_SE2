@@ -8,7 +8,7 @@ participant "Internship Proposal Manager" as IP
 participant "Match Manager" as M
 participant "CV Manager" as CV
 participant "Data Manager" as DM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 participant "Notification Manager" as NM
 participant "Web App Company Member" as WA
 participant "Company Member" as CM
@@ -94,4 +94,3 @@ else else
 end
 @enduml
 
-//TODO: check if the webapp already knows if some request has been sent

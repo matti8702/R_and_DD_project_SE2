@@ -6,7 +6,7 @@ participant "Web App" as W
 participant "Controller" AS C
 participant "CV Manager" AS CM
 participant "Data Manager" AS DM
-participant "Relational DBMS" AS RD
+participant "DBMS" AS RD
 
 activate S
 activate W
@@ -21,6 +21,7 @@ W -> C: publishCV(CVfile)
 activate C
 C -> CM: publishCV(CVfile)
 activate CM
+CM -> CM: store(CVfile)
 CM -> DM: addCV(CVfile)
 activate DM
 DM -> RD: executeStatement(statement)
@@ -32,7 +33,7 @@ deactivate DM
 CM --> C: ok
 deactivate CM
 C --> W: ok
-deactivate C
+deactivate C 
 W --> S: document uploaded
 
 else file extension is not valid
@@ -43,5 +44,4 @@ W --> S: show updates
 
 @enduml
 
-//TODO
-//oss specify that the dbms saves only the path to the file
+"The Curriculum Vitae file is stored in the CV Manager component, while the DBMS saves its location."

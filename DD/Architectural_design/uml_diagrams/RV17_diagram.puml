@@ -8,7 +8,7 @@ participant "Internship Proposal Manager" as IP
 participant "Match Manager" as M
 participant "CV Manager" as CV
 participant "Data Manager" as DM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 participant "Notification Manager" as NM
 participant "Web App Student" as WA
 participant "Student" as S 
@@ -44,7 +44,7 @@ W --> CM: show student CV
 
 CM -> W: click send match proposal
 
-W -> C: CompanyMemberMatchProposal(companyMemberID, studentID, internshipID)
+W -> C: CompanyMemberMatchProposal(studentID, internshipID)
 activate C
 C -> M: checkAlreadyExistentMatch(studentID,internshipID)
 activate M
@@ -57,12 +57,12 @@ RD --> DM: number of matches
 deactivate RD
 DM --> M: number of matches
 deactivate DM
-M -> C: boolean isFirstMatch
+M --> C: boolean isFirstMatch
 deactivate M
 
 alt First time the match proposal is sent
 
-    C -> M: CompanyMemberMatchProposal(companyMemberID, studentID, internshipID)
+    C -> M: CompanyMemberMatchProposal(studentID, internshipID)
     activate M
 
     M -> NM: sendNotifyNewMatch(matchProposal)

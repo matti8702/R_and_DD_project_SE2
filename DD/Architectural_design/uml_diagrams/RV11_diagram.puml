@@ -9,7 +9,7 @@ participant "Suggestion Manager" as SM
 participant "Reccomendation Manager" as RM
 participant "External statistical tool" AS EXT
 participant "Data Manager" AS DM
-participant "Relational DBMS" AS RD
+participant "DBMS" AS RD
 
 
 
@@ -35,7 +35,7 @@ deactivate DM
 
 CM -> RM: updateCV(digitalizedCV)
 activate RM
-RM -> EXT: updateCV(digitalizedCV)
+RM -> EXT: updateEntity(tagsRemoved, tagsAdded, studentID, ENTITYTYPE.STUDENT)
 activate EXT
 EXT --> RM: ok
 deactivate EXT
@@ -55,4 +55,5 @@ W --> S: show updates
 
 @enduml
 
-//TODO check update suggestions (is an auto loop needed)?
+"The function updateEntity(tagsRemoved, tagsAdded, userID, ENTITYTYPE) updates the entity in the statistical analysis tool by specifying the 
+tags that were removed and the tags that were added."

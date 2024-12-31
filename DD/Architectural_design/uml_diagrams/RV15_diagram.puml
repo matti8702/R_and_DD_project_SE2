@@ -9,7 +9,7 @@ participant "Suggestion Manager" as SM
 participant "Reccomendation Manager" as RM
 participant "External statistical tool" AS EXT
 participant "Data Manager" AS DM
-participant "Relational DBMS" AS RD
+participant "DBMS" AS RD
 
 
 
@@ -34,7 +34,7 @@ DM --> I: ok
 deactivate DM 
 I -> RM: updateInternshipTags(tags)
 activate RM
-RM -> EXT: updateInternshipTags(tags)
+RM -> EXT: updateEntity(tagsRemoved, tagsAdded, internshipID, ENTITYTYPE.INTERNSHIP)
 activate EXT
 EXT --> RM: ok
 deactivate EXT
@@ -54,4 +54,4 @@ W --> COM: show updates
 
 @enduml
 
-//TODO check update suggestions (is an auto loop needed)?
+

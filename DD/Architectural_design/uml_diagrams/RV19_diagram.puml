@@ -9,7 +9,7 @@ participant "Controller" AS C
 participant "Match Manager" as M
 participant "Chat Manager" as CH
 participant "Data Manager" as DM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 participant "Notification Manager" as NM
 participant "Web App Student" as WA
 participant "Student" as S
@@ -85,4 +85,3 @@ end
 
 @enduml
 
-//todo check small changes with rasd use case

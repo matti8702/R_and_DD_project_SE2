@@ -7,7 +7,7 @@ participant "Recommendation Manager" as RM
 participant "Statistical Analysis Tool" as SAT
 participant "Data Manager" as DM
 participant "Email Manager" as EM
-participant "Relational DBMS" as RD
+participant "DBMS" as RD
 participant "Email Server" as E
 
 
@@ -15,11 +15,11 @@ activate S
 activate C
 activate RM
 
-RM -> SAT: getStudentsNewRecommendation()
+RM -> SAT: getNewRecommendations(ENTITYTYPE.STUDENT) 
 activate SAT
 SAT --> RM: new students recommendation
 deactivate SAT
-RM -> SAT: getCompanyNewRecommendation()
+RM -> SAT: getNewRecommendations(ENTITYTYPE.COMPANY) 
 activate SAT
 SAT --> RM: new company recommendation
 deactivate SAT
@@ -50,5 +50,7 @@ deactivate E
 @enduml
 
 
-//TODO should we specify that the destination users and the emails are multiple?
-//changed component diagram
+"The function getNewRecommendations(entityType) retrieves all the new recommendations related to entities of the type specified by the parameter 
+entityType"
+"The diagram represents only two users, a Student and a Company Member ( company members receive recommendation associated to their company), 
+who act as representatives of their respective categories. However, emails are sent to all users with new recommendations (which may include none)"

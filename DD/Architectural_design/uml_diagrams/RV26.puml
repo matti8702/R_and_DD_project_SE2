@@ -1,15 +1,15 @@
 @startuml RV26
 hide footbox
 
-participant "Student" as ST
+actor "Student" as ST
 participant "Web App Student " AS WAST
 participant "Controller" as C
 participant "Internship Manager" as IM
 participant "Data Manager" as DM
 participant "DBMS" as DB
 participant "Notification Manager" as NM
-participant "company member" as CM
 participant "Web App Company member" AS WACM
+actor "company member" as CM
 participant "Web App University member" AS WAUM
 
 activate ST
@@ -22,6 +22,7 @@ ST -> WAST : click the submit complaint button
 WAST -> WAST : checkComplaint(complaint)
 loop until complaint is not empty
     WAST --> ST : error page
+    ST -> ST : write a complaint
     ST -> WAST : click the submit complaint button
     WAST -> WAST : checkComplaint(complaint)
 end

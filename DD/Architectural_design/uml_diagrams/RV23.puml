@@ -1,7 +1,7 @@
 @startuml RV23
 hide footbox
 
-participant "Generic User" as U
+actor "Generic User" as U
 participant "Web App User " AS WAU
 participant "Controller" as C
 participant "Chat Manger" as CHM
@@ -9,7 +9,7 @@ participant "Data Manager" as DM
 participant "DBMS" as DB
 participant "Notification Manager" as NM
 participant "Web App Recipient " AS WAR
-participant "Recipient"    as R
+actor "Recipient"    as R
 
 activate U
 activate WAU
@@ -23,7 +23,7 @@ loop until the message is not empty and the recipient's information are not miss
 end
 WAU -> C  : sendMessage(message)
 activate C
-C -> CHM   : checkMessage(message)
+C -> CHM   : sendMessage(message)
 activate CHM
 CHM -> DM  : addMessage(message)
 activate DM

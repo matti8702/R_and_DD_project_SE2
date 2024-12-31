@@ -1,7 +1,7 @@
 @startuml RV21
 hide footbox
 
-participant "company member" as CM
+actor "Company Member" as CM
 participant "Web App Company member" AS WACM
 participant "Controller" as C
 participant "Selection Manager" as SM
@@ -9,7 +9,7 @@ participant "Data Manager" as DM
 participant "DBMS" as DB
 participant "Notification Manager" as NM
 participant "Web App Student " AS WAST
-participant "Student" as ST
+actor "Student" as ST
 participant "Chat Manger" as CHM
 
 activate CM
@@ -52,25 +52,18 @@ C --> WACM : student's info
 deactivate C
 WACM --> CM : page with student's info
 CM -> WACM : click the yes/no button to upload the decision
-WACM -> C : addAdmissionChoice(result, companyMemberName, internshipID, studentName)
+WACM -> C : addAdmissionChoice(result)
 activate C
-C -> SM   : addAdmissionChoice(result, companyMemberName, internshipID, studentName)
+C -> SM   : addAdmissionChoice(result)
 activate SM
-SM -> DM  : removeCandidate(studentName)
+SM -> SM   : retrieveInfo(result)
+SM -> DM  : removeCandidate(studentID)
 activate DM
 DM -> DB  : executeStatement(statement)
 activate DB
 DB --> DM : ok
 deactivate DB
 DM --> SM : ok
-deactivate DM
-SM -> DM  : getCandidates(internshipID)
-activate DM
-DM -> DB  : executeStatement(statement)
-activate DB
-DB --> DM : tuples containing candidates'names
-deactivate DB
-DM --> SM : list of candidates
 deactivate DM
 alt student is accepted
     SM -> DM : getInternshipContract(internshipID)
@@ -93,8 +86,9 @@ alt student is accepted
         deactivate ST
     end
     NM --> SM : ok
-    SM --> C : list of candidates
-    C --> WACM : list of candidates
+    SM --> C : ok
+    C --> WACM : ok
+    ' comment for the description: the new list is performed by the webapp: It makes the difference between the candidates received at the beginning and the one which has responded
     WACM --> CM : page with the updated list of candidates
 else student is rejected
     SM -> NM : sendNotify(result)
@@ -111,9 +105,13 @@ else student is rejected
     SM -> CHM : deleteChat(internshipID, studentID)
     activate CHM
     CHM -> DM : deleteChat(internshipID, studentID)
+    activate DM
     DM -> DB  : executeStatement(statement)
+    activate DB
     DB --> DM  : ok
+    deactivate DB
     DM --> CHM  : ok
+    deactivate DM
     CHM --> SM  : ok
     SM -> NM : notifyRemoveChat(internshipID, studentID)
     alt student is online

@@ -1,13 +1,12 @@
 @startuml RV28
 hide footbox
 
-participant "User" as U
+actor "User" as U
 participant "Web App Company member" AS WAU
 participant "Controller" as C
 participant "Internship Manager" as IM
 participant "Recommendation manager" as RM
 participant "External Statistical Analysis Tool" as ESAT
-
 
 activate U
 activate WAU
@@ -32,9 +31,9 @@ else user wants to write a feedback
     C -> IM    : postFeedback(feedback)
     activate IM
     IM -> IM : retrieveInfo(feedback)
-    IM -> RM : update(internshipId, internshipTags, studentTags)
+    IM -> RM : update(internshipId, internshipTags, studentTags, grades)
     activate RM
-    RM -> ESAT : update(internshipId, internshipTags, studentTags)
+    RM -> ESAT : update(internshipId, internshipTags, studentTags, grades)
     activate ESAT
     ESAT --> RM : ok
     deactivate ESAT

@@ -1,7 +1,7 @@
 @startuml RV27
 hide footbox
 
-participant "University member" AS UM
+actor "University member" AS UM
 participant "Web App University member" AS WAUM
 participant "Controller" as C
 participant "Internship Manager" as IM
@@ -9,9 +9,9 @@ participant "Data Manager" as DM
 participant "DBMS" as DB
 participant "Notification Manager" as NM
 participant "Web App Student " AS WAST
-participant "Student" as ST
+actor "Student" as ST
 participant "Web App Company member " AS WACM
-participant "company member" as CM
+actor "company member" as CM
 
 activate UM
 activate WAUM
@@ -54,7 +54,7 @@ alt student is online
     activate WAST
     NM -> WAST : showInternshipInterruption(internshipName)
     WAST -> ST : interrupted internship page
-    WASt --> NM : ok
+    WAST --> NM : ok
     deactivate ST
     deactivate WAST
 end

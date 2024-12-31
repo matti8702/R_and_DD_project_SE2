@@ -31,9 +31,9 @@ else user wants to write a feedback
     C -> IM    : postFeedback(feedback)
     activate IM
     IM -> IM : retrieveInfo(feedback)
-    IM -> RM : update(internshipId, internshipTags, studentTags, grades)
+    IM -> RM : updateScores(internshipId, internshipTags, studentTags, grades)
     activate RM
-    RM -> ESAT : update(internshipId, internshipTags, studentTags, grades)
+    RM -> ESAT : updateScores(internshipId, internshipTags, studentTags, grades)
     activate ESAT
     ESAT --> RM : ok
     deactivate ESAT

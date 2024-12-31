@@ -33,7 +33,7 @@ SM --> C  : error
 C  --> WACM : error
 WACM --> CM : error page
 CM -> CM    : fill the meeting form
-CM -> WACM  : submitMeeting(form)
+CM -> WACM  : click the submit button
 WACM -> C   : submitMeeting(form)
 C  -> SM  : submitMeeting(form)
 SM -> IS  : submitMeeting(form)

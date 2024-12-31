@@ -19,7 +19,7 @@ deactivate DM
 IM -> IM   : retrieveInternshipId(internshipID)
 IM -> RM   : deleteInternship(internshipId)
 activate RM
-RM -> ESAT   : removeEntity(internshipId)
+RM -> ESAT   : removeEntity(ENTITYTYPE.INTERNSHIP,internshipId)
 activate ESAT
 ESAT --> RM : ok
 deactivate ESAT

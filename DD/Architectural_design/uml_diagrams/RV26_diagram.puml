@@ -50,7 +50,7 @@ alt company member is online
     deactivate CM
 end 
 alt university member is online
-    NM -> WAUM : showComplaint(report)
+    NM -> WAUM : showComplaint(complaint)
     activate WAUM
     activate UM
     WAUM -> UM : page with the new complaint

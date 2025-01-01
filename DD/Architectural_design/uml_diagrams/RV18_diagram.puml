@@ -1,7 +1,7 @@
 @startuml RV18_diagram
 hide footbox
 
-participant "Student" as S 
+actor "Student" as S 
 participant "Web App Student" as W
 participant "Controller" AS C
 participant "Match Manager" as M
@@ -10,7 +10,7 @@ participant "Data Manager" as DM
 participant "DBMS" as RD
 participant "Notification Manager" as NM
 participant "Web App Company Member" as WA
-participant "Company Member" as CM
+actor "Company Member" as CM
 
 
 

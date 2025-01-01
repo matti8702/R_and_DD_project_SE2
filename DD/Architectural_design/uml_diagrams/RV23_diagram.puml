@@ -9,7 +9,7 @@ participant "Data Manager" as DM
 participant "DBMS" as DB
 participant "Notification Manager" as NM
 participant "Web App Recipient " AS WAR
-actor "Recipient"    as R
+actor "Recipient" as R
 
 activate U
 activate WAU

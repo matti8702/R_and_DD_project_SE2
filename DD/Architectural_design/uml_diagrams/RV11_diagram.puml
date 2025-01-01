@@ -1,7 +1,7 @@
 @startuml RV11_diagram
 hide footbox
 
-participant "Student" as S 
+actor "Student" as S 
 participant "Web App" as W
 participant "Controller" AS C
 participant "CV Manager" AS CM

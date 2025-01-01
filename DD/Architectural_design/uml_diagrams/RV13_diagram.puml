@@ -1,8 +1,8 @@
 @startuml RV13_diagram
 hide footbox
 
-participant "Student" as S 
-participant "Company Member" as C
+actor "Student" as S 
+actor "Company Member" as C
 participant "Recommendation Manager" as RM
 participant "Statistical Analysis Tool" as SAT
 participant "Data Manager" as DM

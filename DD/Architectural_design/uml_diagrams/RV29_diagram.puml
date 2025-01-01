@@ -1,7 +1,7 @@
 @startuml RV29
 hide footbox
 
-participant "Internship Manager" as IM
+participant "Internship Proposal Manager" as IM
 participant "Data Manager" as DM
 participant "DBMS" as DB
 participant "Recommendation manager" as RM

@@ -6,7 +6,7 @@ participant "Web App" as W
 participant "Controller" AS C
 participant "CV Manager" AS CM
 participant "Suggestion Manager" as SM
-participant "Reccomendation Manager" as RM
+participant "Recommendation Manager" as RM
 participant "External statistical tool" AS EXT
 participant "Data Manager" AS DM
 participant "DBMS" AS RD

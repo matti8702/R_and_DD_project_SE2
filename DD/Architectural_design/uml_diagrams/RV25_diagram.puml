@@ -4,7 +4,7 @@ hide footbox
 actor "Company member" as CM
 participant "Web App Company member" AS WACM
 participant "Controller" as C
-participant "Internship Manager" as IM
+participant "Internship Status Manager" as IM
 participant "Data Manager" as DM
 participant "DBMS" as DB
 participant "Notification Manager" as NM

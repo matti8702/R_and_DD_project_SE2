@@ -4,7 +4,7 @@ hide footbox
 actor "User" as U
 participant "Web App Company member" AS WAU
 participant "Controller" as C
-participant "Internship Manager" as IM
+participant "Internship Status Manager" as IM
 participant "Recommendation manager" as RM
 participant "External statistical tool" as ESAT
 

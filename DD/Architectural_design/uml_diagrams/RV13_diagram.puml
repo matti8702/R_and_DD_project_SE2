@@ -4,7 +4,7 @@ hide footbox
 actor "Student" as S 
 actor "Company Member" as C
 participant "Recommendation Manager" as RM
-participant "External statistical Tool" as SAT
+participant "External statistical tool" as SAT
 participant "Data Manager" as DM
 participant "Email Manager" as EM
 participant "DBMS" as RD

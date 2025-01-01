@@ -4,7 +4,7 @@ hide footbox
 actor "Student" as ST
 participant "Web App Student" AS WAST
 participant "Controller" as C
-participant "Internship Manager" as IM
+participant "Internship Status Manager" as IM
 participant "Data Manager" as DM
 participant "DBMS" as DB
 participant "Notification Manager" as NM

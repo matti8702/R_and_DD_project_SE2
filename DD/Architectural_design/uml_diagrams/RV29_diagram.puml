@@ -16,7 +16,6 @@ DB --> DM  : ok
 deactivate DB
 DM --> IM  : ok
 deactivate DM
-IM -> IM   : retrieveInternshipId(internshipID)
 IM -> RM   : deleteInternship(internshipId)
 activate RM
 RM -> ESAT   : removeEntity(ENTITYTYPE.INTERNSHIP, internshipId)

@@ -9,7 +9,7 @@ participant "Data Manager" as DM
 participant "DBMS" as DB
 participant "Notification Manager" as NM
 participant "Web App Company member" AS WACM
-actor "company member" as CM
+actor "Company member" as CM
 participant "Web App University member" AS WAUM
 
 activate ST

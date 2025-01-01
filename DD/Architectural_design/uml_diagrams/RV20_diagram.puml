@@ -6,7 +6,7 @@ participant "Web App Company member" as WACM
 participant "Controller" as C
 participant "Selection Manager" as SM
 participant "Interview Scheduler" as IS
-participant "External Videoconference API" as EV
+participant "External Videoconference tool" as EV
 participant "Data Manager" as DM
 participant "DBMS" as DB
 participant "Notification Manager" as NM

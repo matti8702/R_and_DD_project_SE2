@@ -6,7 +6,7 @@ participant "Web App Company member" AS WAU
 participant "Controller" as C
 participant "Internship Manager" as IM
 participant "Recommendation manager" as RM
-participant "External Statistical Analysis Tool" as ESAT
+participant "External statistical tool" as ESAT
 
 activate U
 activate WAU

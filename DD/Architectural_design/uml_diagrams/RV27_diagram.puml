@@ -11,7 +11,7 @@ participant "Notification Manager" as NM
 participant "Web App Student " AS WAST
 actor "Student" as ST
 participant "Web App Company member " AS WACM
-actor "company member" as CM
+actor "Company member" as CM
 
 activate UM
 activate WAUM

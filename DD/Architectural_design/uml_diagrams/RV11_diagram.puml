@@ -35,7 +35,7 @@ deactivate DM
 
 CM -> RM: updateCV(digitalizedCV)
 activate RM
-RM -> EXT: updateEntity(tagsRemoved, tagsAdded, studentID, ENTITYTYPE.STUDENT)
+RM -> EXT: updateEntity(ENTITYTYPE.STUDENT, tagsRemoved, tagsAdded, studentID)
 activate EXT
 EXT --> RM: ok
 deactivate EXT
@@ -55,5 +55,5 @@ W --> S: show updates
 
 @enduml
 
-"The function updateEntity(tagsRemoved, tagsAdded, userID, ENTITYTYPE) updates the entity in the statistical analysis tool by specifying the 
+"The function updateEntity(ENTITYTYPE, tagsRemoved, tagsAdded, userID) updates the entity in the statistical analysis tool by specifying the 
 tags that were removed and the tags that were added."

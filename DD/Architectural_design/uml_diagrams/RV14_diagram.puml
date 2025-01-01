@@ -35,7 +35,7 @@ deactivate DM
 
 CM -> RM: updateCV(digitalizedCV)
 activate RM
-RM -> EXT: updateEntity(tagsRemoved, tagsAdded, studentID, ENTITYTYPE.STUDENT)
+RM -> EXT: updateEntity(ENTITYTYPE.STUDENT, tagsRemoved, tagsAdded, studentID)
 activate EXT
 EXT --> RM: ok
 deactivate EXT

@@ -42,7 +42,7 @@ alt company member confirms modifications
 
     I -> RE: updateInternshipTags(companyID, internshipID, tags)
     activate RE
-    RE -> EXT: updateEntity(ENTITYTYPE.INTERNSHIP, companyID, internshipID, tags)
+    RE -> EXT: updateEntity(ENTITYTYPE.INTERNSHIP, companyID, internshipID, tagsRemoved, tagsAdded)
     activate EXT
     EXT --> RE: ok
     deactivate EXT

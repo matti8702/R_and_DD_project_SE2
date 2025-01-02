@@ -26,7 +26,7 @@ loop until report is not empty
     CM -> WACM : click the submit report button
     WACM -> WACM : checkReport(report)
 end
-WACM -> C : submiteReport(report)
+WACM -> C : submitReport(report)
 activate C
 C -> IM    : submitReport(report)
 activate IM

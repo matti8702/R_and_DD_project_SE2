@@ -1,0 +1,48 @@
+@startuml deployment_diagram
+
+node "User Device" {
+  artifact "Browser" as UserBrowser
+}
+
+node "Perimeter Firewall" {
+  artifact "Firewall system" as PerimeterFW
+}
+
+node "Load Balancer" as LoadBalancer {
+  artifact "Load Balancer system" as LBSystem
+}
+
+node "Application Servers" as AppServers {
+  artifact "Application Server" as AppServer1
+  artifact "Application Server (Replica 1)" as AppServer2
+  artifact "Application Server (Replica 2)" as AppServer3
+}
+
+node "Database Cluster" {
+  artifact "DBMS system" as DBMS
+  database "Primary DB" as PrimaryDB
+  database "Replica 1" as ReplicaDB1
+  database "Replica 2" as ReplicaDB2
+  note bottom of DBMS: it includes the replication\nmanager system
+}
+
+node "Internal Firewall" {
+  artifact "Firewall system" as InternalFW
+}
+
+
+UserBrowser --> PerimeterFW : "HTTPS/WebSocket"
+PerimeterFW --> LBSystem : "HTTPS/WebSocket"
+LBSystem ---> AppServer1 : "HTTPS/WebSocket"
+LBSystem ---> AppServer2 : "HTTPS/WebSocket"
+LBSystem ---> AppServer3 : "HTTPS/WebSocket"
+
+AppServer1 ---> InternalFW : "TCP/IP"
+AppServer2 ---> InternalFW : "TCP/IP"
+AppServer3 ---> InternalFW : "TCP/IP"
+
+InternalFW --> DBMS : "SQL Queries / TCP/IP"
+DBMS --> PrimaryDB : SQL Queries
+DBMS --> ReplicaDB1 : "Replication Data"
+DBMS --> ReplicaDB2 : "Replication Data"
+@enduml

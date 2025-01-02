@@ -6,19 +6,18 @@
 \usepackage{graphicx} % required for inserting images
 \usepackage{import}
 \usepackage{amsmath} % required for \text
+\usepackage{float}
 
-\newcounter{runtimeviewcounter}
-\setcounter{runtimeviewcounter}{1}
-\newcommand{\runtimeview}[2]{
-    % title
-    \subsection*{#1}
-    % description
-    #2
+\newcounter{usecasecounter}
+\setcounter{usecasecounter}{1}
+\newcommand{\runtimeview}[3]{
+    \subsection*{Runtime view of [UC\arabic{usecasecounter}] - #1}
     \begin{figure}[H]
         \centering
-        \includegraphics[scale = 0.45]{Specific_requirements/uml_diagrams/UC\theusecasecounter_diagram.png}
-        \caption{Run time view for \textit{"#1"}.}
+        \includegraphics[scale = {#3}]{Architectural_design/uml_diagrams/RV\theusecasecounter_diagram.png}
+        \caption{Runtime view of \textit{"#1"} use case.}
     \end{figure}
+    {#2}
     \newpage
     \addtocounter{usecasecounter}{1}
 }

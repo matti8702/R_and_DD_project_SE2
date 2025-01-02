@@ -5,7 +5,6 @@ actor "Student" as ST
 participant "Web App Student " AS WAST
 participant "Controller" as C
 participant "Selection Manager" as SM
-participant "Interview Scheduler" as IS
 participant "Chat Manger" as CHM
 participant "Notification Manager" as NM
 participant "Data Manager" as DM

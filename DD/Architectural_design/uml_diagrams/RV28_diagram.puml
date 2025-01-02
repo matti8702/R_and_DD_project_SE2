@@ -1,4 +1,4 @@
-@startuml RV28
+@startuml RV28_diagram
 hide footbox
 
 actor "User" as U

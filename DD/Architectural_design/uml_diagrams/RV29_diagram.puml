@@ -1,4 +1,4 @@
-@startuml RV29
+@startuml RV29_diagram
 hide footbox
 
 participant "Internship Proposal Manager" as IM

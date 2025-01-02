@@ -1,4 +1,4 @@
-@startuml RV23
+@startuml RV23_diagram
 hide footbox
 
 actor "Generic User" as U

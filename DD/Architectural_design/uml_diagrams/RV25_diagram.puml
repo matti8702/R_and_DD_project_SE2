@@ -1,4 +1,4 @@
-@startuml RV25
+@startuml RV25_diagram
 hide footbox
 
 actor "Company member" as CM

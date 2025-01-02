@@ -1,4 +1,4 @@
-@startuml RV27
+@startuml RV27_diagram
 hide footbox
 
 actor "University member" AS UM

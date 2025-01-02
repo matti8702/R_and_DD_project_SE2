@@ -1,4 +1,4 @@
-@startuml RV22
+@startuml RV22_diagram
 hide footbox
 
 actor "Student" as ST

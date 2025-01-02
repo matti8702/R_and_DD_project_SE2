@@ -30,6 +30,7 @@
 \subsection{Component interfaces}
 %TODO: add introduction
 %TODO
+%TODO: review!!
 \begin{itemize}
     \item \textbf{Controller: RestAPI interface}
     \begin{itemize}
@@ -73,7 +74,7 @@
         \item sendNotifyMatchDeclined(matchProposal)
         \item sendNotifyMeeting(meeting)
         \item sendNotifyContract(contract)
-        \item sendNotify(result) %%%%% ???
+        \item sendNotifyRejection()
         \item notifyRemoveChat(internshipID, studentID)
         \item sendNotifyMessage(message)
         \item notifyReport(report)
@@ -157,7 +158,6 @@
         \item getCompanyRecommendations(companyID)
         \item addInternship(companyID, internshipID, tags)
         \item updateInternshipTags(companyID, internshipID, tags)
-        \item updateInternshipTags(tags) %%%%%% RV15
         \item deleteInternship(companyID, internshipID)
         \item deleteInternship(internshipId) %%%%% RV29
         \item updateCV(digitalizedCV)
@@ -190,15 +190,15 @@
         \item getStudentID(userEmail)
         \item getCompanyID(companyMemberEmailAddress)
         \item updateRecommendations(studentID, recommendations)
-        \item updateRecommendations(companyID, recommendations) %%%%%%%%% RV6
+        \item updateRecommendations(companyID, recommendations)
         \item addInternshipProposal(internshipData)
-        \item modifyInternship(internshipID, internshipData)
         \item deleteInternshipProposal(internshipID)
         \item getInternshipsByKeywords(keywords)
         \item modifyCV(text, section)
-        \item addCV(CVfile) %%%%% review
-        \item updateRecomendation(newRecommendation) %%%%%% RV13, typo
-        \item modifyInternshipDetails(internshipDetails) %%%%% RV15
+        \item saveCVPath(CVPath)
+        \item newRecommendation(studentID, newRecommendation)
+        \item newRecommendation(companyID, newRecommendation)
+        \item modifyInternshipDetails(internshipID, internshipDetails)
         \item getInternshipDetails(internshipID)
         \item getCV(studentID)
         \item addMatchProposal(matchProposal)
@@ -222,7 +222,7 @@
 \end{itemize}
 \subsection{Runtime views}
 %TODO: add introduction
-
+%TODO: add diagrams descriptions
 \runtimeview
 {Registration of a university member}
 {}

@@ -91,7 +91,7 @@ alt student is accepted
     ' comment for the description: the new list is performed by the webapp: It makes the difference between the candidates received at the beginning and the one which has responded
     WACM --> CM : page with the updated list of candidates
 else student is rejected
-    SM -> NM : sendNotify(result)
+    SM -> NM : sendNotifyRejection()
     alt student is online
         activate WAST
         activate ST

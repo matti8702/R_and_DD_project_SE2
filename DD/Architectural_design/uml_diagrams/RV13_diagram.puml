@@ -23,7 +23,15 @@ RM -> SAT: getNewRecommendations(ENTITYTYPE.COMPANY)
 activate SAT
 SAT --> RM: new company recommendation
 deactivate SAT
-RM -> DM: updateRecomendation(newRecommendation)
+RM -> DM: newRecommendation(studentID, newRecommendation)
+activate DM
+DM -> RD: executeStatement(statement)
+activate RD
+RD --> DM: ok
+deactivate RD
+DM --> RM: ok
+deactivate DM
+RM -> DM: newRecommendation(companyID, newRecommendation)
 activate DM
 DM -> RD: executeStatement(statement)
 activate RD

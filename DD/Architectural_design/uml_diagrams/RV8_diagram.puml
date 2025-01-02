@@ -19,10 +19,10 @@ CM -> W: insert modifications
 W --> CM: modified fields
 alt company member confirms modifications
     CM -> W: click "Confirm all the changes" button
-    W -> C: modifyInternship(internshipID, internshipData)
-    C -> I: modifyInternship(internshipID, internshipData)
+    W -> C: modifyInternshipDetails(internshipID, internshipDetails)
+    C -> I: modifyInternshipDetails(internshipID, internshipDetails)
     activate I
-    I -> DM: modifyInternship(internshipID, internshipData)
+    I -> DM: modifyInternshipDetails(internshipID, internshipDetails)
     activate DM
     DM -> RD: executeStatement(statement)
     activate RD

@@ -19,12 +19,12 @@ COM -> W: click apply suggestion
 W --> COM: show modification form
 COM -> COM: insert text modification
 COM -> W: confirm modification
-W -> C: modifyInternshipDetails(internshipDetails)
+W -> C: modifyInternshipDetails(internshipID, internshipDetails)
 activate C
-C -> I: modifyInternshipDetails(internshipDetails)
+C -> I: modifyInternshipDetails(internshipID, internshipDetails)
 activate I
 
-I -> DM: modifyInternshipDetails(internshipDetails)
+I -> DM: modifyInternshipDetails(internshipID, internshipDetails)
 activate DM
 DM -> RD: executeStatement(statement)
 activate RD
@@ -32,7 +32,7 @@ RD --> DM: ok
 deactivate RD
 DM --> I: ok
 deactivate DM 
-I -> RM: updateInternshipTags(tags)
+I -> RM: updateInternshipTags(companyID, internshipID, tags)
 activate RM
 RM -> EXT: updateEntity(ENTITYTYPE.INTERNSHIP, tagsRemoved, tagsAdded, internshipID)
 activate EXT

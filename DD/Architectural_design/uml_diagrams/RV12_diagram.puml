@@ -22,7 +22,7 @@ activate C
 C -> CM: publishCV(CVfile)
 activate CM
 CM -> CM: store(CVfile)
-CM -> DM: addCV(CVfile)
+CM -> DM: saveCVPath(CVPath)
 activate DM
 DM -> RD: executeStatement(statement)
 activate RD

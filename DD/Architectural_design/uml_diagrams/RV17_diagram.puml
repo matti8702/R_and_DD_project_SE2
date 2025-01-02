@@ -4,7 +4,6 @@ hide footbox
 actor "Company Member" as CM 
 participant "Web App Company Member" as W
 participant "Controller" AS C
-participant "Internship Proposal Manager" as IP
 participant "Match Manager" as M
 participant "CV Manager" as CV
 participant "Data Manager" as DM

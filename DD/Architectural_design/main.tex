@@ -33,63 +33,191 @@
 \begin{itemize}
     \item \textbf{Controller: RestAPI interface}
     \begin{itemize}
-        \item 
+        \item getAllUniversitiesNames()
+        \item getAllCompaniesNames()
+        \item registerAsUniversityMember(name, surname, dateOfBirth, password, emailAddress, universityName)
+        \item registerAsCompanyMember(name, surname, dateOfBirth, password, emailAddress, companyName)
+        \item registerAsStudent(name, surname, dateOfBirth, password, emailAddress, universityName)
+        \item registerUniversity(userInfo, universityName)
+        \item registerCompany(userInfo, companyName, companyDescription)
+        \item confirmEmailAddress(emailAddress)
+        \item login(emailAddress, password)
+        \item publishInternship(name, applicationStartDate, applicationEndDate, maxStudentAllowed, description, requirements, domain, tags, terms)
+        \item modifyInternship(internshipID, internshipData)
+        \item deleteInternship(internshipID)
+        \item getInternshipsByKeywords(keywords)
+        \item modifySectionDescription(text, section)
+        \item publishCV(CVfile)
+        \item getCV(studentID)
+        \item modifyInternshipDetails(internshipDetails)
+        \item getInternshipDetails(internshipID)
+        \item studentMatchProposal(studentID, internshipID)
+        \item companyMemberMatchProposal(studentID, internshipID)
+        \item evaluateMatchProposal(matchProposal, choice)
+        \item submitMeeting(form)
+        \item getCandidates(internshipID)
+        \item getStudentInfo(studentID)
+        \item addAdmissionChoice(result)
+        \item addDecision(choice)
+        \item sendMessage(message)
+        \item submitReport(report)
+        \item submitComplaint(complaint)
+        \item getStudents(universityName)
+        \item interruptInternship(internshipID, studentID)
+        \item postFeedback(feedback)
     \end{itemize}
     \item \textbf{Notification Manager: Notification interface}
     \begin{itemize}
-        \item 
+        \item sendNotifyNewMatch(matchProposal)
+        \item sendNotifyMatchAccepted(matchProposal)
+        \item sendNotifyMatchDeclined(matchProposal)
+        \item sendNotifyMeeting(meeting)
+        \item sendNotifyContract(contract)
+        \item sendNotify(result) %%%%% ???
+        \item notifyRemoveChat(internshipID, studentID)
+        \item sendNotifyMessage(message)
+        \item notifyReport(report)
+        \item notifyNewComplaint(complaint)
+        \item notifyInternshipInterruption(internshipID, studentID)
     \end{itemize}
     \item \textbf{Registration Manager: Registration interface}
     \begin{itemize}
-        \item 
+        \item registerAsUniversityMember(name, surname, dateOfBirth, password, emailAddress, universityName)
+        \item registerAsCompanyMember(name, surname, dateOfBirth, password, emailAddress, companyName)
+        \item registerAsStudent(name, surname, dateOfBirth, password, emailAddress, universityName)
+        \item confirmEmailAddress(emailAddress)
+        \item registerUniversity(userInfo, universityName)
+        \item registerCompany(userInfo, companyName, companyDescription)
     \end{itemize}
     \item \textbf{Login Manager: Login interface}
     \begin{itemize}
-        \item 
+        \item login(emailAddress, password)
     \end{itemize}
     \item \textbf{CV Manager: CV interface}
     \begin{itemize}
-        \item 
+        \item modifySectionDescription(text, section)
+        \item publishCV(CVfile)
+        \item getCV(studentID)
     \end{itemize}
     \item \textbf{Internship Proposal Manager: Proposal interface}
     \begin{itemize}
-        \item 
+        \item publishInternship(internshipData)
+        \item modifyInternship(internshipID, internshipData)
+        \item deleteInternship(internshipID)
+        \item getInternshipsByKeywords(keywords)
+        \item modifyInternshipDetails(internshipDetails)
+        \item getInternshipDetails(internshipID)
     \end{itemize}
     \item \textbf{Match Manager: Match interface}
     \begin{itemize}
-        \item 
+        \item studentMatchProposal(studentID, internshipID)
+        \item checkAlreadyExistentMatch(studentID,internshipID)
+        \item companyMemberMatchProposal(studentID, internshipID)
+        \item evaluateMatchProposal(matchProposal, choice)
     \end{itemize}
     \item \textbf{Chat Manager: Chat interface}
     \begin{itemize}
-        \item 
+        \item createNewChat()
+        \item deleteChat(internshipID, studentID)
+        \item sendMessage(message)
     \end{itemize}
     \item \textbf{Selection Manager: Selection interface}
     \begin{itemize}
-        \item 
+        \item submitMeeting(form)
+        \item getCandidates(internshipID)
+        \item getStudentInfo(studentID)
+        \item addAdmissionChoice(result)
+        \item addDecision(choice)
     \end{itemize}
     \item \textbf{Internship Status Manager: Internship status interface}
     \begin{itemize}
-        \item 
+        \item submitReport(report)
+        \item submitComplaint(complaint)
+        \item getStudents(universityName)
+        \item interruptInternship(internshipID, studentID)
+        \item postFeedback(feedback)
     \end{itemize}
     \item \textbf{Suggestion Manager: Suggestion interface}
     \begin{itemize}
-        \item 
+        \item getCVSuggestions(digitalizedCvSection)
+        \item getInternshipSuggestion(internshipDetails)
     \end{itemize}
     \item \textbf{Email Manager: Email interface}
     \begin{itemize}
-        \item 
+        \item sendConfirmationEmail(emailAddress)
+        \item sendRecommendationEmail(users)
     \end{itemize}
     \item \textbf{Recommendation Manager: Recommendation interface}
     \begin{itemize}
-        \item 
+        \item addCompany(companyID)
+        \item deleteCompany(companyID)
+        \item addStudent(studentID)
+        \item deleteStudent(studentID)
+        \item getStudentRecommendations(studentID)
+        \item getCompanyRecommendations(companyID)
+        \item addInternship(companyID, internshipID, tags)
+        \item updateInternshipTags(companyID, internshipID, tags)
+        \item updateInternshipTags(tags) %%%%%% RV15
+        \item deleteInternship(companyID, internshipID)
+        \item deleteInternship(internshipId) %%%%% RV29
+        \item updateCV(digitalizedCV)
+        \item updateScores(internshipId, internshipTags, studentTags, grades)
     \end{itemize}
     \item \textbf{Interview Scheduler: Scheduler interface}
     \begin{itemize}
-        \item 
+        \item submitMeeting(form)
+        \item attachWarning(meeting, overlappingEvents)
     \end{itemize}
     \item \textbf{Data Manager: Data interface}
     \begin{itemize}
-        \item 
+        \item getAllUniversitiesNames()
+        \item getAllCompaniesNames()
+        \item getUniversityInfo(universityName)
+        \item getCompanyInfo(companyName)
+        \item getUsersEmail()
+        \item addUniversityMember(name, surname, dateOfBirth, password, emailAddress, universityName)
+        \item addUniversity(universityName, emailDomain)
+        \item addCompanyMember(name, surname, dateOfBirth, password, emailAddress, companyName)
+        \item addCompany(companyName, companyDescription, emailDomain)
+        \item addStudent(name, surname, dateOfBirth, password, emailAddress, universityName)
+        \item confirmUserRegistration(emailAddress)
+        \item cancelUser(emailAddress)
+        \item cancelUniversity(emailAddress)
+        \item cancelCompany(emailAddress)
+        \item getUserPassword(emailAddress)
+        \item addToken(userEmail, token)
+        \item getUserStatus(userEmail)
+        \item getStudentID(userEmail)
+        \item getCompanyID(companyMemberEmailAddress)
+        \item updateRecommendations(studentID, recommendations)
+        \item updateRecommendations(companyID, recommendations) %%%%%%%%% RV6
+        \item addInternshipProposal(internshipData)
+        \item modifyInternship(internshipID, internshipData)
+        \item deleteInternshipProposal(internshipID)
+        \item getInternshipsByKeywords(keywords)
+        \item modifyCV(text, section)
+        \item addCV(CVfile) %%%%% review
+        \item updateRecomendation(newRecommendation) %%%%%% RV13, typo
+        \item modifyInternshipDetails(internshipDetails) %%%%% RV15
+        \item getInternshipDetails(internshipID)
+        \item getCV(studentID)
+        \item addMatchProposal(matchProposal)
+        \item getMatchCount(studentID, InternshipID)
+        \item updateMatchProposal(matchProposal, choice)
+        \item addMeeting(meeting)
+        \item findOverlappingEvents(meeting)
+        \item getCandidates(internshipID)
+        \item getStudentInfo(studentID)
+        \item removeCandidate(studentID)
+        \item getInternshipContract(internshipID)
+        \item deleteChat(internshipID, studentID)
+        \item getInternshipInfo(internshipID) %%%%%RV22
+        \item addMessage(message)
+        \item addReport(report)
+        \item addComplaint(complaint)
+        \item getStudents(universityName)
+        \item interruptInternship(internshipID, studentID)
+        \item closeInternship(internshipID)
     \end{itemize}
 \end{itemize}
 \subsection{Runtime views}
@@ -203,7 +331,7 @@
 \runtimeview
 {Student decides on the offer}
 {}
-{0.22}
+{0.23}
 
 \runtimeview
 {User writes a message}

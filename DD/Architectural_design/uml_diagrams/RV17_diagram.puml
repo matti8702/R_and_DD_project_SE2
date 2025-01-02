@@ -44,7 +44,7 @@ W --> CM: show student CV
 
 CM -> W: click send match proposal
 
-W -> C: CompanyMemberMatchProposal(studentID, internshipID)
+W -> C: companyMemberMatchProposal(studentID, internshipID)
 activate C
 C -> M: checkAlreadyExistentMatch(studentID,internshipID)
 activate M
@@ -62,7 +62,7 @@ deactivate M
 
 alt First time the match proposal is sent
 
-    C -> M: CompanyMemberMatchProposal(studentID, internshipID)
+    C -> M: companyMemberMatchProposal(studentID, internshipID)
     activate M
 
     M -> NM: sendNotifyNewMatch(matchProposal)

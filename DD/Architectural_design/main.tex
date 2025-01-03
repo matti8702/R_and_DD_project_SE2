@@ -37,14 +37,24 @@ Each component is explained in detail:
     \item \textbf{Data Manager}: interacts with the Relational DBMS to perform database operations requested by other components.
 \end{itemize}
 \subsection{Deployment view}
-%TODO: add introduction
+The Deployment view section illustrates the distribution of system modules across the physical infrastructure, showing how they interact with each other to ensure efficient operation and scalability.
 
-%TODO: add deployment diagram
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[scale = 0.31]{Architectural_design/uml_diagrams/deployment_diagram.pdf}
-%    \caption{Deployment diagram of the system.}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.35]{Architectural_design/uml_diagrams/deployment_diagram.png}
+    \caption{Deployment diagram of the system.}
+\end{figure}
+
+\noindent
+Each node is explained in detail:
+\begin{itemize}
+    \item \textbf{User Device}: the user's device runs a \textbf{Browser} that interacts with the system through HTTPS or WebSocket protocols.
+    \item \textbf{Perimeter Firewall}: it acts as a security layer between the user device and the internal system, filtering traffic.
+    \item \textbf{Load Balancer}: the \textbf{Load Balancer system} distributes incoming traffic between multiple application servers (including the main server and its replicas) using HTTPS or WebSocket protocols to ensure high availability.
+    \item \textbf{Application Servers}: it runs the core application logic, using replicas.
+    \item \textbf{Database Cluster}: the \textbf{Database Management System (DBMS)} manages the primary and replica databases (\textbf{Primary DB}, \textbf{Replica 1}, \textbf{Replica 2}). The DBMS handles SQL queries and ensures data replication across the databases.
+    \item \textbf{Internal Firewall}: it protects the communication between the application servers and the DBMS, managing the flow of TCP/IP and SQL queries.
+\end{itemize}
 \subsection{Component interfaces}
 %TODO: add introduction
 %TODO

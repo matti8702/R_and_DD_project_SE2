@@ -23,7 +23,7 @@ node "Database Cluster" {
   database "Primary DB" as PrimaryDB
   database "Replica 1" as ReplicaDB1
   database "Replica 2" as ReplicaDB2
-  note bottom of DBMS: it includes the replication\nmanager system
+  note bottom of DBMS: it runs the replication\nmanager system
 }
 
 node "Internal Firewall" {

@@ -8,16 +8,34 @@
 %    \caption{Overview of the system architecture.}
 %\end{figure}
 \subsection{Component view}
-%TODO: add introduction
+This section presents the Component view diagram. It outlines the system's main building blocks, their responsibilities, and how they interact.
 
-%TODO: add component diagram
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[scale = 0.31]{Architectural_design/uml_diagrams/component_diagram.pdf}
-%    \caption{Component diagram of the system.}
-%\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.31]{Architectural_design/uml_diagrams/component_diagram.pdf}
+    \caption{Component diagram of the system.}
+\end{figure}
 
-%TODO: add diagram description
+\noindent
+Each component is explained in detail:
+\begin{itemize}
+    \item \textbf{Web App}: manages the layout of the website accessed by the users.
+    \item \textbf{Controller}: serves as the entry point of the application server, receiving requests from users' web apps and handling them through calls to other system components.
+    \item \textbf{Notification Manager}: handles real-time notifications, displaying updates relevant to the user while they interact with the website.
+    \item \textbf{Registration Manager}: manages the registration of new users (students, company members, and university members) as well as universities and companies.
+    \item \textbf{Login Manager}: oversees user authentication by verifying credentials and generating tokens. These tokens enable user recognition during the requests and are included in every call from the web app.
+    \item \textbf{CV Manager}: handles student CVs, both in file format and as digitalized versions.
+    \item \textbf{Internship Proposal Manager}: focuses on managing internship proposals published by company members, excluding data related to ongoing internships.
+    \item \textbf{Match Manager}: oversees the lifecycle of match proposals, from creation to the communication of final outcomes.
+    \item \textbf{Chat Manager}: enables communication between company members and students within the same selection phase through a dedicated chat.
+    \item \textbf{Selection Manager}: manages the entire selection process for internship proposals, from scheduling interviews to sharing results with students.
+    \item \textbf{Internship Status Manager}: handles all aspects of ongoing internships, including reports, complaints, and feedback.
+    \item \textbf{Suggestion Manager}: detects suggestions related to digitalized CVs and internship descriptions.
+    \item \textbf{Email Manager}: manages communication with the external email service in order to send emails to registered users.
+    \item \textbf{Recommendation Manager}: works with the external statistical analysis tool in order to generate recommendations for students and companies.
+    \item \textbf{Interview Scheduler}: coordinates with the external video conferencing tool to schedule interviews, generate meeting links, and facilitate virtual sessions for online interviews.
+    \item \textbf{Data Manager}: interacts with the Relational DBMS to perform database operations requested by other components.
+\end{itemize}
 \subsection{Deployment view}
 %TODO: add introduction
 
@@ -261,7 +279,7 @@
 \runtimeview
 {Modify an internship}
 {}
-{0.19}
+{0.18}
 
 \runtimeview
 {Delete an internship}
@@ -296,7 +314,7 @@
 \runtimeview
 {Apply a suggestion to the internship description}
 {}
-{0.17}
+{0.16}
 
 \runtimeview
 {Student sends a match proposal}

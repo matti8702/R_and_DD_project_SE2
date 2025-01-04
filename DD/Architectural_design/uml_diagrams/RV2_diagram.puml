@@ -191,7 +191,3 @@ else company is not registered to the system
 end
 
 @enduml
-
-//specify that addCompanyMember and addCompany insert the user/company with a flag "notConfirmed".
-//confirmUserRegistration add the user and the company too (in case the user has created the company)
-//describe ENTITYTYPE

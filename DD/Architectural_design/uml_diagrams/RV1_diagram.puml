@@ -171,6 +171,3 @@ else university is not registered to the system
 end
 
 @enduml
-
-//specify that addUniversityMember and addUniversity insert the user/university with a flag "notConfirmed".
-//confirmUserRegistration add the user and the university too (in case the user has created the university)

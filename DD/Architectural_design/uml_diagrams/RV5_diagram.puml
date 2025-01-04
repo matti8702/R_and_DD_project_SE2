@@ -86,6 +86,3 @@ else invalid credentials
 end
 
 @enduml
-
-//specify that checkCredentials() check also if user has already confirmed the email address
-//describe token system

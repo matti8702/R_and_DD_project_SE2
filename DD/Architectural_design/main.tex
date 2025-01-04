@@ -8,6 +8,7 @@ The image shows the \textbf{3-tier architecture} of the system.
     \caption{Overview of the system architecture.}
 \end{figure}
 \subsection{Component view}
+\label{section2.2}
 This section presents the Component view diagram. It outlines the system's main building blocks, their responsibilities, and how they interact.
 
 \begin{figure}[H]
@@ -56,8 +57,7 @@ Each node is explained in detail:
     \item \textbf{Internal Firewall}: it protects the communication between the application servers and the DBMS, managing the flow of TCP/IP and SQL queries.
 \end{itemize}
 \subsection{Component interfaces}
-%TODO: add introduction
-%TODO
+This section lists all the functions exposed by the interfaces of the architectural components. These functions will be used in the runtime views presented in the next sub section.
 %TODO: review!!
 \begin{itemize}
     \item \textbf{Controller: RestAPI interface}
@@ -185,7 +185,7 @@ Each node is explained in detail:
         \item getStudentRecommendations(studentID)
         \item getCompanyRecommendations(companyID)
         \item addInternship(companyID, internshipID, tags)
-        \item updateInternshipTags(companyID, internshipID, tags)
+        \item updateInternshipTags(companyID, internshipID, tagsRemoved, tagsAdded)
         \item deleteInternship(companyID, internshipID)
         \item deleteInternship(internshipId) %%%%% RV29
         \item updateCV(digitalizedCV)
@@ -249,21 +249,27 @@ Each node is explained in detail:
     \end{itemize}
 \end{itemize}
 \subsection{Runtime views}
-%TODO: add introduction
+This section presents the runtime views for the use cases defined in the RASD (one view for each use case). These views are shown as sequence diagrams. Unlike those provided in the RASD, these diagrams use actual architectural components as "actors," as previously defined in \underline{\hyperref[section2.2]{section 2.2}}.
 %TODO: add diagrams descriptions
 \runtimeview
 {Registration of a university member}
-{}
+{
+    This sequence diagram illustrates the registration process for university members. It also includes the registration of the member's university if it has not yet been added to the system. The user has one day to confirm the email address provided during registration, following the instructions sent in the system-generated email. Once confirmed, the system activates the user account and the created university, if applicable. Note that, during registration, both the user and the newly created university (if any) are added to the system (by calling \textit{addUniversityMember} and \textit{addUniversity} functions) with a flag "notConfirmed", indicating that the email address has not been confirmed. Until the email is confirmed, the user cannot access the platform. Finally, the \textit{confirmUserRegistration} function activates the user and also the university (in case the user has registered it).
+}
 {0.14}
 
 \runtimeview
 {Registration of a company member}
-{}
+{
+    This sequence diagram illustrates the registration process for company members. It also includes the registration of the member's company if it has not yet been added to the system. The user has one day to confirm the email address provided during registration, following the instructions sent in the system-generated email. Once confirmed, the system activates the user account and the created company, if applicable. Note that, during registration, both the user and the newly created company (if any) are added to the system (by calling \textit{addCompanyMember} and \textit{addCompany} functions) with a flag "notConfirmed", indicating that the email address has not been confirmed. Until the email is confirmed, the user cannot access the platform. In case of a new company is created, the system will send the generated ID of the newly created company to the external statistical analysis tool. If the user does not confirm the email address within one day of registration, the system will notify the tool again in order to delete the company's ID. Moreover, the \textit{confirmUserRegistration} function activates the user and also the university (in case the user has registered it). Finally, the \textit{ENTITYTYPE} enumeration allows specifying the type of entity on which an operation is being performed (modification, insertion, deletion, or reading) on the external statistical analysis tool. The enumeration can take three values: \textit{STUDENT}, \textit{COMPANY} or \textit{INTERNSHIP}.
+}
 {0.12}
 
 \runtimeview
 {Registration of a student}
-{}
+{
+    This sequence diagram illustrates the registration process for students. The user has one day to confirm the email address provided during registration, following the instructions sent in the system-generated email. Once confirmed, the system activates the user account. Note that, during registration, the user is added to the system (by calling \textit{addStudent} function) with a flag "notConfirmed", indicating that the email address has not been confirmed. Until the email is confirmed, the user cannot access the platform. The system will send the generated ID of the newly student to the external statistical analysis tool. If the user does not confirm the email address within one day of registration, the system will notify the tool again in order to delete the student's ID.
+}
 {0.13}
 
 \runtimeview
@@ -283,22 +289,30 @@ Each node is explained in detail:
 
 \runtimeview
 {Creation of an internship}
-{}
+{
+    This diagram shows the creation of an internship proposal by the company member. The system adds the proposal to the database and notifies the external statistical analysis tool of the addition. The tool will receive the ID of the created internship and the ID of the member's company. The tool must know the company that published the internship, as the recommendations will be directed to companies (and thus notified to all company members) and students.
+}
 {0.19}
 
 \runtimeview
 {Modify an internship}
-{}
-{0.18}
+{
+    This diagram shows the modification of an internship proposal made by a company member. The system saves all the changes to the database and communicates the changes regarding only the tags to the external statistical analysis tool, specifying the tags that were removed (\textit{tagsRemoved}) and the tags that were added (\textit{tagsAdded}).
+}
+{0.17}
 
 \runtimeview
 {Delete an internship}
-{}
+{
+    This diagram shows the deletion of an internship proposal made by a company member. The system deletes the proposal from the database and communicates the deletion to the external statistical analysis tool, specifying the type of entity to be deleted (\textit{ENTITYTYPE.INTERNSHIP}), the company ID, and the internship ID.
+}
 {0.23}
 
 \runtimeview
 {Searching for an internship by means of keywords}
-{}
+{
+    This diagram shows the search for internship proposals performed by students through the insertion of keywords. The system searches for all internship proposals that have a name similar to the one specified by the user and, if found, sorts them based on the recommendations received from the external statistical analysis tool.
+}
 {0.22}
 
 \runtimeview
@@ -399,4 +413,4 @@ Each node is explained in detail:
 \subsection{Selected architectural styles and patterns}
 %TODO: 3-tier, MVC, ...
 \subsection{Other design decisions}
-%TODO: delete?
+%TODO: relational db, tokens?

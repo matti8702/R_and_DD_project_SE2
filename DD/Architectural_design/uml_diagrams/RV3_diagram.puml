@@ -123,6 +123,4 @@ else email address is not linked to the university provided
 end
 
 @enduml
-
-//specify that addStudent insert the user with a flag "notConfirmed".
 //modify RASD (conflicts with DA11)

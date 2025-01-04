@@ -40,7 +40,7 @@ alt company member confirms modifications
     DM --> I: company ID
     deactivate DM
 
-    I -> RE: updateInternshipTags(companyID, internshipID, tags)
+    I -> RE: updateInternshipTags(companyID, internshipID, tagsRemoved, tagsAdded)
     activate RE
     RE -> EXT: updateEntity(ENTITYTYPE.INTERNSHIP, companyID, internshipID, tagsRemoved, tagsAdded)
     activate EXT

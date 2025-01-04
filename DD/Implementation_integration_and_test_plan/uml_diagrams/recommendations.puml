@@ -1,0 +1,9 @@
+@startuml feat1
+
+folder RM as "Recommendation Manager"
+folder DM as "Data Manager"
+folder D as "Driver" #DarkGray
+
+D -- RM
+RM -- DM
+@enduml

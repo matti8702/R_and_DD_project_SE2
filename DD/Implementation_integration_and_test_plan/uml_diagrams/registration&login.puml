@@ -1,0 +1,20 @@
+@startuml feat2
+
+folder D1 as "Driver" #DarkGray
+folder D2 as "Driver" #DarkGray
+folder RS as "Registration Manager"
+folder L as "Login Manager"
+folder EM as "Email Manager"
+folder RM as "Recommendation Manager"
+folder DM as "Data Manager"
+
+L --- DM
+RS --- DM
+D1 -- L
+D2 -- RS
+L  -- EM
+RS -- EM
+L  -- RM
+RS --- RM
+RM -- DM
+@enduml

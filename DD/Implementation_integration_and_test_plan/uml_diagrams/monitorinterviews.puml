@@ -1,0 +1,52 @@
+@startuml feat7
+
+folder IM as "Internship Status Manager"
+folder D7 as "Driver" #DarkGray
+folder CH as "Chat Manager"
+folder IS as "Interview Scheduler"
+folder SE as "Selection Manager"
+folder D6 as "Driver" #DarkGray
+folder IP as "Internship Proposal Manager"
+folder D4 as "Driver" #DarkGray
+folder N as "Notify Manager"
+folder M as "Matching Manager"
+folder CV as "CV Manager"
+folder SM as "Suggestion Manager"
+folder D1 as "Driver" #DarkGray
+folder D2 as "Driver" #DarkGray
+folder D3 as "Driver" #DarkGray
+folder D5 as "Driver" #DarkGray
+folder RS as "Registration Manager"
+folder L as "Login Manager"
+folder EM as "Email Manager"
+folder RM as "Recommendation Manager"
+folder DM as "Data Manager"
+
+D7 --- IM
+IM ------- DM
+D6 --- SE 
+SE --- IS
+SE --- CH
+CH --- N
+SE --- DM
+SE --- N
+M --- DM
+D5 --- M
+D4 --- IP
+IP --- DM
+IP --- RM
+M --- N
+CV ---- RM
+CV --- DM
+CV --- SM
+D3 --- CV
+D1 --- L
+D2 --- RS
+L  --- EM
+RS --- EM
+L  --- RM
+RS --- DM 
+L  --- DM
+RS ---- RM
+RM --- DM
+@enduml

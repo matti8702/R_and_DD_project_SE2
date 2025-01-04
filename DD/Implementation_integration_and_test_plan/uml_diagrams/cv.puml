@@ -1,0 +1,27 @@
+@startuml feat3
+
+folder CV as "CV Manager"
+folder SM as "Suggestion Manager"
+folder D1 as "Driver"  #DarkGray 
+folder D2 as "Driver"  #DarkGray
+folder D3 as "Driver"#DarkGray
+folder RS as "Registration Manager"
+folder L as "Login Manager"
+folder EM as "Email Manager"
+folder RM as "Recommendation Manager"
+folder DM as "Data Manager"
+
+CV ---- RM
+CV --- DM
+CV --- SM
+D3 --- CV
+D1 --- L
+D2 --- RS
+L  --- EM
+RS --- EM
+L  --- RM
+RS --- DM 
+L  --- DM
+RS ---- RM
+RM --- DM
+@enduml

@@ -55,5 +55,3 @@ W --> S: show updates
 
 @enduml
 
-"The function updateEntity(ENTITYTYPE, tagsRemoved, tagsAdded, userID) updates the entity in the statistical analysis tool by specifying the 
-tags that were removed and the tags that were added."

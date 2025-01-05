@@ -58,7 +58,3 @@ deactivate E
 @enduml
 
 
-"The function getNewRecommendations(entityType) retrieves all the new recommendations related to entities of the type specified by the parameter 
-entityType"
-"The diagram represents only two users, a Student and a Company Member ( company members receive recommendation associated to their company), 
-who act as representatives of their respective categories. However, emails are sent to all users with new recommendations (which may include none)"

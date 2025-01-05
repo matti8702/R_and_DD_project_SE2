@@ -328,47 +328,102 @@ This section presents the runtime views for the use cases defined in the RASD (o
 
 \runtimeview
 {Modify the digitalized curriculum vitae version}
-{}
+{
+    This diagram illustrates the modification process for the digitalized student curriculum.
+    The system receives the modification, updates the DBMS, and then updates the statistical tool to account for any changes in the student's tags using the function updateEntity(ENTITYTYPE, tagsRemoved, tagsAdded, userID), which specifies the tags that were removed and those that were added.
+    Before displaying the updates on the web application, the platform also updates the suggestions, as they might have been affected by the changes.
+}
 {0.18}
 
 \runtimeview
 {Upload a new CV document}
-{}
+{
+    This diagram shows the process of updating the student CV file.
+    The system first verifies that the file has been uploaded with a correct file extension and then updates the database.
+    It is important to note that the database only stores the path to the CV file, which is saved locally by the CV manager.
+}
 {0.28}
 
 \runtimeview
 {Notify new recommendations}
-{}
+{
+    The diagram illustrates the notification process for new recommendations to users.
+    The system retrieves new recommendations from the statistical tool using the function getNewRecommendations(entityType), which returns all recommendations related to entities of the type specified by the entityType parameter.
+    Subsequently, the platform updates the DBMS and sends an email to all users with new recommendations available.
+    The diagram only depicts two users, a Student and a Company Member, who act as representatives of their respective categories. Company Members receive recommendations associated with their company.
+}
 {0.28}
 
 \runtimeview
 {Apply a suggestion to the digitalized curriculum vitae}
-{}
+{
+    The diagram illustrates the modification of the digitized student curriculum through a suggestion.
+    The student initiates the modification of a CV section by interacting with a suggestion. The system then receives the modification, updates the DBMS, and updates the statistical tool to reflect any changes in the student's tags.
+    Before displaying the updates on the web application, the platform also updates the suggestions, as they may have been impacted by the changes.
+}
 {0.18}
 
 \runtimeview
 {Apply a suggestion to the internship description}
-{}
+{
+    This diagram shows the modification of an internship offer details through a suggestion.
+    The company member begins the modification of an internship offer section, by interacting with a suggestion. The system then processes the modification, updates the DBMS, and updates the statistical tool to reflect any changes in the internship offer's tags.
+    Before displaying the updates on the web application, the platform also revises the suggestions, as they may have been influenced by the changes.
+
+}
 {0.16}
 
 \runtimeview
 {Student sends a match proposal}
-{}
+{
+    This diagram illustrates the sending of a match proposal from a student. The system first 
+    retrieves information about the internship, and if the internship application period is 
+    still open, it proceeds by retrieving the student's CV. The platform then notifies the company member 
+    who published the internship offer, on the web application 
+    about the new match proposal, if the company member is online; otherwise, they will see the 
+    new match after their next login. Finally, the system updates the database by inserting the 
+    new pending match proposal. If the student has already sent a proposal for the same internship, 
+    the web app UI won't allow them to send the request again.
+}
 {0.18}
 
 \runtimeview
 {Company member sends a match proposal}
-{}
+{
+    This diagram shows the sending of a match proposal from a company member to a student. 
+    The system first retrieves the student's curriculum, and if it is the first time the company
+     of the company member sends a proposal to the student, the system proceeds to send the match
+      proposal to the student as a notification on the web app, and then updates the database.
+}
 {0.18}
 
 \runtimeview
 {Student responds to company's match proposal}
-{}
+{
+    The diagram illustrates the evaluation of a match proposal by the student. The system 
+    receives the student's choice, which can either be an acceptance or a refusal, and in 
+    both cases, the platform updates the DBMS. If the student accepts the match, the system 
+    creates a new chat between the student and the company member. If the company member is 
+    active on the web app, they will receive a notification about the outcome of the match and 
+    the opening of the new chat. If the student, instead, rejects the match, the counterpart will 
+    receive a notification if they are active, as in the previous case. In both cases, if the 
+    counterpart is inactive, the outcome of the evaluation will be visible after their next login.
+}
 {0.18}
 
 \runtimeview
 {Company member responds to student's match proposal}
-{}
+{
+    This diagram shows the evaluation of a match proposal by the company member. The system 
+    processes the company member's decision, which can either be an acceptance or a rejection, 
+    and in both cases, the platform updates the DBMS. If the company member agrees to the match, 
+    the system sets up a new chat between the student and the company member. If the student is 
+    active on the web app, they will be notified about the match's outcome and the creation of 
+    the new chat. If the company member, on the other hand, declines the match, the counterpart 
+    will receive a notification if they are online, as in the previous scenario. In both cases, 
+    if the counterpart is offline, the evaluation outcome will become visible after their next 
+    login.
+}
 {0.16}
 
 \runtimeview

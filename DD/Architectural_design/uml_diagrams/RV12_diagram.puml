@@ -44,4 +44,3 @@ W --> S: show updates
 
 @enduml
 
-"The Curriculum Vitae file is stored in the CV Manager component, while the DBMS saves its location."

@@ -249,7 +249,6 @@ This section lists all the functions exposed by the interfaces of the architectu
 \end{itemize}
 \subsection{Runtime views}
 This section presents the runtime views for the use cases defined in the RASD (one view for each use case). These views are shown as sequence diagrams. Unlike those provided in the RASD, these diagrams use actual architectural components as "actors," as previously defined in \underline{\hyperref[section2.2]{section 2.2}}.
-%TODO: add diagrams descriptions
 \runtimeview
 {Registration of a university member}
 {
@@ -292,7 +291,8 @@ This section presents the runtime views for the use cases defined in the RASD (o
 }
 {0.19}
 
-%TODO: specify that tokens are not shown for clarity
+\noindent
+\underline{\textbf{Note}}: in order to keep the diagrams clear and easy to read, the user's token has been excluded from the input parameters of the functions called by the web app. Each request received by the controller will contain the token. The system will then use it to identify the user making the request before processing it.
 
 \runtimeview
 {Creation of an internship}

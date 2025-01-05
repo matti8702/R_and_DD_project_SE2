@@ -274,29 +274,25 @@ This section presents the runtime views for the use cases defined in the RASD (o
 \runtimeview
 {Login of a university member}
 {
-    
-//specify that checkCredentials() check also if user has already confirmed the email address
-//describe token system
-
+    This diagram shows the login phase of a university member. The system checks the correctness of the provided data (email address and password) and verifies that the user has previously confirmed their email address (via the \textit{checkCredentials} function). If the verification is successful, the system generates a unique random token (which serves as an authentication mechanism, enabling the user to make subsequent requests without needing to reauthenticate). The system will keep track of user-token associations to recognize the user making the future requests (by saving tokens in the database). Once the token is generated, it is communicated to the web app along with the user's state. The state includes all the information necessary to load the pages the user will be able to access.
 }
 {0.28}
 
 \runtimeview
 {Login of student}
 {
-    
-//specify that checkCredentials() check also if user has already confirmed the email address
-//describe token system
+    This diagram shows the login phase of a student. The procedure is identical to that of a university member (as described in the previous runtime view) regarding the generation of tokens, the check of credentials and the user's state. In addition to these details, the system sends all recommendations, retrieved through the external statistical analysis tool, to the web app. The system also updates the recommendations stored in the internal database.
 }
 {0.19}
 
 \runtimeview
 {Login of company member}
 {
-    //specify that checkCredentials() check also if user has already confirmed the email address
-//describe token system
+    This diagram shows the login phase of a company member. The procedure is the same as that for students (as described in the previous runtime view). The only difference lies in the fact that, in this case, the recommendations to be retrieved are targeted at the entire company (and thus apply to all its members). For this reason, the system first retrieves the identifier of the company the member works for and then makes the request to the external statistical analysis tool.
 }
 {0.19}
+
+%TODO: specify that tokens are not shown for clarity
 
 \runtimeview
 {Creation of an internship}
@@ -453,18 +449,18 @@ The parameter \textit{result} in the \textit{addAdmissionChoice} function is a c
 \runtimeview
 {Student writes a report}
 {This diagram illustrates a student submitting a report to the system. The system saves the report to the database, then it retrives the information about the company member and the university member from the report (composite type) and sends it to the web apps of all active company members at the time of the event.}
-{0.19}
+{0.18}
 
 \runtimeview
 {Company member writes a report}
 {This diagram illustrates a company member submitting a report to the system. 
 The system saves the report to the database, then it retrieves the student information from the report (composite type) and sends it to the web app of the student if active.}
-{0.19}
+{0.18}
 
 \runtimeview
 {Student writes a complaint}
 {This diagram illustrates a student submitting a complaint to the system. The received complaint is dispatched to all interested party (who are online) by the system, using the information embedded in the parameter, and extracted by the \textit{extractComplaintInfo} function.}
-{0.19}
+{0.17}
 
 \runtimeview
 {University member interrupts an internship}

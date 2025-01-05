@@ -16,5 +16,6 @@ L  -- EM
 RS -- EM
 L  -- RM
 RS --- RM
+RM ---- EM
 RM -- DM
 @enduml

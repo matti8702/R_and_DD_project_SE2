@@ -2,8 +2,12 @@
 
 folder RM as "Recommendation Manager"
 folder DM as "Data Manager"
+folder EM as "Email Manager"
 folder D as "Driver" #DarkGray
+folder DE as "Driver" #DarkGray
 
+DE -- EM
 D -- RM
+RM -- EM 
 RM -- DM
 @enduml

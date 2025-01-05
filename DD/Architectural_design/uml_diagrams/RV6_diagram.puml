@@ -40,7 +40,7 @@ alt credentials are valid
     DM --> L: ok
     deactivate DM
 
-    L -> DM: getCompanyID(companyMemberEmailAddress)
+    L -> DM: getCompanyIDByMember(companyMemberEmailAddress)
     activate DM
     DM -> RD: executeStatement(statement)
     activate RD

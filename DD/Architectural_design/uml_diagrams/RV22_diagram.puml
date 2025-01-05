@@ -22,7 +22,7 @@ activate C
 C -> SM    : addDecision(choice)
 activate SM
 SM -> SM   : extractInfo(choice)
-SM -> DM   : getInternshipInfo(internshipID)
+SM -> DM   : getInternshipDetails(internshipID)
 activate DM
 DM -> DB  : executeStatement(statement)
 activate DB

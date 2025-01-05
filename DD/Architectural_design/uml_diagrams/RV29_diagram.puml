@@ -16,9 +16,19 @@ DB --> DM  : ok
 deactivate DB
 DM --> IM  : ok
 deactivate DM
-IM -> RM   : deleteInternship(internshipId)
+
+IM -> DM: getCompanyIDByInternship(internshipID)
+activate DM
+DM -> DB: executeStatement(statement)
+activate DB
+DB --> DM: company ID
+deactivate RD
+DM --> IM: company ID
+deactivate DM
+
+IM -> RM   : deleteInternship(companyID, internshipID)
 activate RM
-RM -> ESAT   : removeEntity(ENTITYTYPE.INTERNSHIP, internshipId)
+RM -> ESAT   : removeEntity(ENTITYTYPE.INTERNSHIP, internshipID, companyID)
 activate ESAT
 ESAT --> RM : ok
 deactivate ESAT

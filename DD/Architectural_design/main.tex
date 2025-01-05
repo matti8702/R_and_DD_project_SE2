@@ -187,7 +187,6 @@ This section lists all the functions exposed by the interfaces of the architectu
         \item addInternship(companyID, internshipID, tags)
         \item updateInternshipTags(companyID, internshipID, tagsRemoved, tagsAdded)
         \item deleteInternship(companyID, internshipID)
-        \item deleteInternship(internshipId) %%%%% RV29
         \item updateCV(digitalizedCV)
         \item updateScores(internshipId, internshipTags, studentTags, grades)
     \end{itemize}
@@ -216,7 +215,7 @@ This section lists all the functions exposed by the interfaces of the architectu
         \item addToken(userEmail, token)
         \item getUserStatus(userEmail)
         \item getStudentID(userEmail)
-        \item getCompanyID(companyMemberEmailAddress)
+        \item getCompanyIDByMember(companyMemberEmailAddress)
         \item updateRecommendations(studentID, recommendations)
         \item updateRecommendations(companyID, recommendations)
         \item addInternshipProposal(internshipData)
@@ -239,13 +238,13 @@ This section lists all the functions exposed by the interfaces of the architectu
         \item removeCandidate(studentID)
         \item getInternshipContract(internshipID)
         \item deleteChat(internshipID, studentID)
-        \item getInternshipInfo(internshipID) %%%%%RV22
         \item addMessage(message)
         \item addReport(report)
         \item addComplaint(complaint)
         \item getStudents(universityName)
         \item interruptInternship(internshipID, studentID)
         \item closeInternship(internshipID)
+        \item getCompanyIDByInternship(internshipID)
     \end{itemize}
 \end{itemize}
 \subsection{Runtime views}
@@ -274,17 +273,29 @@ This section presents the runtime views for the use cases defined in the RASD (o
 
 \runtimeview
 {Login of a university member}
-{}
+{
+    
+//specify that checkCredentials() check also if user has already confirmed the email address
+//describe token system
+
+}
 {0.28}
 
 \runtimeview
 {Login of student}
-{}
+{
+    
+//specify that checkCredentials() check also if user has already confirmed the email address
+//describe token system
+}
 {0.19}
 
 \runtimeview
 {Login of company member}
-{}
+{
+    //specify that checkCredentials() check also if user has already confirmed the email address
+//describe token system
+}
 {0.19}
 
 \runtimeview

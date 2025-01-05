@@ -373,52 +373,57 @@ This section presents the runtime views for the use cases defined in the RASD (o
 
 \runtimeview
 {Company member schedules the meeting}
-{}
+{This diagram illustrates the process of a company member scheduling a meeting through the platform. If the interview is conducted online, the system generates a videoconference link and sends it to the student's web app, provided the student is online.}
 {0.13}
 
 \runtimeview
 {Company member communicates the result of the interview}
-{}
+{
+This diagram illustrates the process in which a company member sends their decision regarding the acceptance or rejection of a student selected through the application. The system notifies the student of the result and performs specific actions based on the outcome: If the student is accepted, the system retrieves the contract published in the proposal through the database; if the student is rejected, the system deletes the chat associated with the application from the database.
+
+The parameter \textit{result} in the \textit{addAdmissionChoice} function is a composite type containing the \textit{studentID}, which identifies the student, and a boolean value indicating the decision. The value is \textit{true} if the student is accepted and \textit{false} if rejected. This information is retrieved by the \textit{Selection Manager} using the \textit{retrieveInfo} method.
+}
 {0.19}
 
 \runtimeview
 {Student decides on the offer}
-{}
+{This diagram illustrates the process where a student submits their decision regarding the contract, thereby becoming an intern if the contract is accepted. The system retrieves the chat between the student and the company member, with the relevant information stored in the choice (a composite type) sent to the \textit{controller}, and deletes it. If the company member is online, the result is displayed on their screen.}
 {0.23}
 
 \runtimeview
 {User writes a message}
-{}
+{This diagram illustrates a user sending a message to another user, referred to as the \textit{Recipient}, through the platform. The system delivers the message and stores it in the database.}
 {0.22}
 
 \runtimeview
 {Student writes a report}
-{}
+{This diagram illustrates a student submitting a report to the system. The system saves the report to the database, then it retrives the information about the company member and the university member from the report (composite type) and sends it to the web apps of all active company members at the time of the event.}
 {0.19}
 
 \runtimeview
 {Company member writes a report}
-{}
+{This diagram illustrates a company member submitting a report to the system. 
+The system saves the report to the database, then it retrieves the student information from the report (composite type) and sends it to the web app of the student if active.}
 {0.19}
 
 \runtimeview
 {Student writes a complaint}
-{}
+{This diagram illustrates a student submitting a complaint to the system. The received complaint is dispatched to all interested party (who are online) by the system, using the information embedded in the parameter, and extracted by the \textit{extractComplaintInfo} function.}
 {0.19}
 
 \runtimeview
 {University member interrupts an internship}
-{}
+{This diagram illustrates a university member interrupting the internship. The system updates the status of the internship between the student and the company in the database and sends an update command to the webapps of all online interested parties.}
 {0.15}
 
 \runtimeview
 {Student or company member posts a feedback}
-{}
+{This diagram illustrates a student or company member writing and submitting feedback to the platform. The system stores the feedback in the database and then retrieves all the contained information using the \textit{retrieveInfo} function. This information is sent to the statistical analysis tool to update its internal status.}
 {0.21}
 
 \runtimeview
 {The system closes the internship}
-{}
+{This diagram illustrates the \textit{Internship Proposal Manager}'s thread removing an internship from both the database and the statistical analysis tool after its deadline.}
 {0.29}
 
 \subsection{Selected architectural styles and patterns}

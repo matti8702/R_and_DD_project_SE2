@@ -40,6 +40,7 @@ DM --> IM  : ok
 deactivate DM
 IM -> NM  : notifyNewComplaint(complaint)
 activate NM
+NM -> NM : retrieveComplaintInfo(complaint)
 alt company member is online
     NM -> WACM : showComplaint(complaint)
     activate WACM

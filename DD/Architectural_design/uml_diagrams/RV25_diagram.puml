@@ -40,6 +40,7 @@ DM --> IM : ok
 deactivate DM
 IM -> NM : notifyReport(report)
 activate NM
+NM -> NM : retrieveReportInfo(report)
 alt student is online
     activate WAST
     activate ST

@@ -20,25 +20,19 @@ CM -> WACM : press button to schedule the meeting
 WACM --> CM : form page
 CM -> CM    : fill the meeting form
 CM -> WACM  : click the submit button
+WACM -> WACM : checkInfo(form)
+loop until meeting information are correct
+WACM --> CM : error
+CM -> CM  : fill the meeting form
+CM -> WACM  : click the submit button
+WACM -> WACM : checkInfo(form)
+end
 WACM -> C   : submitMeeting(form)
 activate C
 C  -> SM  : submitMeeting(form)
 activate SM
 SM -> IS  : submitMeeting(form)
 activate IS
-IS -> IS  : checkInfo(form)
-loop until meeting information are correct
-IS --> SM : error
-SM --> C  : error
-C  --> WACM : error
-WACM --> CM : error page
-CM -> CM    : fill the meeting form
-CM -> WACM  : click the submit button
-WACM -> C   : submitMeeting(form)
-C  -> SM  : submitMeeting(form)
-SM -> IS  : submitMeeting(form)
-IS -> IS  : checkInfo(form)
-end
 alt online meeting
 IS -> EV  : generateLink(date)
 activate EV

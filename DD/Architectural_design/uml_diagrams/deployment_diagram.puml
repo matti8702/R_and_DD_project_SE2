@@ -12,15 +12,15 @@ node "Load Balancer" as LoadBalancer {
   artifact "Load Balancer system" as LBSystem
 }
 
-node "Application Server1" as AppServer1N {
+node "Application Server" as AppServer1N {
   artifact "Application Server" as AppServer1
 }
 
-node "Application Server2" as AppServer2N {
+node "Application Server" as AppServer2N {
   artifact "Application Server (Replica 1)" as AppServer2
 }
 
-node "Application Server1" as AppServer3N {
+node "Application Server" as AppServer3N {
   artifact "Application Server (Replica 2)" as AppServer3
 }
 

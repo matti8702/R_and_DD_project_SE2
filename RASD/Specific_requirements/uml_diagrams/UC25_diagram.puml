@@ -1,24 +1,25 @@
 @startuml UC25_diagram
 hide footbox
 
-participant "Student" as ST
-participant "S&C" AS S
 participant "Company Member" as CM
+participant "S&C" AS S
+participant "Student" as ST
 participant "University Member" as UM
 
-activate ST
-activate S
-
-ST -> S : createReport()
-S --> ST : report to be filled
-ST -> S : submitReport(report)
-loop until report is not empty
-    S --> ST : error message
-    ST -> S : submitReport(report)
-end
-S --> ST : updated list of reports
-S ->> CM : addReport(report)
 activate CM
-S ->> UM : addReport(report)
+activate S
+CM -> S : createReport()
+S --> CM : report to be filled
+CM -> S : submitReport(report)
+loop until report is not empty
+    S --> CM : error message
+    CM -> S : submitReport(report)
+end
+S --> CM : updated list of reports
+S -> ST : addReport(report)
+activate ST
+ST --> S : ok
+S -> UM : addReport(report)
 activate UM
+UM --> S : ok
 @enduml

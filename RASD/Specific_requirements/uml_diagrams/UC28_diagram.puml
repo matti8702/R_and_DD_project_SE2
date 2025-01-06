@@ -11,7 +11,7 @@ activate S
 U -> S : choiceOnFeedback(choice)
 alt user wants to write a feedback
     S --> U : feedback page
-    U ->> S : post(feedback)
+    U -> S : post(feedback)
     S -> S : checkFeedback(feedback)
     loop until the feedback is complete
         S --> U : error message
@@ -19,8 +19,13 @@ alt user wants to write a feedback
         S -> S : checkFeedback(feedback)
     end
     S -> S: retrieveInfoFromFeedback(feedback)
-    S ->> EXT : update(internshipId, internshipTags, studentTags)
+    S -> EXT : updateScores(internshipId, internshipTags, studentTags, grades)
+    activate EXT
+    EXT --> S : ok
+    deactivate EXT
+    S --> U : ok
 else 
     S -> U : removeNotification()
+    U --> S : ok
 end
 @enduml

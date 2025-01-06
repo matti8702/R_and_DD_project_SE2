@@ -17,8 +17,10 @@ loop until report is not empty
     ST -> S : submitReport(report)
 end
 S --> ST : updated list of reports
-S ->> CM : addReport(report)
+S -> CM : addReport(report)
 activate CM
-S ->> UM : addReport(report)
+CM --> S : ok
+S -> UM : addReport(report)
 activate UM
+UM --> S : ok
 @enduml

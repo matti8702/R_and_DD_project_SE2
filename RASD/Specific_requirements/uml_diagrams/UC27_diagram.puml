@@ -14,9 +14,11 @@ S -> S  : retrieveAllStudent(university)
 S --> UM : list of students currently on an internship
 UM -> S : interrupInternship(internshipName, student)
 S -> S :  update internship status
-S ->> CM  : notifyInterruptionInternship(student, internshipName) 
+S -> CM  : notifyInterruptionInternship(student, internshipName) 
 activate CM
-S ->> ST  : notifyInterruptionInternship(student, internshipName) 
+CM --> S  : ok
+S -> ST  : notifyInterruptionInternship(student, internshipName) 
 activate ST
+ST --> S : ok
 S --> UM : updated internship page
 @enduml

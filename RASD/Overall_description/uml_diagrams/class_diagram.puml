@@ -142,8 +142,8 @@ class Message{
 User -- "0..*"  Message : sender
 
 Message "0..*" --* Chat : contain
-Student -- "0..*"  Chat : have
-CompanyMember -- "0..*"  Chat : have
+Student "1" -- "0..*"  Chat : have
+CompanyMember "1" -- "0..*"  Chat : have
 
 class CurriculumVitae{
     + CVDocument: File

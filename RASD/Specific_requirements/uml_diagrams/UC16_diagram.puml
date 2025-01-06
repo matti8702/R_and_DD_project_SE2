@@ -12,9 +12,9 @@ S --> ST: internship details
 ST -> S: sendRequest(request)
 alt Internship is open
     alt First time the request is sent
-        S -> S: retrieveStudentInfo()
-        S ->> CM : sendRequest(request)
+        S -> CM : sendRequest(request)
         activate CM
+        CM --> S : ok
         deactivate CM
         S --> ST : ok
     else else

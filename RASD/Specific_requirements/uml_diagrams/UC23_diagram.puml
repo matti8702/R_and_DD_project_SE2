@@ -13,7 +13,8 @@ loop until message is empty or the recipient's information are missing/incorrect
     S --> U : error message
     U -> S : sendMessage(message, recipient)
 end
-S ->> R : addMessage(message)
+S -> R : addMessage(message)
 activate R
+R --> S : ok
 S --> U : chat with the new message 
 @enduml

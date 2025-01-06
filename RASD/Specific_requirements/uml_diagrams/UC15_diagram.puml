@@ -6,9 +6,8 @@ participant "S&C" AS S
 
 activate CM
 activate S
-S -> S: findDescriptionsSuggestions()
-S -> CM: show suggestion banner
-CM -> S: manageSuggestion()
+
+CM -> S: applySuggestion()
 S --> CM: show internship form
 CM -> CM: insertInformations()
 CM -> S: confirmModifications()

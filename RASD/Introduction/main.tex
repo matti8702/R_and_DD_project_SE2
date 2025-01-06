@@ -69,6 +69,7 @@ In this section, the phenomena are presented: world phenomena (WP) and shared ph
     \item The external statistical analysis tool sends to the system the recommendations related to the user of interest (student or company member).
 \end{listInSquareBrackets}
 \subsection{Definitions, Acronyms, Abbreviations}
+\label{sec:def}
 
 \subsubsection{Interviewer}
 
@@ -145,18 +146,20 @@ This is the process responsible for matching students with companies.
     and submits an application to the respective company. The student may also receive a request from a company that considers their 
     curriculum eligible for a specific internship it offers. In this case, the student has the option to either accept or decline the proposal.
 
-    \item \textbf{Company point of view :} The company receives an application from a student and can either accept or decline it. The company may also invite students
+    \item \textbf{Company member point of view :} The company receives an application from a student and can either accept or decline it. The company may also invite students
     with an eligible curriculum, identified through the "Homepage Recommendation", to participate in an internship it offers.
 \end{itemize}
 
-Both the student and the company can send and receive multiple requests over the same period of time.
+Both the student and the company members can send and receive multiple requests over the same period of time. Each match proposal references the related internship offer, 
+the sender, and the receiver. If the students initiate the request, the receiver will be the company member who published the internship offer. On the other hand, 
+if the request is initiated by the company member, the student will be the receiver.
 When the receiver of a request evaluates it, the matching process is complete. If the receiver responds positively, the selection process begins.
 
 \subsubsection{Selection Process}
 
 The purpose of this process is to provide support throughout the entire selection phase, which concludes when an eligible group of students, whose number is equal to the available places, is chosen from among all the candidates.
 Students who are not selected will receive a notification of their unsuccessful application.
-Once a match is finalized, the system creates a chat channel to facilitate communication between the company and the selected student.
+Once a match is finalized, the system creates a chat channel to facilitate communication between the company member and the selected student.
 Through this channel, the two parties can arrange an interview, which may take place either online or in person. In both cases, 
 the software automatically generates a reminder when the interview is scheduled. This reminder contains different information depending on the type of interview agreed upon.
 
@@ -166,7 +169,8 @@ the software automatically generates a reminder when the interview is scheduled.
     The link is created using an external videoconferencing tool, which will also be used to conduct the interview.  
 \end{itemize}
 
-After the interview concludes, the system provides a feature to select the best candidates among the interviewed students. Once the company makes 
+After the interview concludes, the system provides a feature to select the best candidates among the interviewed students. The selection will be based on the company's 
+decision, but the process will be managed solely by the company member who published the internship offer to which the selection refers. Once the company makes 
 its choice, all other candidates receive a notification informing them of the negative outcome.
 
 \subsubsection{Acronyms}
@@ -184,6 +188,21 @@ Below there are the acronyms used in the document along with their respective de
 \subsection{Revision history}
 Below there are listed all the document versions in chronological order, starting from the most recent to the oldest.
 \begin{itemize}
+    \item \textbf{Version 2.0} - 06/01/2025
+    \begin{itemize}
+        \item \underline{\hyperref[sec:def]{"Definitions, Acronyms, Abbreviations"}} section: enhanced the explanation of the matchmaking and selection processes.
+        \item UC3: it was previously in conflict with the domain assumption DA11. Now, in UC3, it is assumed that the university of the student is already registered in the system.
+        \item UC14: the request has been removed from the server. Suggestions are already displayed by the system, and the student applies the modifications directly.
+        \item UC15: the request has been removed from the server. Suggestions are already displayed by the system, and the company member applies the modifications directly.
+        \item UC16: removed retrieve students info and minor changes.
+        \item UC17: removed retrieve company member info and minor changes.
+        \item UC18: minor changes.
+        \item UC19: minor changes.
+        \item UC16,\dots,UC28: make the functions synchronous.
+        \item UC25: replace ST as CM in the sequence diagram.
+        \item UC26: add writecomplaint() function to start the interaction with the system.
+        \item UC28: change name of the function signature from the system to the external statistical analysis tool.
+    \end{itemize}
     \item \textbf{Version 1.0} - 22/12/2024
 \end{itemize}
 

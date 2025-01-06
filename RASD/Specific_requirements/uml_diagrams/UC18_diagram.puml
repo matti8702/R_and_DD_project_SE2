@@ -12,11 +12,15 @@ alt Internship is still available
     activate CM
     alt Student has accepted the match
         S -> S  : createChat(student, companyMember)
-        S ->> CM : notifyChoice(choice, student)
-        S ->> CM : openChat(student)
+        S -> CM : notifyMatchAccepted(student)
+        CM --> S : ok
+        S -> CM : openChat(student)
+        CM --> S : ok
         S --> ST : new chat
     else Student has rejected the match
-        S ->> CM : removeCandidate(student)
+        S -> CM : notifyMatchDeclined(student)
+        CM --> S : ok
+        S --> ST : ok
     end
 else Internship closed
     S --> ST: error message

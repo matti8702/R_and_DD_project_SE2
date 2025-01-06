@@ -16,8 +16,9 @@ CM -> S : admission(result, companyMember)
 S -> S : remotion of the student from the list of candidates
 alt Student is accepted
     S -> S  : collectInternshipInfo()
-    S ->> ST : sendOffer(contract)
+    S -> ST : sendOffer(contract)
     activate ST
+    ST --> S : ok
     S --> CM : updated list of candidates
 else Student is rejected
     S -> ST : sendResult(result)

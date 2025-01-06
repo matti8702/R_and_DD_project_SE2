@@ -11,31 +11,27 @@ activate S
 activate ST
 S --> ST: show registration form
 S --> ST: list of all registered universities
-alt university is registered to the system
-    ST -> S: register(name, surname, dateOfBirth, password, emailAddress, university)
-    S -> S: checkData()
-    alt email address is valid
-        S -> EP: sendEmailRequest(emailAddress, text)
-        activate EP
-        EP --> S: ok
-        EP -> ST: sendEmail(email)
-        deactivate EP
-        alt user confirm the email address within one day of registration
-            ST -> S: confirmEmailAddress()
-            S -> S: addUser()
-            S -> EXT: newStudent(studentID)
-            activate EXT
-            EXT --> S: ok
-            deactivate EXT
-        else user does not confirm the email address
-            S --> ST: showError("registration canceled")
-        end
-    else email is already registered to the system
-        S --> ST: showError("user already registered")
-    else email address is not linked to the university provided
-        S --> ST: showError("invalid email domain")
+ST -> S: register(name, surname, dateOfBirth, password, emailAddress, university)
+S -> S: checkData()
+alt email address is valid
+    S -> EP: sendEmailRequest(emailAddress, text)
+    activate EP
+    EP --> S: ok
+    EP -> ST: sendEmail(email)
+    deactivate EP
+    alt user confirm the email address within one day of registration
+        ST -> S: confirmEmailAddress()
+        S -> S: addUser()
+        S -> EXT: newStudent(studentID)
+        activate EXT
+        EXT --> S: ok
+        deactivate EXT
+    else user does not confirm the email address
+        S --> ST: showError("registration canceled")
     end
-else university is not registered to the system
-    S --> ST: showError("university not registered in the system")
+else email is already registered to the system
+    S --> ST: showError("user already registered")
+else email address is not linked to the university provided
+    S --> ST: showError("invalid email domain")
 end
 @enduml

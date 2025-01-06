@@ -12,11 +12,15 @@ alt Internship is still available
     activate ST
     alt Company member has accepted the student
         S -> S  : createChat(student, companyMember)
-        S --> CM : page with the new chat and the updated list of candidates
-        S ->> ST : sendChoice(choice, companyMember)
-        S ->> ST : openChat(companyMember)
+        S -> ST : notifyMatchAccepted(companyMember)
+        ST --> S : ok
+        S -> ST : openChat(companyMember)
+        ST --> S: ok
+        S --> CM : new chat and updated candidates
     else else
-        S --> CM : new list of candidates without the student
+        S -> ST : notifyMatchDeclined(companyMember)
+        ST --> S : ok
+        S --> CM : ok
     end
 else else
     S --> CM: error message

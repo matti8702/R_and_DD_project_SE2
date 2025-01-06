@@ -12,9 +12,9 @@ S --> CM: student info
 CM -> S: sendRequest(request, student)
 S -> S:  checkNumberRequest()
 alt First time the request is sent
-    S -> S: retrieveCompanyMemberInfo()
-    S ->> ST : sendRequest(request, companyMember)
+    S -> ST : sendRequest(request, companyMember)
     activate ST
+    ST --> S : ok
     deactivate ST
     S --> CM : new list of candidates 
 else else

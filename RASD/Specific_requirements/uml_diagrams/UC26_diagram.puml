@@ -9,6 +9,8 @@ participant "Company Member" as CM
 activate ST
 activate S
 
+ST -> S : writeComplaint()
+S --> ST : complaint to write
 ST -> S : submitComplaint(complaint)
 S  -> S : checkComplaint()
 loop until complaint is not empty
@@ -17,9 +19,11 @@ loop until complaint is not empty
     S  -> S : checkComplaint()
 end
 S -> S : retrieveStudentInformation()
-S -> ST : updated list of complaints
-S ->> UM : addComplaint(complaint)
+S --> ST : updated list of complaints
+S -> UM : addComplaint(complaint)
 activate UM
-S ->> CM : addComplaint(complaint)
+UM --> S : ok
+S -> CM : addComplaint(complaint)
 activate CM
+CM --> S : ok
 @enduml

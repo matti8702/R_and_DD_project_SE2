@@ -12,18 +12,21 @@ node "Load Balancer" as LoadBalancer {
   artifact "Load Balancer system" as LBSystem
 }
 
-node "Application Servers" as AppServers {
+node "Application Server1" as AppServer1N {
   artifact "Application Server" as AppServer1
+}
+
+node "Application Server2" as AppServer2N {
   artifact "Application Server (Replica 1)" as AppServer2
+}
+
+node "Application Server1" as AppServer3N {
   artifact "Application Server (Replica 2)" as AppServer3
 }
 
-node "Database Cluster" {
+node "Database Server" as DBN {
   artifact "DBMS system" as DBMS
-  database "Primary DB" as PrimaryDB
-  database "Replica 1" as ReplicaDB1
-  database "Replica 2" as ReplicaDB2
-  note bottom of DBMS: it runs the replication\nmanager system
+  database "Database" as DB
 }
 
 node "Internal Firewall" {
@@ -42,7 +45,5 @@ AppServer2 ---> InternalFW : "TCP/IP"
 AppServer3 ---> InternalFW : "TCP/IP"
 
 InternalFW --> DBMS : "SQL Queries / TCP/IP"
-DBMS --> PrimaryDB : SQL Queries
-DBMS --> ReplicaDB1 : "Replication Data"
-DBMS --> ReplicaDB2 : "Replication Data"
+DBMS --> DB : SQL Queries
 @enduml

@@ -6,7 +6,6 @@ participant "Web App Student" as W
 participant "Controller" AS C
 participant "Internship Proposal Manager" as IP
 participant "Match Manager" as M
-participant "CV Manager" as CV
 participant "Data Manager" as DM
 participant "DBMS" as RD
 participant "Notification Manager" as NM
@@ -44,19 +43,6 @@ alt Internship is open
     alt First time the match proposal is sent
         W ->C: studentMatchProposal(studentID, internshipID)
         activate C
-
-        C -> CV: getCV(studentID)
-        activate CV
-        CV -> DM: getCV(studentID)
-        activate DM
-        DM -> RD: executeStatement(statement)
-        activate RD
-        RD --> DM: student CV
-        deactivate RD
-        DM --> CV: student CV
-        deactivate DM
-        CV --> C: student CV
-        deactivate CV
 
         C -> M: studentMatchProposal(studentID, internshipID)
         activate M
